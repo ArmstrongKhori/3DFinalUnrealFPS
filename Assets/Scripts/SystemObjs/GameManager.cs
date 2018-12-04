@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The "GameManager" is the place where all behind-the-scenes game management happens (as the name implies.)
+/// 
+/// </summary>
 public class GameManager : SystemObj {
 
 
