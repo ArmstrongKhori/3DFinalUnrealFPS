@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class FPSController : MonoBehaviour {
 
-    public Camera pCamera;
-
-    public float ForwardSpeed;
-    public float BackwardSpeed;
-    public float StrafeSpeed;
+    private float ForwardSpeed = 5;
+    private float BackwardSpeed = -4;
+    private float StrafeSpeed = 5;
+    public float JumpHeight = 10;
 
     private Vector3 Direction;
 
@@ -27,19 +26,18 @@ public class FPSController : MonoBehaviour {
 
     private bool isJumping = false;
 
-    //Cursor.Visable = false; - hides cursor.
+    Rigidbody rb;
 
     // Use this for initialization
     void Start () {
         Cursor.visible = false;
-        //controller = GameObject.Find("Capsule").GetComponent<CharacterController>();
     }
 	
     private void MoveForward()
     {
         if (Input.GetKey(KeyCode.W))
         {
-            transform.Translate(Vector3.forward * 5 * Time.deltaTime);
+            transform.Translate(Vector3.forward * ForwardSpeed * Time.deltaTime);
         }
     }
 
@@ -47,7 +45,7 @@ public class FPSController : MonoBehaviour {
     {
         if (Input.GetKey(KeyCode.S))
         {
-            transform.Translate(Vector3.forward * -5 * Time.deltaTime);
+            transform.Translate(Vector3.forward * BackwardSpeed * Time.deltaTime);
         }
     }
 
@@ -57,14 +55,18 @@ public class FPSController : MonoBehaviour {
         {
             if (!isJumping)
             {
+                float temp = transform.position.y;
                 isJumping = true;
-                transform.Translate(Vector3.up * 10 * Time.deltaTime);
+                rb.AddForce(0, JumpHeight, 0);
+                Debug.Log(transform.position.y);
             }
         }
 
         if (GetComponent<Rigidbody>().velocity.y == 0)
         {
             isJumping = false;
+
+            Debug.Log(transform.position.y);
         }
     }
 
@@ -72,12 +74,12 @@ public class FPSController : MonoBehaviour {
     {
         if (Input.GetKey(KeyCode.D))
         {
-            transform.Translate(Vector3.right * 5 * Time.deltaTime);
+            transform.Translate(Vector3.right * StrafeSpeed * Time.deltaTime);
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            transform.Translate(Vector3.right * -5 * Time.deltaTime);
+            transform.Translate(Vector3.right * -StrafeSpeed * Time.deltaTime);
         }
     }
 
@@ -88,8 +90,6 @@ public class FPSController : MonoBehaviour {
 
         transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
     }
-
-
 
     // Update is called once per frame
     void Update()
