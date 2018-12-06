@@ -5,7 +5,6 @@ using UnityEngine;
 public class FPSController : MonoBehaviour {
 
     public Camera pCamera;
-    private Rigidbody rb;
 
     public float ForwardSpeed;
     public float BackwardSpeed;
@@ -26,6 +25,8 @@ public class FPSController : MonoBehaviour {
 
     public float Gravity = 9.81f;
 
+    private bool isJumping = false;
+
     //Cursor.Visable = false; - hides cursor.
 
     // Use this for initialization
@@ -42,10 +43,48 @@ public class FPSController : MonoBehaviour {
         }
     }
 
+    private void MoveBackward()
+    {
+        if (Input.GetKey(KeyCode.S))
+        {
+            transform.Translate(Vector3.forward * -5 * Time.deltaTime);
+        }
+    }
+
+    private void Jump()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            if (!isJumping)
+            {
+                isJumping = true;
+                transform.Translate(Vector3.up * 10 * Time.deltaTime);
+            }
+        }
+
+        if (GetComponent<Rigidbody>().velocity.y == 0)
+        {
+            isJumping = false;
+        }
+    }
+
+    private void Strafe()
+    {
+        if (Input.GetKey(KeyCode.D))
+        {
+            transform.Translate(Vector3.right * 5 * Time.deltaTime);
+        }
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.Translate(Vector3.right * -5 * Time.deltaTime);
+        }
+    }
+
     private void ControlAim()
     {
         yaw += SpeedH * Input.GetAxis("Mouse X");
-        pitch += SpeedV * Input.GetAxis("Mouse Y");
+        pitch -= SpeedV * Input.GetAxis("Mouse Y");
 
         transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
     }
@@ -57,5 +96,8 @@ public class FPSController : MonoBehaviour {
     {
         ControlAim();
         MoveForward();
+        MoveBackward();
+        Strafe();
+        Jump();
     }
 }
