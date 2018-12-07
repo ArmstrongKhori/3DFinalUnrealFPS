@@ -81,27 +81,51 @@ public class GameStateManager : MonoBehaviour {
 
     public Button FreeForAll, TeamDeathMacth, LastManStanding; // Multiplayer menu buttons
     public Button Controls, HowToPlay, Audio, Video; // Options menu buttons
+    public Button GameWinReplay; // Replay button GameWin state
+    public Button GameOverReplay; // Replay button GameOver state
 
     // HERE WE CAN CONTROL WHICH GAMEPLAY MODE ACTIVATE ----->
     private void RunFreeForaAllMode()
     {
         Debug.Log("FREE FOR ALL MODE IS ACITVE");
+
+        GameWinReplay.onClick.RemoveAllListeners();
+        GameOverReplay.onClick.RemoveAllListeners();
+        GameWinReplay.onClick.AddListener(RunFreeForaAllMode);
+        GameOverReplay.onClick.AddListener(RunFreeForaAllMode);
+
+        StartGame();
     }
 
     private void RunTeamDeathMacthMode()
     {
         Debug.Log("TEAM DEATH MACTH MODE IS ACITVE");
+
+        GameWinReplay.onClick.RemoveAllListeners();
+        GameOverReplay.onClick.RemoveAllListeners();
+        GameWinReplay.onClick.AddListener(RunTeamDeathMacthMode);
+        GameOverReplay.onClick.AddListener(RunTeamDeathMacthMode);
+
+        StartGame();
     }
 
     private void RunLastManStandingMode()
     {
         Debug.Log("LAST MAN STANDING MODE IS ACITVE");
+
+        GameWinReplay.onClick.RemoveAllListeners();
+        GameOverReplay.onClick.RemoveAllListeners();
+        GameWinReplay.onClick.AddListener(RunLastManStandingMode);
+        GameOverReplay.onClick.AddListener(RunLastManStandingMode);
+
+        StartGame();
     }
 
     // HERE WE CAN CONTROL WHICH STATE FROM OPTIONS MENU ACTIVATE ----->
     private void RunControlOptions()
     {
         Debug.Log("HERE WE CAN SEE CONTROL OPTIONS");
+        
     }
     private void RunHowToPlayOptions()
     {
@@ -133,6 +157,7 @@ public class GameStateManager : MonoBehaviour {
         HowToPlay.onClick.AddListener(RunHowToPlayOptions); // Running HowToPlay button listener
         Audio.onClick.AddListener(RunAudioOptions); // Running Audio button listener
         Video.onClick.AddListener(RunVideoOptions); // Running Video button listener
+
     }
 
 
@@ -227,7 +252,6 @@ public class GameStateManager : MonoBehaviour {
     void Update () {
 
 
-        
         //Just for test 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
