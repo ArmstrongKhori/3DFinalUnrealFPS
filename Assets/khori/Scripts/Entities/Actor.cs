@@ -8,8 +8,28 @@ using UnityEngine;
 /// </summary>
 public class Actor : Entity {
 
+    internal Rigidbody rb;
+
+    public override void Awake()
+    {
+        base.Awake();
+        //
+        rb = gameObject.GetComponent<Rigidbody>();
+        if (rb == null) { rb = gameObject.AddComponent<Rigidbody>(); }
+    }
+
 
     public virtual void Act() { }
 
 
+    public void Despawn()
+    {
+
+        //
+        OnDespawned();
+    }
+
+
+    public virtual void OnSpawned(Actor by = null) { }
+    public virtual void OnDespawned() { }
 }

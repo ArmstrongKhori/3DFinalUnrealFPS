@@ -8,6 +8,20 @@ using UnityEngine;
 /// </summary>
 public class GameManager : SystemObj {
 
+    public override void Start()
+    {
+        base.Start();
+        //
+        // *** Call "Initialize" for all SystemObjs that currently exist (except this.)
+        Initialize();
+        //
+        foreach (SystemObj a in FindObjectsOfType<SystemObj>())
+        {
+            if (a == this) { continue; }
+            
+            a.Initialize();
+        }
+    }
 
 
 

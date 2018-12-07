@@ -3,7 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BattleManager : SystemObj {
-    
+
+
+
+    internal GameObject gameSpace;
+    internal List<Actor> allActors;
+
+
+
+    internal override void Initialize()
+    {
+        base.Initialize();
+        //
+        gameSpace = GameObject.Find("(gamespace)");
+        allActors = new List<Actor>();
+
+
+        foreach (Actor a in FindObjectsOfType<Actor>())
+        {
+            allActors.Add(a);
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        Run();
+    }
+
 
     /// <summary>
     /// The cycle of gameplay.
@@ -11,7 +37,24 @@ public class BattleManager : SystemObj {
     /// </summary>
     public void Run()
     {
+        foreach (Actor a in allActors)
+        {
+            a.Act();
+        }
+    }
 
+
+    public Actor Spawn(string name, Actor by)
+    {
+        Actor a = (Actor)Instantiate(Resources.Load("Spawnables/" + name, typeof(Actor)), by.transform);
+        //
+        a.transform.parent = gameSpace.transform; // *** Detach it from the target after spawning it ONTO the target.
+        //
+        //
+        a.OnSpawned(by);
+
+
+        return a;
     }
 
 

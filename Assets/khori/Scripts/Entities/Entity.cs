@@ -8,6 +8,10 @@ using UnityEngine;
 /// </summary>
 public class Entity : MonoBehaviour {
 
+
+
+
+
 	public virtual void Awake()
     {
 
