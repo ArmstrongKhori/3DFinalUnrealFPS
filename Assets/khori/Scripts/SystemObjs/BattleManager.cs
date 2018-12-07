@@ -2,18 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// The "GameManager" is the place where all behind-the-scenes game management happens (as the name implies.)
-/// 
-/// </summary>
-public class GameManager : SystemObj {
+public class BattleManager : SystemObj {
+    
 
+    /// <summary>
+    /// The cycle of gameplay.
+    /// Calls the "Run" event of all entities in the scene.
+    /// </summary>
+    public void Run()
+    {
 
+    }
 
 
     #region Singleton Stuff
-    private static GameManager _instance;
-    public static GameManager Instance() { return _instance; }
+    private static BattleManager _instance;
+    public static BattleManager Instance() { return _instance; }
     private void Awake()
     {
         if (_instance == null)

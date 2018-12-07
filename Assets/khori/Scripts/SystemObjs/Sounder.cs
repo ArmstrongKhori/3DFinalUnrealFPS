@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// The "GameManager" is the place where all behind-the-scenes game management happens (as the name implies.)
-/// 
+/// This singleton deals with all things related to sound (such as sound effects, music, and whatnot.)
 /// </summary>
-public class GameManager : SystemObj {
-
-
+public class Sounder : SystemObj {
+    
 
 
     #region Singleton Stuff
-    private static GameManager _instance;
-    public static GameManager Instance() { return _instance; }
+    private static Sounder _instance;
+    public static Sounder Instance() { return _instance; }
     private void Awake()
     {
         if (_instance == null)
