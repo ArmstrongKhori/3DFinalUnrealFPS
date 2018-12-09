@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour {
 
-    public int maxHealth;
+    public int maxHealth = 100;
     public Text currentHealthText;
     public Image deadScreen;
 
     private int currentHealth;
     private bool isDead;
+
 
 	// Use this for initialization
 	void Start () {
