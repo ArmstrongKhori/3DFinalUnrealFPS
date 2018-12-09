@@ -17,7 +17,6 @@ public class FPSController : MonoBehaviour {
     private float pitch = 0.0f;
     private float yaw = 0.0f;
 
-    private int Health;
     //private CharacterController controller;
 
     private Vector3 moveDirection = Vector3.zero;
