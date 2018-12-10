@@ -16,6 +16,7 @@ public class PlayerHealth : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+
         currentHealth = maxHealth;
         isDead = false;
         UpdateGUI();
@@ -35,7 +36,6 @@ public class PlayerHealth : MonoBehaviour {
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
         CheckDead();
         UpdateGUI();
-
         
     }
 
