@@ -213,27 +213,39 @@ public class GameStateManager : MonoBehaviour {
     public void StartGame()
     {
         DoChangeMajorGameState(MajorGameStates.GAME);
-
+        CharacterStateManager tempChState;
+        tempChState = GameObject.Find("Player").GetComponent<CharacterStateManager>();
+        tempChState.Idle();
     }
     // Activate the Pause State
     public void PauseGame()
     {
         DoChangeGameplayGameState(GameplayGameStates.PAUSED);
+        CharacterStateManager tempChState;
+        tempChState = GameObject.Find("Player").GetComponent<CharacterStateManager>();
+        tempChState.IsActive = true;
     }
     //Unpause game
     public void UnpausedGame()
     {
         DoChangeGameplayGameState(GameplayGameStates.RUNNING);
+
     }
     // Game Over State
     internal void GameOver()
     {
         DoChangeMajorGameState(MajorGameStates.GAMEOVER);
+        CharacterStateManager tempChState;
+        tempChState = GameObject.Find("Player").GetComponent<CharacterStateManager>();
+        tempChState.IsActive = false;
     }
     // Game Win State
     internal void GameWin()
     {
         DoChangeMajorGameState(MajorGameStates.GAMEWIN);
+        CharacterStateManager tempChState;
+        tempChState = GameObject.Find("Player").GetComponent<CharacterStateManager>();
+        tempChState.IsActive = false;
     }
     // Game Exit
     public void GameExit()
@@ -267,7 +279,7 @@ public class GameStateManager : MonoBehaviour {
             {
                 UnpausedGame();
             }
-            else { PauseGame();}
+            else if(!IsGamePaused) { PauseGame();}
         }
         if (Input.GetKeyDown(KeyCode.Alpha4) && !IsGameOver)
         {
