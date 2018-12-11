@@ -7,7 +7,7 @@ public class FPSController : MonoBehaviour {
     private float ForwardSpeed = 5;
     private float BackwardSpeed = -4;
     private float StrafeSpeed = 5;
-    public float JumpHeight = 10;
+    public float JumpHeight = 100;
 
     private Vector3 Direction;
 
@@ -28,24 +28,40 @@ public class FPSController : MonoBehaviour {
 
     Rigidbody rb;
 
+    private int CurrentGun;
+
+    private List<bool> WeaponPickup;
+
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         Cursor.visible = false;
+
+        rb = GetComponent<Rigidbody>();
+
+        WeaponPickup = new List<bool>();
+
+        for (int i = 0; i < 5; i++)
+        {
+            WeaponPickup[i].Equals(false);
+        }
+
+        Debug.Log(WeaponPickup);
     }
 	
     private void MoveForward()
     {
         if (Input.GetKey(KeyCode.W))
         {
-            transform.Translate(Vector3.forward * ForwardSpeed * Time.deltaTime);
+            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, -ForwardSpeed);
         }
     }
 
     private void MoveBackward()
     {
         if (Input.GetKey(KeyCode.S))
-        {
-            transform.Translate(Vector3.forward * BackwardSpeed * Time.deltaTime);
+        {         
+            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, -BackwardSpeed);
         }
     }
 
@@ -57,16 +73,8 @@ public class FPSController : MonoBehaviour {
             {
                 float temp = transform.position.y;
                 isJumping = true;
-                rb.AddForce(0, JumpHeight, 0);
-                Debug.Log(transform.position.y);
+                rb.velocity = new Vector3(rb.velocity.x, JumpHeight, rb.velocity.z);
             }
-        }
-
-        if (GetComponent<Rigidbody>().velocity.y == 0)
-        {
-            isJumping = false;
-
-            Debug.Log(transform.position.y);
         }
     }
 
@@ -74,12 +82,20 @@ public class FPSController : MonoBehaviour {
     {
         if (Input.GetKey(KeyCode.D))
         {
-            transform.Translate(Vector3.right * StrafeSpeed * Time.deltaTime);
+            rb.velocity = new Vector3(-StrafeSpeed, rb.velocity.y, rb.velocity.z);
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            transform.Translate(Vector3.right * -StrafeSpeed * Time.deltaTime);
+            rb.velocity = new Vector3(StrafeSpeed, rb.velocity.y, rb.velocity.z);
+        }
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Ground")
+        {
+            isJumping = false;
         }
     }
 
@@ -91,6 +107,41 @@ public class FPSController : MonoBehaviour {
         transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
     }
 
+    private void SelectWeapon()
+    {
+        /*
+        if (Input.GetKey(KeyCode.Alpha1) && )
+        {
+            CurrentGun = 1;
+
+            Debug.Log(CurrentGun);
+        }
+
+        if (Input.GetKey(KeyCode.Alpha2) && )
+        {
+            CurrentGun = 2;
+            Debug.Log(CurrentGun);
+        }
+
+        if (Input.GetKey(KeyCode.Alpha3) && )
+        {
+            CurrentGun = 3;
+            Debug.Log(CurrentGun);
+        }
+
+        if (Input.GetKey(KeyCode.Alpha4) && )
+        {
+            CurrentGun = 4;
+            Debug.Log(CurrentGun);
+        }
+
+        if (Input.GetKey(KeyCode.Alpha5) && )
+        {
+            CurrentGun = 5;
+            Debug.Log(CurrentGun);
+        }*/
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -99,5 +150,6 @@ public class FPSController : MonoBehaviour {
         MoveBackward();
         Strafe();
         Jump();
+        SelectWeapon();
     }
 }
