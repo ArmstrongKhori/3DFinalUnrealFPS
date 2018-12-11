@@ -6,11 +6,16 @@ public class ControllableCharacter : Character {
 
     public BaseInputter input;
 
+    public Weapon weapon;
+
     public override void Awake()
     {
         base.Awake();
         //
         input = new PlayerInputter();
+
+        // ??? <-- Debugging code.
+        weapon = new Weapon(new Pistol(), this);
     }
 
 
@@ -28,10 +33,35 @@ public class ControllableCharacter : Character {
         transform.Translate(moveDirection * Time.deltaTime);
 
 
-        if (input.fire1)
-        {
-            BattleManager.Instance().Spawn("Bullet", this);
-        }
+        // *** Weapon stuff.
+        weapon.Check();
+        //
+        weapon.Interact();
+    }
+
+
+    public virtual void LateAct()
+    {
+        followReeling = Mathf.Lerp(followReeling, recoilReeling, 0.1f); // ??? <-- This number is completely made up... I have no real reason for using it...
+        //
+        recoilReeling -= 2.5f * Time.deltaTime; // *** Takes roughly a 3rd of a second to recover from maximum recoil reeling.
+        //
+        // ??? <-- TODO: Make this value actually adjust the character's POV...
+    }
+
+
+    /// <summary>
+    /// This value "adjusts" your view's pitch.
+    /// </summary>
+    private float recoilReeling = 0.0f;
+    /// <summary>
+    /// This value "follows" the current reeling value.
+    /// This allows a more "realistic" swinging of the view when under high recoil.
+    /// </summary>
+    private float followReeling = 0.0f;
+    public void ApplyRecoil(float amount)
+    {
+        recoilReeling += amount;
     }
 
 }

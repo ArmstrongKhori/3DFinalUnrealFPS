@@ -17,10 +17,23 @@ public class BaseInputter {
     public bool jump = false;
     public bool fire1 = false;
     public bool fire2 = false;
+    //
+    // *** All of these values are necessary for knowing if/when a button has been pushed/released...
+    public float lastMoving = 0.0f;
+    public float lastStrafing = 0.0f;
+    public bool lastJump = false;
+    public bool lastFire1 = false;
+    public bool lastFire2 = false;
 
-    
+
     public virtual void Read()
     {
+        lastMoving = moving;
+        lastStrafing = strafing;
+        lastJump = jump;
+        lastFire1 = fire1;
+        lastFire2 = fire2;
+        //
         moving = 0.0f;
         strafing = 0.0f;
         jump = false;

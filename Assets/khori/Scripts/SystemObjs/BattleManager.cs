@@ -9,6 +9,8 @@ public class BattleManager : SystemObj {
     internal GameObject gameSpace;
     internal List<Actor> allActors;
 
+    
+
 
 
     internal override void Initialize()
@@ -80,4 +82,13 @@ public class BattleManager : SystemObj {
     }
     #endregion
 
+}
+
+
+
+public class ParticipantData
+{
+    public int kills = 0;
+    public int deaths = 0;
+    public Character character = null;
 }
