@@ -56,8 +56,11 @@ public class FPSController : MonoBehaviour {
             {
                 float temp = transform.position.y;
                 isJumping = true;
-                rb.AddForce(0, JumpHeight, 0);
-                Debug.Log(transform.position.y);
+                //rb.AddForce(0, JumpHeight, 0);
+
+                transform.Translate(Vector3.up * JumpHeight * Time.deltaTime);//<<<ERICK_HOBBS
+
+                //Debug.Log(transform.position.y);
             }
         }
 
@@ -65,7 +68,7 @@ public class FPSController : MonoBehaviour {
         {
             isJumping = false;
 
-            Debug.Log(transform.position.y);
+            //Debug.Log(transform.position.y);
         }
     }
 
@@ -98,5 +101,11 @@ public class FPSController : MonoBehaviour {
         MoveBackward();
         Strafe();
         Jump();
+        
+    }
+
+    void FixedUpdate()
+    {
+           transform.Translate(Vector3.down * 2 * Time.deltaTime);//<<<ERICK_HOBBS
     }
 }
