@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5cbf90fce730b104c9043dee993dd4c3
+guid: 53889b461a0997e4a953e7c87015dad9
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -139,7 +139,7 @@ ModelImporter:
     400130: mixamorig:Spine1
     400132: mixamorig:Spine2
     400134: //RootNode
-    7400000: Walking
+    7400000: RunningForwardLeft
     9500000: //RootNode
   externalObjects: {}
   materials:
@@ -170,10 +170,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Walking
+      name: RunningForwardLeft
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 41
+      lastFrame: 15
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -228,7 +228,7 @@ ModelImporter:
     tangentImportMode: 3
     normalCalculationMode: 4
   importAnimation: 1
-  copyAvatar: 1
+  copyAvatar: 0
   humanDescription:
     serializedVersion: 2
     human: []
@@ -245,8 +245,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: ded0b52334ddbf94883aa33f4cb7cfc3,
-    type: 3}
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
   humanoidOversampling: 1
   additionalBone: 0

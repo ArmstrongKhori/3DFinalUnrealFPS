@@ -215,7 +215,8 @@ public class GameStateManager : MonoBehaviour {
         DoChangeMajorGameState(MajorGameStates.GAME);
         CharacterStateManager tempChState;
         tempChState = GameObject.Find("Player").GetComponent<CharacterStateManager>();
-        tempChState.Idle();
+        tempChState.IsActive = true;
+
     }
     // Activate the Pause State
     public void PauseGame()

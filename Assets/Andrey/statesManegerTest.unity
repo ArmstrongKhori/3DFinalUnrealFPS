@@ -6267,6 +6267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsActive: 0
   IsDead: 0
+  InMotion: 0
   playerMotion: {fileID: 1681242400}
 --- !u!4 &1681242399
 Transform:
@@ -6291,7 +6292,7 @@ Animator:
   m_GameObject: {fileID: 1681242397}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ded0b52334ddbf94883aa33f4cb7cfc3, type: 3}
-  m_Controller: {fileID: 9100000, guid: 5d4712272b5e152439d8adbd8542bcac, type: 2}
+  m_Controller: {fileID: 9100000, guid: fbc806034f4d28341b37f4bc8969e3ad, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 2
   m_ApplyRootMotion: 1
