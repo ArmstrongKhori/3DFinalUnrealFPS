@@ -118,7 +118,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh17530
+  m_Name: pb_Mesh20194
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -358,7 +358,7 @@ GameObject:
   - component: {fileID: 1604625902}
   m_Layer: 0
   m_Name: Level
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 127
@@ -3984,9 +3984,17 @@ MonoBehaviour:
     angleError: 8
     areaError: 15
   dontDestroyMeshOnDelete: 0
-  m_selectedFaces: 
-  m_SelectedEdges: []
-  m_selectedTriangles: 
+  m_selectedFaces: 13000000
+  m_SelectedEdges:
+  - x: 80
+    y: 81
+  - x: 81
+    y: 78
+  - x: 79
+    y: 80
+  - x: 78
+    y: 79
+  m_selectedTriangles: 50000000510000004e0000004f000000
 --- !u!64 &1604625903
 MeshCollider:
   m_ObjectHideFlags: 0
