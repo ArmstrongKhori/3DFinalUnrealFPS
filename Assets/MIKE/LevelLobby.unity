@@ -3984,17 +3984,9 @@ MonoBehaviour:
     angleError: 8
     areaError: 15
   dontDestroyMeshOnDelete: 0
-  m_selectedFaces: 13000000
-  m_SelectedEdges:
-  - x: 80
-    y: 81
-  - x: 81
-    y: 78
-  - x: 79
-    y: 80
-  - x: 78
-    y: 79
-  m_selectedTriangles: 50000000510000004e0000004f000000
+  m_selectedFaces: 
+  m_SelectedEdges: []
+  m_selectedTriangles: 
 --- !u!64 &1604625903
 MeshCollider:
   m_ObjectHideFlags: 0
