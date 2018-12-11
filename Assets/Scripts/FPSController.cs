@@ -53,7 +53,7 @@ public class FPSController : MonoBehaviour {
     {
         if (Input.GetKey(KeyCode.W))
         {
-            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, -ForwardSpeed);
+            rb.velocity += transform.TransformDirection(new Vector3(0, 0, ForwardSpeed));
         }
     }
 
@@ -61,7 +61,7 @@ public class FPSController : MonoBehaviour {
     {
         if (Input.GetKey(KeyCode.S))
         {         
-            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, -BackwardSpeed);
+            rb.velocity += transform.TransformDirection(new Vector3(0, 0, BackwardSpeed));
         }
     }
 
@@ -82,12 +82,12 @@ public class FPSController : MonoBehaviour {
     {
         if (Input.GetKey(KeyCode.D))
         {
-            rb.velocity = new Vector3(-StrafeSpeed, rb.velocity.y, rb.velocity.z);
+            rb.velocity += transform.TransformDirection(new Vector3(StrafeSpeed, 0, 0));
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            rb.velocity = new Vector3(StrafeSpeed, rb.velocity.y, rb.velocity.z);
+            rb.velocity += transform.TransformDirection(new Vector3(-StrafeSpeed, 0, 0));
         }
     }
 
@@ -150,6 +150,9 @@ public class FPSController : MonoBehaviour {
         MoveBackward();
         Strafe();
         Jump();
+        //
+        rb.velocity = rb.velocity.normalized * Mathf.Min(rb.velocity.magnitude, 10);
+        //
         SelectWeapon();
     }
 }
