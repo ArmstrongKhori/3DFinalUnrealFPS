@@ -40,7 +40,8 @@ public class Character : Actor
     {
         base.Awake();
         //
-
+        // *** "Characters" do not tilt. They can only "turn".
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
 
 
