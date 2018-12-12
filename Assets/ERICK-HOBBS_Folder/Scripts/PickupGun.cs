@@ -42,7 +42,7 @@ public class PickupGun : MonoBehaviour {
 
     IEnumerator TakeHandgun()
     {
-        //transform.position = new Vector3(0, -1000, 0);
+        transform.position = new Vector3(0, -1000, 0);
         FakeGun.SetActive(false);
         RealGun.SetActive(true);
         yield return new WaitForSeconds(0.1f);
