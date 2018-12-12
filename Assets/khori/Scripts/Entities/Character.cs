@@ -33,7 +33,15 @@ public class Character : Actor
 
     public float armor = 25;
     public float health = 100;
-    
+
+
+
+    public override void Awake()
+    {
+        base.Awake();
+        //
+
+    }
 
 
 

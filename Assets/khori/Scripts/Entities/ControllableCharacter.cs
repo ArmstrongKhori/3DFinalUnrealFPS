@@ -15,7 +15,7 @@ public class ControllableCharacter : Character {
         input = new PlayerInputter();
 
         // ??? <-- Debugging code.
-        weapon = new Weapon(new Pistol(), this);
+        weapon = new Weapon(new Rifle(), this);
     }
 
 
@@ -28,9 +28,11 @@ public class ControllableCharacter : Character {
 
         Vector3 moveDirection = Vector3.zero;
         //
-        moveDirection += new Vector3(10 * input.strafing, 0, 10 * input.moving);
+        moveDirection += new Vector3(10 * 0, 0, 10 * input.moving); // input.strafing
+
+        transform.Rotate(new Vector3(0, 1 * input.strafing, 0));
         //
-        transform.Translate(moveDirection * Time.deltaTime);
+        rb.velocity = transform.TransformDirection(moveDirection); //  * Time.deltaTime
 
 
         // *** Weapon stuff.
