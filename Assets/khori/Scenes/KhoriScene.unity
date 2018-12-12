@@ -883,11 +883,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1983220986}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 331a68f6ebef0214eaf54a5c7bed2237, type: 3}
+  m_Script: {fileID: 11500000, guid: 8807e327bdc760646b6dfa940ba90254, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpHeight: 100
+  JumpHeight: 10
   Gravity: 9.81
+  attachedCamera: {fileID: 760612584}
 --- !u!65 &1983220988
 BoxCollider:
   m_ObjectHideFlags: 0
