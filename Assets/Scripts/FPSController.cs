@@ -7,7 +7,7 @@ public class FPSController : MonoBehaviour {
     private float ForwardSpeed = 5;
     private float BackwardSpeed = -4;
     private float StrafeSpeed = 5;
-    public float JumpHeight = 100;
+    private float JumpHeight = 10;
 
     private Vector3 Direction;
 
@@ -20,8 +20,6 @@ public class FPSController : MonoBehaviour {
     //private CharacterController controller;
 
     private Vector3 moveDirection = Vector3.zero;
-
-    public float Gravity = 9.81f;
 
     private bool isJumping = false;
 
@@ -42,7 +40,7 @@ public class FPSController : MonoBehaviour {
 
         for (int i = 0; i < 5; i++)
         {
-            WeaponPickup[i].Equals(false);
+            WeaponPickup.Add(false);
         }
 
         Debug.Log(WeaponPickup);
@@ -72,7 +70,6 @@ public class FPSController : MonoBehaviour {
             {
                 float temp = transform.position.y;
                 isJumping = true;
-
                 rb.velocity = new Vector3(rb.velocity.x, JumpHeight, rb.velocity.z);
             }
         }
