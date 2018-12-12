@@ -10,6 +10,8 @@ public class PlayerInputter : BaseInputter {
     
     public override void Read()
     {
+        base.Read();
+        //
         moving = Input.GetAxis("Vertical");
         strafing = Input.GetAxis("Horizontal");
         jump = Input.GetButton("Jump");

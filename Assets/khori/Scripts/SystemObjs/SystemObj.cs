@@ -10,13 +10,11 @@ using UnityEngine;
 public class SystemObj : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+	public virtual void Start () {
+        // *** DO NOT call your Initialize function unless the GameManager already exists!
+        // *** This is because the GameManager calls everything else's Initialize function!
+        GameManager gm = GameManager.Instance();
+        if (gm != null) { Initialize(); }
 	}
 
 
