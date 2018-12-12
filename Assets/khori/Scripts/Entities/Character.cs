@@ -36,6 +36,10 @@ public class Character : Actor
 
 
 
+    public override Vector3 LookVector { get { return base.LookVector; } }
+
+
+
     public override void Awake()
     {
         base.Awake();

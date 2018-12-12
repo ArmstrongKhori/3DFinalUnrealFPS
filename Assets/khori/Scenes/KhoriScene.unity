@@ -626,7 +626,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65aa13fff76761446bfb5b6a64b2210c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1983220990}
+  target: {fileID: 0}
 --- !u!81 &1279928415
 AudioListener:
   m_ObjectHideFlags: 0
@@ -866,8 +866,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1983220989}
   - component: {fileID: 1983220988}
-  - component: {fileID: 1983220990}
   - component: {fileID: 1983220987}
+  - component: {fileID: 1983220990}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -924,7 +924,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1983220986}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87902391935cb9d45b2afe59f73b982e, type: 3}
+  m_Script: {fileID: 11500000, guid: b85de637a7d3ad147884b9180799af2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   armor: 25

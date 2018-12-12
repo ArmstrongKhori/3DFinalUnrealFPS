@@ -13,7 +13,7 @@ public class Missile : Prop {
         base.OnSpawned();
         //
         rb.useGravity = false;
-        rb.velocity = by.transform.forward * initialVelocity;
+        rb.velocity = by.LookVector * initialVelocity;
     }
 
 }

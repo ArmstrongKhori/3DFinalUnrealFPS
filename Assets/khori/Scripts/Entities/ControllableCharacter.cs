@@ -5,8 +5,19 @@ using UnityEngine;
 public class ControllableCharacter : Character {
 
     public BaseInputter input;
-
     public Weapon weapon;
+
+
+    public override Vector3 LookVector
+    {
+        // ??? <-- This needs to be implemented INTO the controller itself.
+        get
+        {
+            FPSController2 con = GetComponent<FPSController2>();
+            return con == null ? base.LookVector : con.attachedCamera.transform.forward;
+        }
+    }
+
 
     public override void Awake()
     {
@@ -26,6 +37,7 @@ public class ControllableCharacter : Character {
         input.Read();
 
 
+        /*
         Vector3 moveDirection = Vector3.zero;
         //
         moveDirection += new Vector3(10 * 0, 0, 10 * input.moving); // input.strafing
@@ -33,6 +45,7 @@ public class ControllableCharacter : Character {
         transform.Rotate(new Vector3(0, 1 * input.strafing, 0));
         //
         rb.velocity = transform.TransformDirection(moveDirection); //  * Time.deltaTime
+        */
 
 
         // *** Weapon stuff.
