@@ -9,10 +9,15 @@ public class CharacterStateManager : MonoBehaviour {
     public bool IsDead = false;
     public bool InMotion = false;
 
+
     public Animator playerMotion;
 
-    public float Direction = 0.0f;
-    public float Speed = 0.0f;
+    public RuntimeAnimatorController controllerGun2D;
+    public RuntimeAnimatorController controllerRifle2D;
+
+
+    private float Direction = 0.0f;
+    private float Speed = 0.0f;
     private float animAdjNumber = 0.25f; // number which effects how fast switching between states
 
     private void Awake()
@@ -497,13 +502,29 @@ public class CharacterStateManager : MonoBehaviour {
             InMotion = true;
         }
 
+        //SHOOTING
+        public void Shooting()
+        {
+
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+            {
+                Debug.Log("HERE CHARACTER SHOOTING");
+                InMotion = true;
+                playerMotion.SetBool("IsShoot", true);
+            }
+            Debug.Log("HERE CHARACTER SHOOTING");
+            playerMotion.SetBool("IsShoot", true);
+            
+        }
+
+
         //JUMP
         public void Jump()
         {
-                Debug.Log("HERE CHARACTER JUMPS");
-                InMotion = true;
-                playerMotion.SetBool("IsJump", true);
-            }
+            Debug.Log("HERE CHARACTER JUMPS");
+            InMotion = true;
+            playerMotion.SetBool("IsJump", true);
+        }
 
         //DEATH
         public void Death()
@@ -520,9 +541,10 @@ public class CharacterStateManager : MonoBehaviour {
     void Update() {
 
         InMotion = false;
+        playerMotion.SetBool("IsShoot", false);
 
         // JUST FOR TESTING 
-        
+
         //Walking and Run Forward -----> 
         if (Input.GetKey(KeyCode.W))
         {
@@ -607,7 +629,12 @@ public class CharacterStateManager : MonoBehaviour {
         {
             RunningBackwardLeft();
         }
-        
+
+        //Shooting
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            Shooting();
+        }
 
 
         //Jumping -----> 
@@ -625,10 +652,20 @@ public class CharacterStateManager : MonoBehaviour {
 
         if (IsActive && !IsDead && !InMotion)
         {
-
             Debug.Log("IDLE TURNING BACK");
             Idle();
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            playerMotion.runtimeAnimatorController = controllerGun2D;
+
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            playerMotion.runtimeAnimatorController = controllerRifle2D;
+        }
+
 
     }
 }
