@@ -36,11 +36,16 @@ public class Character : Actor
 
 
 
+    public override Vector3 LookVector { get { return base.LookVector; } }
+
+
+
     public override void Awake()
     {
         base.Awake();
         //
-
+        // *** "Characters" do not tilt. They can only "turn".
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
     }
 
 
