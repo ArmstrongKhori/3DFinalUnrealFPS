@@ -10,6 +10,9 @@ public class Actor : Entity {
 
     internal Rigidbody rb;
 
+    public virtual Vector3 LookVector { get { return transform.forward; } }
+
+
     public override void Awake()
     {
         base.Awake();
