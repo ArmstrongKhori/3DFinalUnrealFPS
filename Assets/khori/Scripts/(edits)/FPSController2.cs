@@ -123,6 +123,15 @@ public class FPSController2 : MonoBehaviour
         transform.eulerAngles = new Vector3(0.0f, yaw, 0.0f);
         attachedCamera.transform.eulerAngles = new Vector3(pitch, transform.eulerAngles.y, 0.0f);
         // =====================================================================================
+
+        if (pitch > 80)
+        {
+            pitch = 80;
+        }
+        else if (pitch < -30)
+        {
+            pitch = -30;
+        }
     }
 
     private void SelectWeapon()
