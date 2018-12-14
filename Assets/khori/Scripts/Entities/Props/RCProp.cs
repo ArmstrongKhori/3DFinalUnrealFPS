@@ -90,7 +90,7 @@ public class RCProp : Prop {
                 // ??? <-- This needs CORRECT layer masks...
                 // ??? <-- There is currently no deviance for raycasting whatsoever...
                 // !!! <-- Use the 10-modded value of the roll for left-right, and the 10-divved value of the roll for the up-down...
-                rays = Physics.RaycastAll(startingPoint, heading, falloff, 1 << 9);
+                rays = Physics.RaycastAll(startingPoint, heading, falloff, 1 << 9| 1 << 10);
                 Debug.Log("Heading: " + heading);
                 //
                 // *** Let's find the closest point of impact out of all possible candidates!
@@ -148,7 +148,7 @@ public class RCProp : Prop {
                 break;
             case ResolutionShapes.Sphere:
                 // ??? <-- This needs CORRECT layer masks...
-                rays = Physics.SphereCastAll(startingPoint, radiusMax, Vector3.zero, 1 << 9);
+                rays = Physics.SphereCastAll(startingPoint, radiusMax, Vector3.zero, 1 << 9 | 1 << 10);
                 //
                 foreach (RaycastHit ray in rays)
                 {

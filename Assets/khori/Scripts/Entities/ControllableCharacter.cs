@@ -32,9 +32,13 @@ public class ControllableCharacter : Character {
 
     public override void Act()
     {
+        if (!isLocalPlayer) { return; }
+
+
         base.Act();
         //
         input.Read();
+        
 
 
         /*

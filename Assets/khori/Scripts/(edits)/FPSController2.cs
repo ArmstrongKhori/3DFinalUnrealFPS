@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class FPSController2 : MonoBehaviour
+public class FPSController2 : NetworkBehaviour
 {
 
     private float ForwardSpeed = 5;
@@ -54,6 +55,11 @@ public class FPSController2 : MonoBehaviour
         }
 
         Debug.Log(WeaponPickup);
+
+
+
+
+        if (!isLocalPlayer) { attachedCamera.gameObject.SetActive(false); }
     }
 
     private void MoveForward()
@@ -160,6 +166,9 @@ public class FPSController2 : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!isLocalPlayer) { return; }
+
+
         ControlAim();
         MoveForward();
         MoveBackward();

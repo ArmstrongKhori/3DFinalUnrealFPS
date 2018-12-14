@@ -15,6 +15,8 @@ public class Pistol : WeaponData {
         appearance = "pistol";
     }
 
+
+
     public override void OnFire(Weapon w)
     {
         base.OnFire(w);

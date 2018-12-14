@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 /// <summary>
 /// A "Character" is an actor which interacts with projectiles, physics, or characters.
@@ -31,7 +32,10 @@ public class Character : Actor
     /// </summary>
     public const float ARMORMAXHARD = 200;
 
+    
+    [SyncVar]
     public float armor = 25;
+    [SyncVar]
     public float health = 100;
 
 
@@ -50,8 +54,15 @@ public class Character : Actor
 
 
 
-    internal void Struck(Prop prop, StrikingData data)
+    public void Struck(Prop prop, StrikingData data)
     {
-        
+        RpcNetworkGetHit();
+    }
+
+    
+    [ClientRpc]
+    public void RpcNetworkGetHit()
+    {
+        rb.velocity = new Vector3(0, 10, 0);
     }
 }
