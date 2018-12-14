@@ -38,8 +38,20 @@ public class ControllableCharacter : Character {
         base.Act();
         //
         input.Read();
-        
 
+
+
+        if (input.fire2)
+        {
+            foreach (Character c in FindObjectsOfType<Character>())
+            {
+                if (c.NetworkID != NetworkID)
+                {
+                    Network_Interact(InteractVerbs.Damage, c.NetworkID, new InteractData(5));
+                }
+            }
+        }
+        
 
         /*
         Vector3 moveDirection = Vector3.zero;

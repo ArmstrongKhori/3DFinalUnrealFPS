@@ -17,6 +17,10 @@ public class Entity : NetworkBehaviour {
     {
 
     }
+    public virtual void Start()
+    {
+
+    }
 
 
     private bool _discarded = false;

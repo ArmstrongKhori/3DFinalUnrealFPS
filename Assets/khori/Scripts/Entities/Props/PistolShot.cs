@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PistolShot : RCProp {
 
-    public override void OnSpawned(Actor by = null)
+    public override void OnSpawned()
     {
         base.OnSpawned();
         //
-        heading = by.LookVector;
+        heading = Owner.LookVector;
     }
 
 

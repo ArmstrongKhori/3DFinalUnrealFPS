@@ -51,11 +51,12 @@ public class BattleManager : SystemObj {
     public Actor Spawn(string name, Actor by)
     {
         Actor a = (Actor)Instantiate(Resources.Load("Spawnables/" + name, typeof(Actor)), by.transform);
+        a.Owner = by;
         //
         a.transform.parent = gameSpace.transform; // *** Detach it from the target after spawning it ONTO the target.
         //
         //
-        a.OnSpawned(by);
+        a.OnSpawned();
 
 
         return a;

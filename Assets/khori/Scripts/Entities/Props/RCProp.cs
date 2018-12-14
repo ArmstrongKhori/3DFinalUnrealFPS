@@ -53,9 +53,9 @@ public class RCProp : Prop {
         // ??? <-- Raycasted Props shouldn't even HAVE rigidbodies...
     }
 
-    public override void OnSpawned(Actor by = null)
+    public override void OnSpawned()
     {
-        base.OnSpawned(by);
+        base.OnSpawned();
         //
         startingPoint = transform.position;
     }
@@ -167,6 +167,7 @@ public class RCProp : Prop {
                     sd.surface = ray.collider.gameObject.GetComponent<SolidSurface>();
                     //
                     rr.AddStrikeData(sd);
+
                 }
                 break;
         }

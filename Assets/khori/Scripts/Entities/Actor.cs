@@ -9,6 +9,12 @@ using UnityEngine;
 public class Actor : Entity {
 
     internal Rigidbody rb;
+    /// <summary>
+    /// This is not always necessary, but you can describe who "owns" this actor.
+    /// If it is null, the actor is considered as owning itself.
+    /// </summary>
+    public Actor Owner { get { return owner == null ? this : owner; } set { owner = value; } }
+    private Actor owner;
 
     public virtual Vector3 LookVector { get { return transform.forward; } }
 
@@ -49,6 +55,6 @@ public class Actor : Entity {
     }
 
 
-    public virtual void OnSpawned(Actor by = null) { }
+    public virtual void OnSpawned() { }
     public virtual void OnDespawned() { }
 }
