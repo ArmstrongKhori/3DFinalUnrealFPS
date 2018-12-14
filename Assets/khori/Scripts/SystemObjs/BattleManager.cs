@@ -39,7 +39,9 @@ public class BattleManager : SystemObj {
     /// </summary>
     public void Run()
     {
-        foreach (Actor a in allActors)
+        // ??? <-- This is INCREDIBLY inefficient. Add proper list-modication later...
+        Actor[] runningList = allActors.ToArray();
+        foreach (Actor a in runningList)
         {
             a.Act();
         }

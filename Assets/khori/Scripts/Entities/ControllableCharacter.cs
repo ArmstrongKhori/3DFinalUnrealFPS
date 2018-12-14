@@ -26,7 +26,7 @@ public class ControllableCharacter : Character {
         input = new PlayerInputter();
 
         // ??? <-- Debugging code.
-        weapon = new Weapon(new Rifle(), this);
+        weapon = new Weapon(new Pistol(), this);
     }
 
 

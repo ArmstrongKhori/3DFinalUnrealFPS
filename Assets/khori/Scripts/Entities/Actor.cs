@@ -19,6 +19,14 @@ public class Actor : Entity {
         //
         rb = gameObject.GetComponent<Rigidbody>();
         if (rb == null) { rb = gameObject.AddComponent<Rigidbody>(); }
+
+
+        BattleManager bm = BattleManager.Instance();
+        if (bm != null)
+        {
+            bm.allActors.Add(this);
+            // ??? <-- Fix this logic later...
+        }
     }
 
 
@@ -27,9 +35,17 @@ public class Actor : Entity {
 
     public void Despawn()
     {
-
-        //
         OnDespawned();
+        //
+        Discard();
+    }
+
+    public override void Discard()
+    {
+        base.Discard();
+        //
+        BattleManager.Instance().allActors.Remove(this);
+        // ??? <-- Fix this, zzzz...
     }
 
 

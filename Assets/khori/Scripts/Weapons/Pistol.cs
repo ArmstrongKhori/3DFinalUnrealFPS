@@ -20,7 +20,8 @@ public class Pistol : WeaponData {
         base.OnFire(w);
         //
         // ??? <-- Debugging code.
-        BattleManager.Instance().Spawn("Bullet", w.owner);
+        // BattleManager.Instance().Spawn("Bullet", w.owner);
+        BattleManager.Instance().Spawn("PistolShot", w.owner);
     }
 
 }

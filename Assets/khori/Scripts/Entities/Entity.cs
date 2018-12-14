@@ -17,4 +17,16 @@ public class Entity : MonoBehaviour {
 
     }
 
+
+    private bool _discarded = false;
+    public virtual void Discard()
+    {
+        if (!_discarded)
+        {
+            _discarded = true;
+
+            Destroy(this.gameObject);
+        }
+    }
+
 }
