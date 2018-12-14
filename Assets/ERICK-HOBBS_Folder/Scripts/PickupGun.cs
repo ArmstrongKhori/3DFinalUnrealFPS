@@ -30,7 +30,6 @@ public class PickupGun : MonoBehaviour {
             if (TheDistance <= 5)
             {
                 StartCoroutine(TakeHandgun());
-                
             }
         }
     }
