@@ -7,7 +7,7 @@ public class AudioManager : MonoBehaviour {
 
     public Sound[] sounds;
 
-    void Awake()
+    void Initialize()
     {
         foreach (Sound s in sounds)
         {
@@ -61,5 +61,27 @@ public class AudioManager : MonoBehaviour {
         FindObjectOfType<AudioManager>().Play("gunShot");
     }
 
+
+    #region Singleton Stuff
+    private static AudioManager _instance;
+    public static AudioManager Instance() { return _instance; }
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        //
+        DontDestroyOnLoad(this.gameObject);
+
+
+        Initialize();
+    }
+    #endregion
 
 }

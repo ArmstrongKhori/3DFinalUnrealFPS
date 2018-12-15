@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class CharacterStateManager : MonoBehaviour {
+public class CharacterStateManager : NetworkBehaviour {
 
 
     public bool IsActive = false;
@@ -18,7 +19,7 @@ public class CharacterStateManager : MonoBehaviour {
 
     private float Direction = 0.0f;
     private float Speed = 0.0f;
-    private float animAdjNumber = 0.25f; // number which effects how fast switching between states
+    private float animAdjNumber = 0.15f; // number which effects how fast switching between states
 
     private void Awake()
     {
@@ -540,9 +541,13 @@ public class CharacterStateManager : MonoBehaviour {
 
     void Update() {
 
+        if (!isLocalPlayer) { return; }
+
         InMotion = false;
         playerMotion.SetBool("IsShot", false);
 
+
+        
         // JUST FOR TESTING 
 
         //Walking and Run Forward -----> 

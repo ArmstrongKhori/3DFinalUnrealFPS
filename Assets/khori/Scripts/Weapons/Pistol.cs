@@ -24,6 +24,8 @@ public class Pistol : WeaponData {
         // ??? <-- Debugging code.
         // BattleManager.Instance().Spawn("Bullet", w.owner);
         BattleManager.Instance().Spawn("PistolShot", w.owner);
+
+        AudioManager.Instance().GUNSHOT();
     }
 
 }
