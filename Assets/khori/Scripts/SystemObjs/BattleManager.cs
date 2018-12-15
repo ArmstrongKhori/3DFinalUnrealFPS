@@ -48,9 +48,9 @@ public class BattleManager : SystemObj {
     }
 
 
-    public Actor Spawn(string name, Actor by)
+    public Actor Spawn(string name, Character by)
     {
-        Actor a = (Actor)Instantiate(Resources.Load("Spawnables/" + name, typeof(Actor)), by.transform);
+        Actor a = (Actor)Instantiate(Resources.Load("Spawnables/" + name, typeof(Actor)), by.gunPoint.transform);
         a.Owner = by;
         //
         a.transform.parent = gameSpace.transform; // *** Detach it from the target after spawning it ONTO the target.

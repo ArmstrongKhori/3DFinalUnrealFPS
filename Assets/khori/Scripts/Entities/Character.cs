@@ -39,6 +39,12 @@ public class Character : Actor
     public float health = 100;
 
 
+    public GameObject modelHolder;
+    public CharacterStateManager stateManager;
+
+    public POI gunPoint;
+
+
     public NetworkInstanceId NetworkID { get { return GetComponent<NetworkIdentity>().netId; } }
     public override Vector3 LookVector { get { return base.LookVector; } }
 
@@ -52,7 +58,14 @@ public class Character : Actor
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 
 
+        modelHolder = transform.Find("Player").gameObject;
+        //
+        stateManager = modelHolder.GetComponent<CharacterStateManager>();
         
+
+
+
+
         name = "PlayerNo_" + FindObjectsOfType<Character>().Length;
     }
     public override void Start()

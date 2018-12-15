@@ -6,6 +6,8 @@ using UnityEngine.Networking;
 public class FPSController2 : NetworkBehaviour
 {
 
+    public const float RUNNINGMULT = 2.0f;
+
     private float ForwardSpeed = 5;
     private float BackwardSpeed = -4;
     private float StrafeSpeed = 5;
@@ -40,12 +42,23 @@ public class FPSController2 : NetworkBehaviour
 
     private List<bool> WeaponPickup;
 
+
+    public Character character;
+
+    private CharacterStateManager CharAnim;
+
     // Use this for initialization
     void Start()
     {
         Cursor.visible = false;
 
         rb = GetComponent<Rigidbody>();
+        character = GetComponent<Character>();
+        //
+        CharAnim = character.stateManager;
+
+
+
 
         WeaponPickup = new List<bool>();
 
@@ -54,11 +67,9 @@ public class FPSController2 : NetworkBehaviour
             WeaponPickup.Add(false);
         }
 
+
+
         Debug.Log(WeaponPickup);
-
-
-
-
         if (!isLocalPlayer) { attachedCamera.gameObject.SetActive(false); }
     }
 
@@ -66,15 +77,27 @@ public class FPSController2 : NetworkBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
-            rb.velocity += transform.TransformDirection(new Vector3(0, 0, ForwardSpeed));
-        }
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                rb.velocity += transform.TransformDirection(new Vector3(0, 0, ForwardSpeed* RUNNINGMULT));
+            }
+            else
+            {
+                rb.velocity += transform.TransformDirection(new Vector3(0, 0, ForwardSpeed));
+            }
+         }
     }
 
     private void MoveBackward()
     {
         if (Input.GetKey(KeyCode.S))
         {
+            CharAnim.WalkingBackward();
             rb.velocity += transform.TransformDirection(new Vector3(0, 0, BackwardSpeed));
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                CharAnim.RunningBackward();
+            }
         }
     }
 
@@ -84,6 +107,8 @@ public class FPSController2 : NetworkBehaviour
         {
             if (!isJumping)
             {
+                CharAnim.Jump();
+
                 float temp = transform.position.y;
                 isJumping = true;
 
@@ -97,11 +122,13 @@ public class FPSController2 : NetworkBehaviour
     {
         if (Input.GetKey(KeyCode.D))
         {
+            CharAnim.WalkingRight();
             rb.velocity += transform.TransformDirection(new Vector3(StrafeSpeed, 0, 0));
         }
 
         if (Input.GetKey(KeyCode.A))
         {
+            CharAnim.WalkingLeft();
             rb.velocity += transform.TransformDirection(new Vector3(-StrafeSpeed, 0, 0));
         }
     }
@@ -110,6 +137,7 @@ public class FPSController2 : NetworkBehaviour
     {
         if (other.gameObject.tag == "Ground")
         {
+            CharAnim.playerMotion.SetBool("IsJump", false);
             isJumping = false;
         }
     }
@@ -126,6 +154,15 @@ public class FPSController2 : NetworkBehaviour
         transform.eulerAngles = new Vector3(0.0f, yaw, 0.0f);
         attachedCamera.transform.eulerAngles = new Vector3(pitch, transform.eulerAngles.y, 0.0f);
         // =====================================================================================
+
+        if (pitch > 80)
+        {
+            pitch = 80;
+        }
+        else if (pitch < -30)
+        {
+            pitch = -30;
+        }
     }
 
     private void SelectWeapon()
@@ -168,7 +205,7 @@ public class FPSController2 : NetworkBehaviour
     {
         if (!isLocalPlayer) { return; }
 
-
+        
         ControlAim();
         MoveForward();
         MoveBackward();
@@ -185,13 +222,40 @@ public class FPSController2 : NetworkBehaviour
         Vector3 tempVelo = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         float tempFall = rb.velocity.y;
         //
-        rb.velocity = tempVelo.normalized * Mathf.Min(tempVelo.magnitude, 10f);
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            rb.velocity = tempVelo.normalized * Mathf.Min(tempVelo.magnitude, 10f * RUNNINGMULT);
+        }
+        else
+        {
+            rb.velocity = tempVelo.normalized * Mathf.Min(tempVelo.magnitude, 10f);
+        }
         // !!! <-- In the future, increasing the character's "friction" might be more "natural-looking" than just brick-walling their speed...
         //
         rb.velocity = new Vector3(rb.velocity.x, tempFall, rb.velocity.z);
         // =====================================================================================
         //
         SelectWeapon();
+        Debug.Log(rb.velocity);
+
+        Vector3 localVel = transform.InverseTransformVector(rb.velocity);
+        CharAnim.playerMotion.SetFloat("Speed", localVel.x / ForwardSpeed /4);
+        CharAnim.playerMotion.SetFloat("Direction", localVel.z / StrafeSpeed /4);
+
+        /*
+        if (localVel.z > 0)
+        {
+            CharAnim.WalkingForward();
+        }
+        else if (localVel.z < 0)
+        {
+            CharAnim.WalkingBackward();
+        }
+        else
+        {
+            CharAnim.Idle();
+        }
+        */
 
     }
 }

@@ -1,24 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class CharacterStateManager : MonoBehaviour {
+public class CharacterStateManager : NetworkBehaviour {
 
 
     public bool IsActive = false;
     public bool IsDead = false;
-
     public bool InMotion = false;
+
 
     public Animator playerMotion;
 
-    public float Direction = 0.0f;
-    public float Speed = 0.0f;
+    public RuntimeAnimatorController controllerGun2D;
+    public RuntimeAnimatorController controllerRifle2D;
+
+
+    private float Direction = 0.0f;
+    private float Speed = 0.0f;
+    private float animAdjNumber = 0.15f; // number which effects how fast switching between states
 
     private void Awake()
     {
        playerMotion.SetFloat("Speed", 0);
        playerMotion.SetFloat("Direction", 0);
+       IsActive = true;
     }
 
     // FOR 1D BLEND TREE
@@ -155,22 +162,22 @@ public class CharacterStateManager : MonoBehaviour {
         {
             if (Direction > 0f)
             {
-                Direction -= 0.01f;
+                Direction -= animAdjNumber;
                 Debug.Log(Direction);
             }
             if (Speed > 0f)
             {
-                Speed -= 0.01f;
+                Speed -= animAdjNumber;
                 Debug.Log(Speed);
             }
             if (Direction < 0f)
             {
-                Direction += 0.01f;
+                Direction += animAdjNumber;
                 Debug.Log(Direction);
             }
             if (Speed < 0f)
             {
-                Speed += 0.01f;
+                Speed += animAdjNumber;
                 Debug.Log(Speed);
             }
             
@@ -187,15 +194,15 @@ public class CharacterStateManager : MonoBehaviour {
         public void WalkingForward() {
 
             if (Direction < 0.5f)
-            { Direction += 0.01f; Debug.Log(Direction); }
+            { Direction += animAdjNumber; Debug.Log(Direction); }
             if (Direction > 0.5f)
-            { Direction -= 0.01f; Debug.Log(Direction); }
+            { Direction -= animAdjNumber; Debug.Log(Direction); }
 
             //Set X Axis back to 0
             if (Speed < 0)
-            { Speed += 0.01f; Debug.Log(Speed); }
+            { Speed += animAdjNumber; Debug.Log(Speed); }
             if (Speed > 0)
-            { Speed -= 0.01f; Debug.Log(Speed); }
+            { Speed -= animAdjNumber; Debug.Log(Speed); }
 
 
             Debug.Log("WALKING STARTS HERE");
@@ -209,15 +216,15 @@ public class CharacterStateManager : MonoBehaviour {
         {
 
             if (Speed > -0.5f)
-            { Speed -= 0.01f; Debug.Log(Speed); }
+            { Speed -= animAdjNumber; Debug.Log(Speed); }
             if (Speed < -0.5f)
-            { Speed += 0.01f; Debug.Log(Speed); }
+            { Speed += animAdjNumber; Debug.Log(Speed); }
 
             //Set Y Axis back to 0
             if (Direction > 0f)
-            { Direction -= 0.01f; Debug.Log(Direction); }
+            { Direction -= animAdjNumber; Debug.Log(Direction); }
             if (Direction < 0f)
-            { Direction += 0.01f; Debug.Log(Direction); }
+            { Direction += animAdjNumber; Debug.Log(Direction); }
 
             Debug.Log("WALKING STARTS HERE");
             playerMotion.SetFloat("Speed", Speed);
@@ -229,15 +236,15 @@ public class CharacterStateManager : MonoBehaviour {
         public void WalkingRight()
         {
             if (Speed < 0.5f)
-            { Speed += 0.01f; Debug.Log(Speed); }
+            { Speed += animAdjNumber; Debug.Log(Speed); }
             if (Speed > 0.5f)
-            { Speed -= 0.01f; Debug.Log(Speed); }
+            { Speed -= animAdjNumber; Debug.Log(Speed); }
 
             //Set Y Axis back to 0
             if (Direction > 0f)
-            { Direction -= 0.01f; Debug.Log(Direction); }
+            { Direction -= animAdjNumber; Debug.Log(Direction); }
             if (Direction < 0f)
-            { Direction += 0.01f; Debug.Log(Direction); }
+            { Direction += animAdjNumber; Debug.Log(Direction); }
 
             Debug.Log("WALKING STARTS HERE");
             playerMotion.SetFloat("Speed", Speed);
@@ -250,16 +257,16 @@ public class CharacterStateManager : MonoBehaviour {
         public void WalkingBackward()
         {
             if (Direction > -0.5f)
-            { Direction -= 0.01f; Debug.Log(Direction); }
+            { Direction -= animAdjNumber; Debug.Log(Direction); }
             if (Direction < -0.5f )
-            { Direction += 0.01f; Debug.Log(Direction); }
+            { Direction += animAdjNumber; Debug.Log(Direction); }
 
 
             //Set X Axis back to 0
             if (Speed < 0)
-            { Speed += 0.01f; Debug.Log(Speed); }
+            { Speed += animAdjNumber; Debug.Log(Speed); }
             if (Speed > 0)
-            { Speed -= 0.01f; Debug.Log(Speed); }
+            { Speed -= animAdjNumber; Debug.Log(Speed); }
 
             Debug.Log("WALKING STARTS HERE");
             playerMotion.SetFloat("Speed", Speed);
@@ -271,16 +278,16 @@ public class CharacterStateManager : MonoBehaviour {
         public void RunningForward()
         {
             if (Direction < 1f)
-            { Direction += 0.01f; Debug.Log(Direction); }
+            { Direction += animAdjNumber; Debug.Log(Direction); }
             if (Direction > 0f)
-            { Direction += 0.01f; Debug.Log(Direction); }
+            { Direction += animAdjNumber; Debug.Log(Direction); }
 
 
             //Set X Axis back to 0
             if (Speed < 0)
-            { Speed += 0.01f; Debug.Log(Speed); }
+            { Speed += animAdjNumber; Debug.Log(Speed); }
             if (Speed > 0)
-            { Speed -= 0.01f; Debug.Log(Speed); }
+            { Speed -= animAdjNumber; Debug.Log(Speed); }
 
             Debug.Log("HERE CHARACTER RUNS");
             playerMotion.SetFloat("Speed", Speed);
@@ -292,15 +299,15 @@ public class CharacterStateManager : MonoBehaviour {
         public void RunningLeft()
         {
             if (Speed > -1f)
-            { Speed -= 0.01f; Debug.Log(Speed); }
+            { Speed -= animAdjNumber; Debug.Log(Speed); }
             if (Speed < 0f)
-            { Speed -= 0.01f; Debug.Log(Speed); }
+            { Speed -= animAdjNumber; Debug.Log(Speed); }
 
             //Set Y Axis back to 0
             if (Direction > 0f)
-            { Direction -= 0.01f; Debug.Log(Direction); }
+            { Direction -= animAdjNumber; Debug.Log(Direction); }
             if (Direction < 0f)
-            { Direction += 0.01f; Debug.Log(Direction); }
+            { Direction += animAdjNumber; Debug.Log(Direction); }
 
             Debug.Log("HERE CHARACTER RUNS");
             playerMotion.SetFloat("Speed", Speed);
@@ -312,15 +319,15 @@ public class CharacterStateManager : MonoBehaviour {
         public void RunningRight()
         {
             if (Speed < 1f)
-            { Speed += 0.01f; Debug.Log(Speed); }
+            { Speed += animAdjNumber; Debug.Log(Speed); }
             if (Speed > 0f)
-            { Speed += 0.01f; Debug.Log(Speed); }
+            { Speed += animAdjNumber; Debug.Log(Speed); }
 
             //Set Y Axis back to 0
             if (Direction > 0f)
-            { Direction -= 0.01f; Debug.Log(Direction); }
+            { Direction -= animAdjNumber; Debug.Log(Direction); }
             if (Direction < 0f)
-            { Direction += 0.01f; Debug.Log(Direction); }
+            { Direction += animAdjNumber; Debug.Log(Direction); }
 
             Debug.Log("HERE CHARACTER RUNS");
             playerMotion.SetFloat("Speed", Speed);
@@ -333,13 +340,13 @@ public class CharacterStateManager : MonoBehaviour {
         {
             if (Speed > -0.5f)
             {
-                Speed -= 0.01f; Debug.Log(Speed);
+                Speed -= animAdjNumber; Debug.Log(Speed);
             }
             else if (Speed > -0.499f)
             { Speed = -0.5f; Direction = 0.5f; Debug.Log(Speed); }
 
             if (Direction < 0.5f)
-            { Direction += 0.01f; Debug.Log(Direction); }
+            { Direction += animAdjNumber; Debug.Log(Direction); }
 
             Debug.Log("WALKING STARTS HERE");
             playerMotion.SetFloat("Speed", Speed);
@@ -351,11 +358,11 @@ public class CharacterStateManager : MonoBehaviour {
         public void WalkingForwardRight()
         {
             if (Speed < 0.5f)
-            { Speed += 0.01f; Debug.Log(Speed); }
+            { Speed += animAdjNumber; Debug.Log(Speed); }
 
 
             if (Direction < 0.5f)
-            { Direction += 0.01f; Debug.Log(Direction); }
+            { Direction += animAdjNumber; Debug.Log(Direction); }
 
             Debug.Log("WALKING STARTS HERE");
             playerMotion.SetFloat("Speed", Speed);
@@ -367,13 +374,13 @@ public class CharacterStateManager : MonoBehaviour {
         public void RunningForwardRight()
         {
             if (Speed < 1f)
-            { Speed += 0.01f; Debug.Log(Speed); }
+            { Speed += animAdjNumber; Debug.Log(Speed); }
 
             if (Speed > 0f)
-            { Speed += 0.01f; Debug.Log(Speed); }
+            { Speed += animAdjNumber; Debug.Log(Speed); }
 
             if (Direction < 1f)
-            { Direction += 0.01f; Debug.Log(Direction); }
+            { Direction += animAdjNumber; Debug.Log(Direction); }
 
             else if (Speed > -0.999f)
             { Speed = -1f; Direction = 1f; Debug.Log(Speed); }
@@ -388,13 +395,13 @@ public class CharacterStateManager : MonoBehaviour {
         public void RunningForwardLeft()
         {
             if (Speed > -1f)
-            { Speed -= 0.01f; Debug.Log(Speed); }
+            { Speed -= animAdjNumber; Debug.Log(Speed); }
             if (Speed < 0f)
-            { Speed -= 0.01f; Debug.Log(Speed); }
+            { Speed -= animAdjNumber; Debug.Log(Speed); }
             if (Direction < 1f)
-            { Direction += 0.01f; Debug.Log(Direction); }
+            { Direction += animAdjNumber; Debug.Log(Direction); }
             if (Direction > 0f)
-            { Direction += 0.01f; Debug.Log(Direction); }
+            { Direction += animAdjNumber; Debug.Log(Direction); }
 
             else if (Speed > -0.999f)
             { Speed = -1;  Direction = 1; }
@@ -410,15 +417,15 @@ public class CharacterStateManager : MonoBehaviour {
         public void RunningBackward()
         {
             if (Direction > -1f)
-            { Direction -= 0.01f; Debug.Log(Direction); }
+            { Direction -= animAdjNumber; Debug.Log(Direction); }
             if (Direction < 0f)
-            { Direction -= 0.01f; Debug.Log(Direction); }
+            { Direction -= animAdjNumber; Debug.Log(Direction); }
 
             //Set X Axis back to 0
             if (Speed < 0)
-            { Speed += 0.01f; Debug.Log(Speed); }
+            { Speed += animAdjNumber; Debug.Log(Speed); }
             if (Speed > 0)
-            { Speed -= 0.01f; Debug.Log(Speed); }
+            { Speed -= animAdjNumber; Debug.Log(Speed); }
 
             Debug.Log("HERE CHARACTER RUNS");
             playerMotion.SetFloat("Speed", Speed);
@@ -430,9 +437,9 @@ public class CharacterStateManager : MonoBehaviour {
         public void WalkingBackwardRight()
         {
             if (Speed < 0.5f)
-            { Speed += 0.01f; Debug.Log(Speed); }
+            { Speed += animAdjNumber; Debug.Log(Speed); }
             if (Direction > -0.5f)
-            { Direction -= 0.01f; Debug.Log(Direction); }
+            { Direction -= animAdjNumber; Debug.Log(Direction); }
 
             Debug.Log("WALKING STARTS HERE");
             playerMotion.SetFloat("Speed", Speed);
@@ -444,9 +451,9 @@ public class CharacterStateManager : MonoBehaviour {
         public void WalkingBackwardLeft()
         {
             if (Speed > -0.5f)
-            { Speed -= 0.01f; Debug.Log(Speed); }
+            { Speed -= animAdjNumber; Debug.Log(Speed); }
             if (Direction > -0.5f)
-            { Direction -= 0.01f; Debug.Log(Direction); }
+            { Direction -= animAdjNumber; Debug.Log(Direction); }
 
             Debug.Log("WALKING STARTS HERE");
             playerMotion.SetFloat("Speed", Speed);
@@ -460,13 +467,13 @@ public class CharacterStateManager : MonoBehaviour {
         {
 
             if (Speed < 1f)
-            { Speed += 0.01f; Debug.Log(Speed); }
+            { Speed += animAdjNumber; Debug.Log(Speed); }
             if (Speed > 0f)
-            { Speed += 0.01f; Debug.Log(Speed); }
+            { Speed += animAdjNumber; Debug.Log(Speed); }
             if (Direction > -1f)
-            { Direction -= 0.01f; Debug.Log(Direction); }
+            { Direction -= animAdjNumber; Debug.Log(Direction); }
             if (Direction < 0f)
-            { Direction -= 0.01f; Debug.Log(Direction); }
+            { Direction -= animAdjNumber; Debug.Log(Direction); }
             else if (Speed > 0.999f)
             { Speed = 1; Direction = -1; }
 
@@ -480,13 +487,13 @@ public class CharacterStateManager : MonoBehaviour {
         public void RunningBackwardLeft()
         {
             if (Speed > -1f)
-            { Speed -= 0.01f; Debug.Log(Speed); }
+            { Speed -= animAdjNumber; Debug.Log(Speed); }
             if (Speed < 0f)
-            { Speed -= 0.01f; Debug.Log(Speed); }
+            { Speed -= animAdjNumber; Debug.Log(Speed); }
             if (Direction > -1f)
-            { Direction -= 0.01f; Debug.Log(Direction); }
+            { Direction -= animAdjNumber; Debug.Log(Direction); }
             if (Direction < 0f)
-            { Direction -= 0.01f; Debug.Log(Direction); }
+            { Direction -= animAdjNumber; Debug.Log(Direction); }
             else if (Direction < -0.999f)
             { Speed = -1; Direction = -1; }
 
@@ -496,13 +503,29 @@ public class CharacterStateManager : MonoBehaviour {
             InMotion = true;
         }
 
+        //SHOOTING
+        public void Shooting()
+        {
+
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+            {
+                Debug.Log("HERE CHARACTER SHOOTING");
+                InMotion = true;
+                playerMotion.SetBool("IsShot", true);
+            }
+            Debug.Log("HERE CHARACTER SHOOTING");
+            playerMotion.SetBool("IsShot", true);
+            
+        }
+
+
         //JUMP
         public void Jump()
         {
-                Debug.Log("HERE CHARACTER JUMPS");
-                InMotion = true;
-                playerMotion.SetBool("IsJump", true);
-            }
+            Debug.Log("HERE CHARACTER JUMPS");
+            InMotion = true;
+            playerMotion.SetBool("IsJump", true);
+        }
 
         //DEATH
         public void Death()
@@ -518,8 +541,13 @@ public class CharacterStateManager : MonoBehaviour {
 
     void Update() {
 
-        InMotion = false;
+        if (!isLocalPlayer) { return; }
 
+        InMotion = false;
+        playerMotion.SetBool("IsShot", false);
+
+
+        
         // JUST FOR TESTING 
 
         //Walking and Run Forward -----> 
@@ -607,6 +635,12 @@ public class CharacterStateManager : MonoBehaviour {
             RunningBackwardLeft();
         }
 
+        //Shooting
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            Shooting();
+        }
+
 
         //Jumping -----> 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -623,10 +657,20 @@ public class CharacterStateManager : MonoBehaviour {
 
         if (IsActive && !IsDead && !InMotion)
         {
-
             Debug.Log("IDLE TURNING BACK");
             Idle();
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            playerMotion.runtimeAnimatorController = controllerGun2D;
+
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            playerMotion.runtimeAnimatorController = controllerRifle2D;
+        }
+
 
     }
 }
