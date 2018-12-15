@@ -62,6 +62,7 @@ public class Prop : Actor {
         if (c != null)
         {
             sd.character = c;
+            sd.originPoint = transform.position;
             sd.pointOfImpact = collision.contacts[0].point;
         }
         else
@@ -70,6 +71,7 @@ public class Prop : Actor {
             if (ss != null)
             {
                 sd.surface = ss;
+                sd.originPoint = transform.position;
                 sd.pointOfImpact = collision.contacts[0].point;
             }
         }
@@ -78,22 +80,5 @@ public class Prop : Actor {
         //
         //
         Strike(sd);
-    }
-}
-
-
-
-public class StrikingData
-{
-    public readonly Prop prop;
-
-    public Character character = null;
-    public SolidSurface surface = null;
-
-    public Vector3 pointOfImpact;
-
-    public StrikingData(Prop p)
-    {
-        prop = p;
     }
 }

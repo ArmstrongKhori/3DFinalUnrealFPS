@@ -26,16 +26,32 @@ public class ControllableCharacter : Character {
         input = new PlayerInputter();
 
         // ??? <-- Debugging code.
-        weapon = new Weapon(new Rifle(), this);
+        weapon = new Weapon(new Pistol(), this);
     }
 
 
     public override void Act()
     {
+        if (!isLocalPlayer) { return; }
+
+
         base.Act();
         //
         input.Read();
 
+
+
+        if (input.fire2)
+        {
+            foreach (Character c in FindObjectsOfType<Character>())
+            {
+                if (c.NetworkID != NetworkID)
+                {
+                    Network_Interact(InteractVerbs.Damage, c.NetworkID, new InteractData(5));
+                }
+            }
+        }
+        
 
         /*
         Vector3 moveDirection = Vector3.zero;
