@@ -517,7 +517,6 @@ GameObject:
   - component: {fileID: 4979972405390084}
   - component: {fileID: 114214299585352292}
   - component: {fileID: 95103912124114284}
-  - component: {fileID: 114651811333251432}
   - component: {fileID: 114278707542270602}
   m_Layer: 0
   m_Name: Player
@@ -2610,8 +2609,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   armor: 25
   health: 100
-  modelHolder: {fileID: 0}
-  stateManager: {fileID: 0}
+  modelHolder: {fileID: 1504410566235628}
+  stateManager: {fileID: 114214299585352292}
   gunPoint: {fileID: 114564372157839568}
 --- !u!114 &114640155669539420
 MonoBehaviour:
@@ -2632,21 +2631,6 @@ MonoBehaviour:
   param3: 
   param4: 
   param5: 
---- !u!114 &114651811333251432
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1504410566235628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8807e327bdc760646b6dfa940ba90254, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  JumpHeight: 10
-  Gravity: 9.81
-  character: {fileID: 0}
-  attachedCamera: {fileID: 0}
 --- !u!135 &135067345318149068
 SphereCollider:
   m_ObjectHideFlags: 1
