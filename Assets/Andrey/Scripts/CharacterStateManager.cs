@@ -510,10 +510,10 @@ public class CharacterStateManager : MonoBehaviour {
             {
                 Debug.Log("HERE CHARACTER SHOOTING");
                 InMotion = true;
-                playerMotion.SetBool("IsShoot", true);
+                playerMotion.SetBool("IsShot", true);
             }
             Debug.Log("HERE CHARACTER SHOOTING");
-            playerMotion.SetBool("IsShoot", true);
+            playerMotion.SetBool("IsShot", true);
             
         }
 
@@ -541,7 +541,7 @@ public class CharacterStateManager : MonoBehaviour {
     void Update() {
 
         InMotion = false;
-        playerMotion.SetBool("IsShoot", false);
+        playerMotion.SetBool("IsShot", false);
 
         // JUST FOR TESTING 
 

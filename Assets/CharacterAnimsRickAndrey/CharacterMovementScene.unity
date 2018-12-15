@@ -463,6 +463,16 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: 114221669037138996, guid: 97b552f2b16df21479f7d10caec6fe39,
+        type: 2}
+      propertyPath: controllerRifle2D
+      value: 
+      objectReference: {fileID: 9100000, guid: fbc806034f4d28341b37f4bc8969e3ad, type: 2}
+    - target: {fileID: 114221669037138996, guid: 97b552f2b16df21479f7d10caec6fe39,
+        type: 2}
+      propertyPath: controllerGun2D
+      value: 
+      objectReference: {fileID: 9100000, guid: 74b811abd9c97a04c859292ac2687d6c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97b552f2b16df21479f7d10caec6fe39, type: 2}
   m_IsPrefabAsset: 0

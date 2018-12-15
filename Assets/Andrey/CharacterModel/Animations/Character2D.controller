@@ -13,34 +13,34 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: Direction
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: IsJump
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: IsDead
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
-  - m_Name: IsShoot
+    m_Controller: {fileID: 0}
+  - m_Name: IsShot
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
-    m_Name: Base Layer
+    m_Name: Base Layer Rifle
     m_StateMachine: {fileID: 1107650251221689854}
     m_Mask: {fileID: 0}
     m_Motions: []
@@ -52,7 +52,7 @@ AnimatorController:
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
   - serializedVersion: 5
-    m_Name: Shoot
+    m_Name: Shoot Rifle
     m_StateMachine: {fileID: 1107828335626533936}
     m_Mask: {fileID: 31900000, guid: fee78dbdf9e133348b1fa28fd1ca3a3f, type: 2}
     m_Motions: []
@@ -218,7 +218,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0.05
   m_TransitionOffset: 0
-  m_ExitTime: 1
+  m_ExitTime: 0.75
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -256,7 +256,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: IsShoot
+    m_ConditionEvent: IsShot
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102093206852726158}
@@ -304,7 +304,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: IsShoot
+    m_ConditionEvent: IsShot
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102154309166592624}
@@ -482,7 +482,7 @@ AnimatorStateMachine:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Base Layer
+  m_Name: Base Layer Rifle
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 1102818511605854536}
@@ -511,21 +511,21 @@ AnimatorStateMachine:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Shoot
+  m_Name: Shoot Rifle
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 1102093206852726158}
     m_Position: {x: 336, y: 240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102154309166592624}
-    m_Position: {x: 336, y: -24, z: 0}
+    m_Position: {x: 336, y: -84, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 36, y: -168, z: 0}
-  m_EntryPosition: {x: 36, y: 84, z: 0}
+  m_AnyStatePosition: {x: 24, y: -240, z: 0}
+  m_EntryPosition: {x: 24, y: 108, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 1102154309166592624}
