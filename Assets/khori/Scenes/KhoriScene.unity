@@ -288,6 +288,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   surfaceType: 3
+--- !u!1 &384611846
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 384611848}
+  - component: {fileID: 384611847}
+  m_Layer: 0
+  m_Name: Database
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &384611847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 384611846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba540078a3d11a04fadd837ee5d96974, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &384611848
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 384611846}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.2480572, y: -0.56833714, z: -1.5031233}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &435597040
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,11 +760,11 @@ MonoBehaviour:
   m_PlayerPrefab: {fileID: 1798686586251010, guid: 5ae74b28c29c6e1459f27b13e92cf56c,
     type: 2}
   m_AutoCreatePlayer: 1
-  m_PlayerSpawnMethod: 0
+  m_PlayerSpawnMethod: 1
   m_OfflineScene: KhoriScene
   m_OnlineScene: KhoriScene
   m_SpawnPrefabs:
-  - {fileID: 0}
+  - {fileID: 1271348627546606, guid: 594ac4ad95096bf4799f003845df55c9, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -981,6 +1021,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac086b37c447371489af42344cd1f1cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioIndex: 0
+  audioBuffer:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  loopFlip: 0
+  loopBar: 0
+  bpm: 0
+  bars: 0
+  loopArea: 0
+  music: {fileID: 0}
+  musicA: {fileID: 0}
 --- !u!4 &1272044046
 Transform:
   m_ObjectHideFlags: 0
@@ -1274,6 +1328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04025a7aba6939b4698951e0d8e1c0b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testObj: {fileID: 1271348627546606, guid: 594ac4ad95096bf4799f003845df55c9, type: 2}
 --- !u!4 &2137148524
 Transform:
   m_ObjectHideFlags: 0

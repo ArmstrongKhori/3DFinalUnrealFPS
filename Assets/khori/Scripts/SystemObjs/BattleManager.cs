@@ -9,7 +9,9 @@ public class BattleManager : SystemObj {
     internal GameObject gameSpace;
     internal List<Actor> allActors;
 
-    
+
+
+    public GameObject testObj;
 
 
 

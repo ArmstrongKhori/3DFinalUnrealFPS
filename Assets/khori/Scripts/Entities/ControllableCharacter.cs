@@ -41,8 +41,11 @@ public class ControllableCharacter : Character {
 
 
 
-        if (input.fire2)
+        if (input.fire2 && !input.lastFire2)
         {
+            Network_Interact(InteractVerbs.TestBlock, NetworkID, new InteractData());
+
+            /*
             foreach (Character c in FindObjectsOfType<Character>())
             {
                 if (c.NetworkID != NetworkID)
@@ -50,6 +53,7 @@ public class ControllableCharacter : Character {
                     Network_Interact(InteractVerbs.Damage, c.NetworkID, new InteractData(5));
                 }
             }
+            */
         }
         
 
