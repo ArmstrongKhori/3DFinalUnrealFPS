@@ -20,18 +20,18 @@ public class PickupGun : MonoBehaviour {
 
     void OnMouseOver()
     {
-        if (TheDistance <= 2)
+        if (TheDistance <= 10)
         {
-            TextDisplay.GetComponent<Text>().text = "Take Hand Gun";
+            TextDisplay.GetComponent<Text>().text = "Hand Gun";
         }
 
-        if (Input.GetButtonDown("Action"))
+       /*if (Input.GetButtonDown("Action"))
         {
             if (TheDistance <= 5)
             {
                 StartCoroutine(TakeHandgun());
             }
-        }
+        }*/
     }
 
     void OnMouseExit()
@@ -39,11 +39,21 @@ public class PickupGun : MonoBehaviour {
         TextDisplay.GetComponent<Text>().text = "";
     }
 
-    IEnumerator TakeHandgun()
+    /*IEnumerator TakeHandgun()
     {
         transform.position = new Vector3(0, -1000, 0);
         FakeGun.SetActive(false);
         RealGun.SetActive(true);
         yield return new WaitForSeconds(0.1f);
+    }*/
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Player")
+        {
+            transform.position = new Vector3(0, -1000, 0);
+            RealGun.SetActive(true);
+            FakeGun.SetActive(false);
+        }
+        
     }
 }
