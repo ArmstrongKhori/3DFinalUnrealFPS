@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class FPSController2 : MonoBehaviour
+public class FPSController2 : NetworkBehaviour
 {
+
+    public const float RUNNINGMULT = 2.0f;
 
     private float ForwardSpeed = 5;
     private float BackwardSpeed = -4;
@@ -39,6 +42,9 @@ public class FPSController2 : MonoBehaviour
 
     private List<bool> WeaponPickup;
 
+
+    public Character character;
+
     private CharacterStateManager CharAnim;
 
     // Use this for initialization
@@ -47,6 +53,12 @@ public class FPSController2 : MonoBehaviour
         Cursor.visible = false;
 
         rb = GetComponent<Rigidbody>();
+        character = GetComponent<Character>();
+        //
+        CharAnim = character.stateManager;
+
+
+
 
         WeaponPickup = new List<bool>();
 
@@ -55,22 +67,37 @@ public class FPSController2 : MonoBehaviour
             WeaponPickup.Add(false);
         }
 
-        CharAnim = GetComponent<CharacterStateManager>();
+
+
+        Debug.Log(WeaponPickup);
+        if (!isLocalPlayer) { attachedCamera.gameObject.SetActive(false); }
     }
 
     private void MoveForward()
     {
         if (Input.GetKey(KeyCode.W))
         {
-            rb.velocity += transform.TransformDirection(new Vector3(0, 0, ForwardSpeed));
-        }
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                rb.velocity += transform.TransformDirection(new Vector3(0, 0, ForwardSpeed* RUNNINGMULT));
+            }
+            else
+            {
+                rb.velocity += transform.TransformDirection(new Vector3(0, 0, ForwardSpeed));
+            }
+         }
     }
 
     private void MoveBackward()
     {
         if (Input.GetKey(KeyCode.S))
         {
+            CharAnim.WalkingBackward();
             rb.velocity += transform.TransformDirection(new Vector3(0, 0, BackwardSpeed));
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                CharAnim.RunningBackward();
+            }
         }
     }
 
@@ -80,6 +107,8 @@ public class FPSController2 : MonoBehaviour
         {
             if (!isJumping)
             {
+                CharAnim.Jump();
+
                 float temp = transform.position.y;
                 isJumping = true;
 
@@ -93,11 +122,13 @@ public class FPSController2 : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.D))
         {
+            CharAnim.WalkingRight();
             rb.velocity += transform.TransformDirection(new Vector3(StrafeSpeed, 0, 0));
         }
 
         if (Input.GetKey(KeyCode.A))
         {
+            CharAnim.WalkingLeft();
             rb.velocity += transform.TransformDirection(new Vector3(-StrafeSpeed, 0, 0));
         }
     }
@@ -172,6 +203,9 @@ public class FPSController2 : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!isLocalPlayer) { return; }
+
+        
         ControlAim();
         MoveForward();
         MoveBackward();
@@ -188,7 +222,14 @@ public class FPSController2 : MonoBehaviour
         Vector3 tempVelo = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         float tempFall = rb.velocity.y;
         //
-        rb.velocity = tempVelo.normalized * Mathf.Min(tempVelo.magnitude, 10f);
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            rb.velocity = tempVelo.normalized * Mathf.Min(tempVelo.magnitude, 10f * RUNNINGMULT);
+        }
+        else
+        {
+            rb.velocity = tempVelo.normalized * Mathf.Min(tempVelo.magnitude, 10f);
+        }
         // !!! <-- In the future, increasing the character's "friction" might be more "natural-looking" than just brick-walling their speed...
         //
         rb.velocity = new Vector3(rb.velocity.x, tempFall, rb.velocity.z);
@@ -196,6 +237,25 @@ public class FPSController2 : MonoBehaviour
         //
         SelectWeapon();
         Debug.Log(rb.velocity);
+
+        Vector3 localVel = transform.InverseTransformVector(rb.velocity);
+        CharAnim.playerMotion.SetFloat("Speed", localVel.x / ForwardSpeed /4);
+        CharAnim.playerMotion.SetFloat("Direction", localVel.z / StrafeSpeed /4);
+
+        /*
+        if (localVel.z > 0)
+        {
+            CharAnim.WalkingForward();
+        }
+        else if (localVel.z < 0)
+        {
+            CharAnim.WalkingBackward();
+        }
+        else
+        {
+            CharAnim.Idle();
+        }
+        */
 
     }
 }

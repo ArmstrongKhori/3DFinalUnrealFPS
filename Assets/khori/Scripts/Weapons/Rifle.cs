@@ -5,9 +5,9 @@ using UnityEngine;
 public class Rifle : WeaponData
 {
 
-    public override void OnCreate(Weapon w)
+    public override void OnInitialize(Weapon w)
     {
-        base.OnCreate(w);
+        base.OnInitialize(w);
         //
         initialAmmo = 60;
         maximumAmmo = 300;
@@ -22,6 +22,8 @@ public class Rifle : WeaponData
         //
         // ??? <-- Debugging code.
         BattleManager.Instance().Spawn("Bullet", w.owner);
+
+        AudioManager.Instance().AK47SHOT();
     }
 
 }

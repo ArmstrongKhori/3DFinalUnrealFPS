@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RCProp : Prop {
 
+    internal Vector3 startingPoint;
+
     public enum ResolutionShapes
     {
         /// <summary>
@@ -27,7 +29,7 @@ public class RCProp : Prop {
     /// The "direction" on which this prop intends to resolve.
     /// This is mainly only relevant for bullets, which describes the direction it will go.
     /// </summary>
-    public Vector3 heading = Vector3.zero;
+    internal Vector3 heading = Vector3.zero;
     /// <summary>
     /// How many degrees of deviance can occur when resolving.
     /// </summary>
@@ -41,6 +43,22 @@ public class RCProp : Prop {
     /// This is mainly relevant for "bursty" things, such as shotguns or shrapnel... Or maybe an absurdly fast minigun? *thinks of Roadhog...*
     /// </summary>
     public float count = 1;
+
+
+    public override void Awake()
+    {
+        base.Awake();
+        //
+        rb.useGravity = false;
+        // ??? <-- Raycasted Props shouldn't even HAVE rigidbodies...
+    }
+
+    public override void OnSpawned()
+    {
+        base.OnSpawned();
+        //
+        startingPoint = transform.position;
+    }
 
 
     public override void Act()
@@ -58,6 +76,8 @@ public class RCProp : Prop {
     /// </summary>
     public void Resolve()
     {
+        Debug.Log("Resolving as: " + resolutionShape);
+
         ResolutionResult rr = new ResolutionResult(this);
         rr.randomRoll = Random.Range(0f, 100f);
         //
@@ -70,7 +90,8 @@ public class RCProp : Prop {
                 // ??? <-- This needs CORRECT layer masks...
                 // ??? <-- There is currently no deviance for raycasting whatsoever...
                 // !!! <-- Use the 10-modded value of the roll for left-right, and the 10-divved value of the roll for the up-down...
-                rays = Physics.RaycastAll(transform.position, heading, falloff, 1 << 8);
+                rays = Physics.RaycastAll(startingPoint, heading, falloff, 1 << 9| 1 << 10);
+                Debug.Log("Heading: " + heading);
                 //
                 // *** Let's find the closest point of impact out of all possible candidates!
                 int closest = -1;
@@ -103,16 +124,31 @@ public class RCProp : Prop {
                     //
                     // *** ... Then, STRIKE that thing!
                     StrikingData sd = new StrikingData(this);
+                    sd.originPoint = startingPoint;
                     sd.pointOfImpact = transform.position;
                     sd.character = rays[closest].collider.gameObject.GetComponent<Character>();
                     sd.surface = rays[closest].collider.gameObject.GetComponent<SolidSurface>();
                     //
                     rr.AddStrikeData(sd);
                 }
+                else
+                {
+                    // *** Go to the furthest point it would have gone.
+                    transform.position = startingPoint + heading * falloff;
+                    //
+                    // *** Create striking data anyways, but it didn't "hit" anything.
+                    StrikingData sd = new StrikingData(this);
+                    sd.originPoint = startingPoint;
+                    sd.pointOfImpact = transform.position;
+                    sd.character = null;
+                    sd.surface = null;
+                    //
+                    rr.AddStrikeData(sd);
+                }
                 break;
             case ResolutionShapes.Sphere:
                 // ??? <-- This needs CORRECT layer masks...
-                rays = Physics.SphereCastAll(transform.position, radiusMax, Vector3.zero, 1 << 8);
+                rays = Physics.SphereCastAll(startingPoint, radiusMax, Vector3.zero, 1 << 9 | 1 << 10);
                 //
                 foreach (RaycastHit ray in rays)
                 {
@@ -125,11 +161,13 @@ public class RCProp : Prop {
 
                     // *** ... Then, STRIKE that thing!
                     StrikingData sd = new StrikingData(this);
+                    sd.originPoint = startingPoint;
                     sd.pointOfImpact = ray.point;
                     sd.character = ray.collider.gameObject.GetComponent<Character>();
                     sd.surface = ray.collider.gameObject.GetComponent<SolidSurface>();
                     //
                     rr.AddStrikeData(sd);
+
                 }
                 break;
         }
@@ -156,33 +194,5 @@ public class RCProp : Prop {
     public virtual bool OnResolved(ResolutionResult rr)
     {
         return true;
-    }
-}
-
-
-
-/// <summary>
-/// Describes every detail about how the resolution occurred.
-/// This information is important for adding feedback to the results (such as knowing the exact course many casts went in.)
-/// </summary>
-public class ResolutionResult
-{
-    public readonly RCProp prop;
-    public List<StrikingData> allStrikes = new List<StrikingData>();
-    /// <summary>
-    /// A number used for generating the deviance.
-    /// Knowing this number allows one to recreate the results of a "random" raycast.
-    /// </summary>
-    public float randomRoll;
-
-
-    public ResolutionResult(RCProp p)
-    {
-        prop = p;
-    }
-
-    public void AddStrikeData(StrikingData sd)
-    {
-        allStrikes.Add(sd);
     }
 }

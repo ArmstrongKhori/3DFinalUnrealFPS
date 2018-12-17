@@ -15,12 +15,17 @@ public class Pistol : WeaponData {
         appearance = "pistol";
     }
 
+
+
     public override void OnFire(Weapon w)
     {
         base.OnFire(w);
         //
         // ??? <-- Debugging code.
-        BattleManager.Instance().Spawn("Bullet", w.owner);
+        // BattleManager.Instance().Spawn("Bullet", w.owner);
+        BattleManager.Instance().Spawn("PistolShot", w.owner);
+
+        AudioManager.Instance().GUNSHOT();
     }
 
 }

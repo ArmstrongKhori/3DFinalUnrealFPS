@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// The "GameManager" is the place where all behind-the-scenes game management happens (as the name implies.)
@@ -21,6 +22,32 @@ public class GameManager : SystemObj {
             
             a.Initialize();
         }
+    }
+
+
+
+    internal Canvas screenCanvas;
+    internal Text screenText;
+    internal override void Initialize()
+    {
+        base.Initialize();
+        //
+        screenCanvas = GameObject.Find("__ScreenCanvas").GetComponent<Canvas>();
+        //
+        if (screenCanvas != null)
+        {
+            screenText = screenCanvas.transform.Find("__ScreenText").GetComponent<Text>();
+        }
+    }
+
+
+    public void DisplayMessage(string message)
+    {
+        screenText.text = message;
+    }
+    public void AppendMessage(string message)
+    {
+        screenText.text += "\n" + message;
     }
 
 

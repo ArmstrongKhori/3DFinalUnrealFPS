@@ -7,7 +7,7 @@ public class AudioManager : MonoBehaviour {
 
     public Sound[] sounds;
 
-    void Awake()
+    void Initialize()
     {
         foreach (Sound s in sounds)
         {
@@ -20,10 +20,6 @@ public class AudioManager : MonoBehaviour {
         }
     }
 
-    void Start()
-    {
-        
-    }
 
     public void Play(string name)
     {
@@ -45,4 +41,47 @@ public class AudioManager : MonoBehaviour {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         s.source.UnPause();
     }
+
+
+
+    // AUDIO HERE ---->>
+
+    public void AK47SHOT()
+    {
+        FindObjectOfType<AudioManager>().Play("ak47Shot");
+    }
+
+    public void M16SHOT()
+    {
+        FindObjectOfType<AudioManager>().Play("m16Shot");
+    }
+
+    public void GUNSHOT()
+    {
+        FindObjectOfType<AudioManager>().Play("gunShot");
+    }
+
+
+    #region Singleton Stuff
+    private static AudioManager _instance;
+    public static AudioManager Instance() { return _instance; }
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        //
+        DontDestroyOnLoad(this.gameObject);
+
+
+        Initialize();
+    }
+    #endregion
+
 }

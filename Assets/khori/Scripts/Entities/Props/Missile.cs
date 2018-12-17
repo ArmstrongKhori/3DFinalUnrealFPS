@@ -8,12 +8,12 @@ public class Missile : Prop {
 
 
 
-    public override void OnSpawned(Actor by = null)
+    public override void OnSpawned()
     {
         base.OnSpawned();
         //
         rb.useGravity = false;
-        rb.velocity = by.LookVector * initialVelocity;
+        rb.velocity = Owner.LookVector * initialVelocity;
     }
 
 }
