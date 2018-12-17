@@ -19,6 +19,7 @@ public class CharacterStateManager : MonoBehaviour {
     {
        playerMotion.SetFloat("Speed", 0);
        playerMotion.SetFloat("Direction", 0);
+        IsActive = true;
     }
 
     // FOR 1D BLEND TREE
@@ -187,15 +188,15 @@ public class CharacterStateManager : MonoBehaviour {
         public void WalkingForward() {
 
             if (Direction < 0.5f)
-            { Direction += 0.01f; Debug.Log(Direction); }
+            { Direction += 0.1f; Debug.Log(Direction); }
             if (Direction > 0.5f)
-            { Direction -= 0.01f; Debug.Log(Direction); }
+            { Direction -= 0.1f; Debug.Log(Direction); }
 
             //Set X Axis back to 0
             if (Speed < 0)
-            { Speed += 0.01f; Debug.Log(Speed); }
+            { Speed += 0.1f; Debug.Log(Speed); }
             if (Speed > 0)
-            { Speed -= 0.01f; Debug.Log(Speed); }
+            { Speed -= 0.1f; Debug.Log(Speed); }
 
 
             Debug.Log("WALKING STARTS HERE");
@@ -209,15 +210,15 @@ public class CharacterStateManager : MonoBehaviour {
         {
 
             if (Speed > -0.5f)
-            { Speed -= 0.01f; Debug.Log(Speed); }
+            { Speed -= 0.1f; Debug.Log(Speed); }
             if (Speed < -0.5f)
-            { Speed += 0.01f; Debug.Log(Speed); }
+            { Speed += 0.1f; Debug.Log(Speed); }
 
             //Set Y Axis back to 0
             if (Direction > 0f)
-            { Direction -= 0.01f; Debug.Log(Direction); }
+            { Direction -= 0.1f; Debug.Log(Direction); }
             if (Direction < 0f)
-            { Direction += 0.01f; Debug.Log(Direction); }
+            { Direction += 0.1f; Debug.Log(Direction); }
 
             Debug.Log("WALKING STARTS HERE");
             playerMotion.SetFloat("Speed", Speed);
@@ -229,15 +230,15 @@ public class CharacterStateManager : MonoBehaviour {
         public void WalkingRight()
         {
             if (Speed < 0.5f)
-            { Speed += 0.01f; Debug.Log(Speed); }
+            { Speed += 0.1f; Debug.Log(Speed); }
             if (Speed > 0.5f)
-            { Speed -= 0.01f; Debug.Log(Speed); }
+            { Speed -= 0.1f; Debug.Log(Speed); }
 
             //Set Y Axis back to 0
             if (Direction > 0f)
-            { Direction -= 0.01f; Debug.Log(Direction); }
+            { Direction -= 0.1f; Debug.Log(Direction); }
             if (Direction < 0f)
-            { Direction += 0.01f; Debug.Log(Direction); }
+            { Direction += 0.1f; Debug.Log(Direction); }
 
             Debug.Log("WALKING STARTS HERE");
             playerMotion.SetFloat("Speed", Speed);
@@ -250,16 +251,16 @@ public class CharacterStateManager : MonoBehaviour {
         public void WalkingBackward()
         {
             if (Direction > -0.5f)
-            { Direction -= 0.01f; Debug.Log(Direction); }
+            { Direction -= 0.1f; Debug.Log(Direction); }
             if (Direction < -0.5f )
-            { Direction += 0.01f; Debug.Log(Direction); }
+            { Direction += 0.1f; Debug.Log(Direction); }
 
 
             //Set X Axis back to 0
             if (Speed < 0)
-            { Speed += 0.01f; Debug.Log(Speed); }
+            { Speed += 0.1f; Debug.Log(Speed); }
             if (Speed > 0)
-            { Speed -= 0.01f; Debug.Log(Speed); }
+            { Speed -= 0.1f; Debug.Log(Speed); }
 
             Debug.Log("WALKING STARTS HERE");
             playerMotion.SetFloat("Speed", Speed);
@@ -271,16 +272,16 @@ public class CharacterStateManager : MonoBehaviour {
         public void RunningForward()
         {
             if (Direction < 1f)
-            { Direction += 0.01f; Debug.Log(Direction); }
+            { Direction += 0.1f; Debug.Log(Direction); }
             if (Direction > 0f)
-            { Direction += 0.01f; Debug.Log(Direction); }
+            { Direction += 0.1f; Debug.Log(Direction); }
 
 
             //Set X Axis back to 0
             if (Speed < 0)
-            { Speed += 0.01f; Debug.Log(Speed); }
+            { Speed += 0.1f; Debug.Log(Speed); }
             if (Speed > 0)
-            { Speed -= 0.01f; Debug.Log(Speed); }
+            { Speed -= 0.1f; Debug.Log(Speed); }
 
             Debug.Log("HERE CHARACTER RUNS");
             playerMotion.SetFloat("Speed", Speed);
@@ -292,15 +293,15 @@ public class CharacterStateManager : MonoBehaviour {
         public void RunningLeft()
         {
             if (Speed > -1f)
-            { Speed -= 0.01f; Debug.Log(Speed); }
+            { Speed -= 0.1f; Debug.Log(Speed); }
             if (Speed < 0f)
-            { Speed -= 0.01f; Debug.Log(Speed); }
+            { Speed -= 0.1f; Debug.Log(Speed); }
 
             //Set Y Axis back to 0
             if (Direction > 0f)
-            { Direction -= 0.01f; Debug.Log(Direction); }
+            { Direction -= 0.1f; Debug.Log(Direction); }
             if (Direction < 0f)
-            { Direction += 0.01f; Debug.Log(Direction); }
+            { Direction += 0.1f; Debug.Log(Direction); }
 
             Debug.Log("HERE CHARACTER RUNS");
             playerMotion.SetFloat("Speed", Speed);
@@ -312,15 +313,15 @@ public class CharacterStateManager : MonoBehaviour {
         public void RunningRight()
         {
             if (Speed < 1f)
-            { Speed += 0.01f; Debug.Log(Speed); }
+            { Speed += 0.1f; Debug.Log(Speed); }
             if (Speed > 0f)
-            { Speed += 0.01f; Debug.Log(Speed); }
+            { Speed += 0.1f; Debug.Log(Speed); }
 
             //Set Y Axis back to 0
             if (Direction > 0f)
-            { Direction -= 0.01f; Debug.Log(Direction); }
+            { Direction -= 0.1f; Debug.Log(Direction); }
             if (Direction < 0f)
-            { Direction += 0.01f; Debug.Log(Direction); }
+            { Direction += 0.1f; Debug.Log(Direction); }
 
             Debug.Log("HERE CHARACTER RUNS");
             playerMotion.SetFloat("Speed", Speed);
@@ -521,7 +522,7 @@ public class CharacterStateManager : MonoBehaviour {
         InMotion = false;
 
         // JUST FOR TESTING 
-
+        
         //Walking and Run Forward -----> 
         if (Input.GetKey(KeyCode.W))
         {
@@ -606,7 +607,22 @@ public class CharacterStateManager : MonoBehaviour {
         {
             RunningBackwardLeft();
         }
-
+        
+        /*if (Input.GetKey(KeyCode.W))
+        {
+            Speed += Time.deltaTime;
+            if (Speed > 1.0)
+            {
+                Speed = 1.0f;
+            }
+        } else if (Input.GetKey(KeyCode.S))
+        {
+            Speed -= Time.deltaTime;
+            if (Speed < -1.0)
+            {
+                Speed = -1.0f;
+            }
+        } */
 
         //Jumping -----> 
         if (Input.GetKeyDown(KeyCode.Space))

@@ -39,6 +39,8 @@ public class FPSController2 : MonoBehaviour
 
     private List<bool> WeaponPickup;
 
+    private CharacterStateManager CharAnim;
+
     // Use this for initialization
     void Start()
     {
@@ -53,7 +55,7 @@ public class FPSController2 : MonoBehaviour
             WeaponPickup.Add(false);
         }
 
-        Debug.Log(WeaponPickup);
+        CharAnim = GetComponent<CharacterStateManager>();
     }
 
     private void MoveForward()
@@ -104,6 +106,7 @@ public class FPSController2 : MonoBehaviour
     {
         if (other.gameObject.tag == "Ground")
         {
+            CharAnim.playerMotion.SetBool("IsJump", false);
             isJumping = false;
         }
     }
@@ -120,6 +123,15 @@ public class FPSController2 : MonoBehaviour
         transform.eulerAngles = new Vector3(0.0f, yaw, 0.0f);
         attachedCamera.transform.eulerAngles = new Vector3(pitch, transform.eulerAngles.y, 0.0f);
         // =====================================================================================
+
+        if (pitch > 80)
+        {
+            pitch = 80;
+        }
+        else if (pitch < -30)
+        {
+            pitch = -30;
+        }
     }
 
     private void SelectWeapon()
@@ -183,6 +195,7 @@ public class FPSController2 : MonoBehaviour
         // =====================================================================================
         //
         SelectWeapon();
+        Debug.Log(rb.velocity);
 
     }
 }
