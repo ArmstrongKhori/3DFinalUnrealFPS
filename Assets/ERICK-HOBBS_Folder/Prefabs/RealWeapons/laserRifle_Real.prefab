@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23195591384693688}
   m_Layer: 0
   m_Name: laserRifle_Real
-  m_TagString: Untagged
+  m_TagString: LaserRifle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

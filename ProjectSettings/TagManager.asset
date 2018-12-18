@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - HandGun
+  - LaserRifle
+  - SniperRifle
+  - RocketLauncher
+  - Axe
   layers:
   - Default
   - TransparentFX
