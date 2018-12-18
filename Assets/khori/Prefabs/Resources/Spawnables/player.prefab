@@ -891,6 +891,7 @@ GameObject:
   - component: {fileID: 114337154317473740}
   - component: {fileID: 95260595170859858}
   - component: {fileID: 114640155669539420}
+  - component: {fileID: 114471363043717668}
   m_Layer: 10
   m_Name: player
   m_TagString: Untagged
@@ -2570,6 +2571,18 @@ MonoBehaviour:
   m_MovementThreshold: 0.001
   m_InterpolateRotation: 0.5
   m_InterpolateMovement: 0.5
+--- !u!114 &114471363043717668
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1798686586251010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ccfc846593a4645b1029cf9afc10bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Weapons: []
 --- !u!114 &114564372157839568
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2595,7 +2608,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JumpHeight: 10
   Gravity: 9.81
-  character: {fileID: 0}
+  WeaponPickup: 
+  character: {fileID: 114584861281649972}
   attachedCamera: {fileID: 20092537431538788}
 --- !u!114 &114584861281649972
 MonoBehaviour:
@@ -2645,6 +2659,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JumpHeight: 10
   Gravity: 9.81
+  WeaponPickup: 
   character: {fileID: 0}
   attachedCamera: {fileID: 0}
 --- !u!135 &135067345318149068

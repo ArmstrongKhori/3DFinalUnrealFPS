@@ -75,7 +75,7 @@ public class Character : Actor
 
         if (isLocalPlayer)
         {
-            GameManager.Instance().DisplayMessage("You are " + name);
+            //GameManager.Instance().DisplayMessage("You are " + name);
         }
     }
 
