@@ -77,8 +77,11 @@ public class FPSController2 : NetworkBehaviour
 
     private void MoveForward()
     {
+        
         if (Input.GetKey(KeyCode.W))
         {
+            
+
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 rb.velocity += transform.TransformDirection(new Vector3(0, 0, ForwardSpeed* RUNNINGMULT));
@@ -94,12 +97,8 @@ public class FPSController2 : NetworkBehaviour
     {
         if (Input.GetKey(KeyCode.S))
         {
-            CharAnim.WalkingBackward();
+
             rb.velocity += transform.TransformDirection(new Vector3(0, 0, BackwardSpeed));
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                CharAnim.RunningBackward();
-            }
         }
     }
 
@@ -107,31 +106,35 @@ public class FPSController2 : NetworkBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            if (!isJumping)
-            {
-                CharAnim.Jump();
+            Invoke("JumpAction", 0.2f);
 
-                float temp = transform.position.y;
-                isJumping = true;
-
-                rb.velocity = new Vector3(rb.velocity.x, JumpHeight, rb.velocity.z);
-            }
         }
 
+    }
+
+    private void JumpAction()
+    {
+
+        if (!isJumping)
+        {
+
+            float temp = transform.position.y;
+            isJumping = true;
+
+            rb.velocity = new Vector3(rb.velocity.x, JumpHeight, rb.velocity.z);
+        }
     }
 
     private void Strafe()
     {
         if (Input.GetKey(KeyCode.D))
         {
-            CharAnim.WalkingRight();
             rb.velocity += transform.TransformDirection(new Vector3(StrafeSpeed, 0, 0));
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            CharAnim.WalkingLeft();
-            rb.velocity += transform.TransformDirection(new Vector3(-StrafeSpeed, 0, 0));
+           rb.velocity += transform.TransformDirection(new Vector3(-StrafeSpeed, 0, 0));
         }
     }
 
@@ -165,6 +168,11 @@ public class FPSController2 : NetworkBehaviour
         {
             pitch = -30;
         }
+    }
+
+    private void Idle()
+    {
+        CharAnim.Idle();
     }
 
     private void SelectWeapon()
@@ -206,8 +214,9 @@ public class FPSController2 : NetworkBehaviour
     void FixedUpdate()
     {
         if (!isLocalPlayer) { return; }
-
         
+
+        Idle();
         ControlAim();
         MoveForward();
         MoveBackward();
@@ -217,6 +226,7 @@ public class FPSController2 : NetworkBehaviour
         // One can move faster than normal by walking and strafing simultaneously. You need to multiply movement speed by "0.7" when both are being done at the same time to prevent this.
         // =====================================================================================
         Jump();
+        
         //
         // =====================================================================================
         // *** Movement friction that ignores up/down velocity.
@@ -241,8 +251,6 @@ public class FPSController2 : NetworkBehaviour
         Debug.Log(rb.velocity);
 
         Vector3 localVel = transform.InverseTransformVector(rb.velocity);
-        CharAnim.playerMotion.SetFloat("Speed", localVel.x / ForwardSpeed /4);
-        CharAnim.playerMotion.SetFloat("Direction", localVel.z / StrafeSpeed /4);
 
         /*
         if (localVel.z > 0)
@@ -255,9 +263,146 @@ public class FPSController2 : NetworkBehaviour
         }
         else
         {
-            CharAnim.Idle();
+            
         }
         */
+        
+    }
+
+    // Input logic for Animator!!! ----->
+    #region
+    void Update()
+    {
+
+        if (!isLocalPlayer) { return; }
+        if(isJumping) { return; }
+        CharAnim.InMotion = false;
+        CharAnim.playerMotion.SetBool("IsShot", false);
+
+        // JUST FOR TESTING 
+
+        //Walking and Run Forward -----> 
+        if (Input.GetKey(KeyCode.W))
+        {
+            CharAnim.WalkingForward();
+
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                CharAnim.RunningForward();
+            }
+        }
+
+        //Walking and Running Backward -----> 
+        if (Input.GetKey(KeyCode.S))
+        {
+            CharAnim.WalkingBackward();
+
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                CharAnim.RunningBackward();
+            }
+        }
+
+        //Walking and Running Left
+        if (Input.GetKey(KeyCode.A))
+        {
+            CharAnim.WalkingLeft();
+
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                CharAnim.RunningLeft();
+            }
+        }
+        //Walking and Running Right
+        if (Input.GetKey(KeyCode.D))
+        {
+            CharAnim.WalkingRight();
+
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                CharAnim.RunningRight();
+            }
+        }
+
+        //Walking Forward Right
+        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
+        {
+            CharAnim.WalkingForwardRight();
+        }
+        //Walking Forward Left
+        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
+        {
+            CharAnim.WalkingForwardLeft();
+        }
+        //Running Forward Right
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
+        {
+            CharAnim.RunningForwardRight();
+        }
+        //Running Forward Left
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
+        {
+            CharAnim.RunningForwardLeft();
+        }
+        //Walking Backward Right
+        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
+        {
+            CharAnim.WalkingBackwardRight();
+        }
+        //Walking Backward Left
+        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A))
+        {
+            CharAnim.WalkingBackwardLeft();
+        }
+
+        //Running Backward Right
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
+        {
+            CharAnim.RunningBackwardRight();
+        }
+        //Running Backward Left
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A))
+        {
+            CharAnim.RunningBackwardLeft();
+        }
+
+        //Shooting
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            CharAnim.Shooting();
+        }
+
+
+        //Jumping -----> 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            CharAnim.Jump();
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            CharAnim.Death();
+        }
+
+
+        if (CharAnim.IsActive && !CharAnim.IsDead && !CharAnim.InMotion)
+        {
+            Debug.Log("IDLE TURNING BACK");
+            Idle();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            CharAnim.playerMotion.runtimeAnimatorController = CharAnim.controllerGun2D;
+
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            CharAnim.playerMotion.runtimeAnimatorController = CharAnim.controllerRifle2D;
+        }
 
     }
+    #endregion
+
 }

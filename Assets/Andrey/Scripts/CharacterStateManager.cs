@@ -19,7 +19,7 @@ public class CharacterStateManager : NetworkBehaviour {
 
     private float Direction = 0.0f;
     private float Speed = 0.0f;
-    private float animAdjNumber = 0.15f; // number which effects how fast switching between states
+    private float animAdjNumber = 0.3f; // number which effects how fast switching between states
 
     private void Awake()
     {
@@ -538,7 +538,7 @@ public class CharacterStateManager : NetworkBehaviour {
 
     #endregion
 
-
+    /*
     void Update() {
 
         if (!isLocalPlayer) { return; }
@@ -671,6 +671,6 @@ public class CharacterStateManager : NetworkBehaviour {
             playerMotion.runtimeAnimatorController = controllerRifle2D;
         }
 
-
     }
+    */
 }
