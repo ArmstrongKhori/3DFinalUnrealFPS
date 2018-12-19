@@ -13,8 +13,8 @@ public class SystemObj : MonoBehaviour {
 	public virtual void Start () {
         // *** DO NOT call your Initialize function unless the GameManager already exists!
         // *** This is because the GameManager calls everything else's Initialize function!
-        GameManager gm = GameManager.Instance();
-        if (gm != null) { Initialize(); }
+        // GameManager gm = GameManager.Instance();
+        // if (gm != null) { Initialize(); }
 	}
 
 

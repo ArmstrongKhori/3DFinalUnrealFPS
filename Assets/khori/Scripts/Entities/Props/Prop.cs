@@ -38,21 +38,33 @@ public class Prop : Actor {
 
     public virtual void Strike(StrikingData data)
     {
+        bool didStrike = false;
+        //
         if (data.character != null)
         {
+            didStrike = true;
+
             data.character.Struck(this, data);
         }
 
         if (data.surface != null)
         {
+            didStrike = true;
+
             // ??? <-- Hard-coded impact value...
             data.surface.Impact(SolidSurface.ImpactMagnitudes.Light, (data.pointOfImpact - data.surface.transform.position));
+        }
+
+
+        if (didStrike)
+        {
+            Despawn();
         }
     }
 
 
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         StrikingData sd = new StrikingData(this);
         //
@@ -61,9 +73,12 @@ public class Prop : Actor {
         Character c = collision.gameObject.GetComponent<Character>();
         if (c != null)
         {
-            sd.character = c;
-            sd.originPoint = transform.position;
-            sd.pointOfImpact = collision.contacts[0].point;
+            if (c != Owner)
+            {
+                sd.character = c;
+                sd.originPoint = transform.position;
+                sd.pointOfImpact = collision.ClosestPoint(transform.position); // contacts[0].point
+            }
         }
         else
         {
@@ -72,7 +87,7 @@ public class Prop : Actor {
             {
                 sd.surface = ss;
                 sd.originPoint = transform.position;
-                sd.pointOfImpact = collision.contacts[0].point;
+                sd.pointOfImpact = collision.ClosestPoint(transform.position); // collision.contacts[0].point;
             }
         }
         // ??? <-- Currently only takes ONE point of impact.

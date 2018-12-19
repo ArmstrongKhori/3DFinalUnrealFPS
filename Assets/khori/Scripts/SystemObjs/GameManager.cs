@@ -13,18 +13,23 @@ public class GameManager : SystemObj {
     {
         base.Start();
         //
-        // *** Call "Initialize" for all SystemObjs that currently exist (except this.)
-        Initialize();
+        GameObject battleManager = new GameObject("BattleManager");
+        battleManager.transform.parent = transform;
+        battleManager.AddComponent<BattleManager>();
+
+        GameObject networker = new GameObject("Networker");
+        networker.transform.parent = transform;
+        networker.AddComponent<Networker>();
         //
+        /*
         foreach (SystemObj a in FindObjectsOfType<SystemObj>())
         {
             if (a == this) { continue; }
             
             a.Initialize();
         }
+        */
     }
-
-
 
     internal Canvas screenCanvas;
     internal Text screenText;
@@ -32,11 +37,27 @@ public class GameManager : SystemObj {
     {
         base.Initialize();
         //
-        screenCanvas = GameObject.Find("__ScreenCanvas").GetComponent<Canvas>();
+        GameObject go;
+        go = new GameObject("__ScreenCanvas");
+        screenCanvas = go.AddComponent<Canvas>();
+        screenCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
         //
         if (screenCanvas != null)
         {
-            screenText = screenCanvas.transform.Find("__ScreenText").GetComponent<Text>();
+            go = new GameObject("__ScreenText");
+            go.transform.parent = screenCanvas.transform;
+            //
+            screenText = go.AddComponent<Text>();
+            screenText.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
+            screenText.alignment = TextAnchor.MiddleCenter;
+            screenText.fontSize = 27;
+            screenText.color = Color.magenta;
+            //
+            screenText.rectTransform.anchorMin = new Vector2(0, 0);
+            screenText.rectTransform.anchorMax = new Vector2(1, 1);
+            //
+            screenText.rectTransform.offsetMin = new Vector2(0, 0);
+            screenText.rectTransform.offsetMax = new Vector2(0, 0);
         }
     }
 

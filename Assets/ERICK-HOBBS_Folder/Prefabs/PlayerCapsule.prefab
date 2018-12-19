@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 54047728446915466}
   - component: {fileID: 114235016770830032}
   - component: {fileID: 114240538384830024}
+  - component: {fileID: 114095649113175992}
   m_Layer: 0
   m_Name: PlayerCapsule
   m_TagString: Player
@@ -102,8 +103,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1378559405579638}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 10.868453, y: 2.1023462, z: -14.97}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4831201569269590}
   m_Father: {fileID: 0}
@@ -240,6 +241,38 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1048360710311630}
   m_Enabled: 1
+--- !u!114 &114095649113175992
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1378559405579638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 96
+    i1: 2
+    i2: 142
+    i3: 131
+    i4: 235
+    i5: 230
+    i6: 53
+    i7: 132
+    i8: 27
+    i9: 22
+    i10: 201
+    i11: 6
+    i12: 179
+    i13: 136
+    i14: 201
+    i15: 74
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114235016770830032
 MonoBehaviour:
   m_ObjectHideFlags: 1

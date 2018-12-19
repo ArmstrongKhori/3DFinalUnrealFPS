@@ -9,7 +9,9 @@ public class BattleManager : SystemObj {
     internal GameObject gameSpace;
     internal List<Actor> allActors;
 
-    
+
+
+    public GameObject testObj;
 
 
 
@@ -17,7 +19,7 @@ public class BattleManager : SystemObj {
     {
         base.Initialize();
         //
-        gameSpace = GameObject.Find("(gamespace)");
+        gameSpace = new GameObject("(gamespace)"); //  GameObject.Find("(gamespace)");
         allActors = new List<Actor>();
 
 
@@ -25,6 +27,9 @@ public class BattleManager : SystemObj {
         {
             allActors.Add(a);
         }
+
+
+        testObj = (GameObject)Resources.Load("Spawnables/testpref", typeof(GameObject));
     }
 
     private void FixedUpdate()

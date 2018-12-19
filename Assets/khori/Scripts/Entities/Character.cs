@@ -114,6 +114,9 @@ public class Character : Actor
         /// Cause damage.
         /// </summary>
         Damage,
+
+
+        TestBlock,
     }
 
     /// <summary>
@@ -185,6 +188,15 @@ public class Character : Actor
                 break;
             case InteractVerbs.Tell:
                 Network_Interact(InteractVerbs.Tell, NetworkID, new InteractData("Ouch! You hit " + name+"!"));
+                break;
+
+            case InteractVerbs.TestBlock:
+                GameObject tmp = Instantiate(BattleManager.Instance().testObj, transform);
+                tmp.transform.parent = null;
+                //
+                tmp.transform.Translate(new Vector3(0, 0, 5));
+
+                NetworkServer.Spawn(tmp);
                 break;
         }
     }

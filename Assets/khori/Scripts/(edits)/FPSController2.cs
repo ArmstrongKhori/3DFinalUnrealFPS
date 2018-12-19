@@ -8,13 +8,15 @@ public class FPSController2 : NetworkBehaviour
 
     public const float RUNNINGMULT = 2.0f;
 
-    private float ForwardSpeed = 5;
-    private float BackwardSpeed = -4;
-    private float StrafeSpeed = 5;
+    public float SpeedLimit = 10f;
+
+    private float ForwardSpeed = 5/3;
+    private float BackwardSpeed = -4/3;
+    private float StrafeSpeed = 5/3;
     // =====================================================================================
     // *** Default jump height was "100". Changed it to 10, just like in your scene.
     // *** This might also explain why your jumping physics went nuts in new scenes.
-    public float JumpHeight = 10;
+    public float JumpHeight = 10/3;
     // =====================================================================================
 
     private Vector3 Direction;
@@ -262,11 +264,11 @@ public class FPSController2 : NetworkBehaviour
         //
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            rb.velocity = tempVelo.normalized * Mathf.Min(tempVelo.magnitude, 10f * RUNNINGMULT);
+            rb.velocity = tempVelo.normalized * Mathf.Min(tempVelo.magnitude, SpeedLimit * RUNNINGMULT);
         }
         else
         {
-            rb.velocity = tempVelo.normalized * Mathf.Min(tempVelo.magnitude, 10f);
+            rb.velocity = tempVelo.normalized * Mathf.Min(tempVelo.magnitude, SpeedLimit);
         }
         // !!! <-- In the future, increasing the character's "friction" might be more "natural-looking" than just brick-walling their speed...
         //
