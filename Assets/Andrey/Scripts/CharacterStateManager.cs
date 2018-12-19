@@ -16,6 +16,10 @@ public class CharacterStateManager : NetworkBehaviour {
     public RuntimeAnimatorController controllerGun2D;
     public RuntimeAnimatorController controllerRifle2D;
 
+    public GameObject laserRifle;
+    public GameObject sniperRifle;
+    public GameObject granadeLauncher;
+    public GameObject gun;
 
     private float Direction = 0.0f;
     private float Speed = 0.0f;
@@ -26,6 +30,11 @@ public class CharacterStateManager : NetworkBehaviour {
        playerMotion.SetFloat("Speed", 0);
        playerMotion.SetFloat("Direction", 0);
        IsActive = true;
+
+        laserRifle.SetActive(false);
+        sniperRifle.SetActive(false);
+        granadeLauncher.SetActive(false);
+        gun.SetActive(false);
     }
 
     // FOR 1D BLEND TREE
@@ -538,139 +547,193 @@ public class CharacterStateManager : NetworkBehaviour {
 
     #endregion
 
-    /*
+
+    //Character takes LaserRifle in hands
+    public void TakeLaserRifle()
+    {
+        laserRifle.SetActive(true);
+        sniperRifle.SetActive(false);
+        granadeLauncher.SetActive(false);
+        gun.SetActive(false);
+        TurnToRifleController();
+    }
+
+    //Character takes SniperRifle in hands
+    public void TakeSniperRifle()
+    {
+        laserRifle.SetActive(false);
+        sniperRifle.SetActive(true);
+        granadeLauncher.SetActive(false);
+        gun.SetActive(false);
+        TurnToRifleController();
+    }
+
+    //Character takes GranadeLauncher in hands
+    public void TakeGranadeLauncher()
+    {
+        laserRifle.SetActive(false);
+        sniperRifle.SetActive(false);
+        granadeLauncher.SetActive(true);
+        gun.SetActive(false);
+        TurnToRifleController();
+    }
+
+    //Character takes GranadeLauncher in hands
+    public void TakeGun()
+    {
+        laserRifle.SetActive(false);
+        sniperRifle.SetActive(false);
+        granadeLauncher.SetActive(false);
+        gun.SetActive(true);
+        TurnToGunController();
+    }
+
+    //Switch controller to Rifle controller
+    public void TurnToRifleController()
+    {
+        playerMotion.runtimeAnimatorController = controllerRifle2D;
+    }
+    //Switch controller to Gun controller
+    public void TurnToGunController()
+    {
+        playerMotion.runtimeAnimatorController = controllerGun2D;
+    }
+
     void Update() {
 
-        if (!isLocalPlayer) { return; }
-
-        InMotion = false;
-        playerMotion.SetBool("IsShot", false);
 
 
-        
-        // JUST FOR TESTING 
+        /*
+                if (!isLocalPlayer) { return; }
 
-        //Walking and Run Forward -----> 
-        if (Input.GetKey(KeyCode.W))
-        {
-            WalkingForward();
-
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                RunningForward();
-            }
-        }
-
-        //Walking and Running Backward -----> 
-        if (Input.GetKey(KeyCode.S))
-        {
-            WalkingBackward();
-
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                RunningBackward();
-            }
-        } 
-        
-        //Walking and Running Left
-        if (Input.GetKey(KeyCode.A))
-        {
-            WalkingLeft();
-
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                RunningLeft();
-            }
-        }
-        //Walking and Running Right
-        if (Input.GetKey(KeyCode.D))
-        {
-            WalkingRight();
-
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                RunningRight();
-            }
-        }
-
-        //Walking Forward Right
-        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
-        {
-            WalkingForwardRight();
-        }
-        //Walking Forward Left
-        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
-        {
-            WalkingForwardLeft();
-        }
-        //Running Forward Right
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
-        {
-            RunningForwardRight();
-        }
-        //Running Forward Left
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
-        {
-            RunningForwardLeft();
-        }
-        //Walking Backward Right
-        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
-        {
-            WalkingBackwardRight();
-        }
-        //Walking Backward Left
-        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A))
-        {
-            WalkingBackwardLeft();
-        }
-
-        //Running Backward Right
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
-        {
-            RunningBackwardRight();
-        }
-        //Running Backward Left
-        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A))
-        {
-            RunningBackwardLeft();
-        }
-
-        //Shooting
-        if (Input.GetKey(KeyCode.Mouse0))
-        {
-            Shooting();
-        }
+                InMotion = false;
+                playerMotion.SetBool("IsShot", false);
 
 
-        //Jumping -----> 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Jump();
-        }
-        
 
-        if (Input.GetKeyDown(KeyCode.Backspace))
-        {
-            Death();
-        }
+                // JUST FOR TESTING 
+
+                //Walking and Run Forward -----> 
+                if (Input.GetKey(KeyCode.W))
+                {
+                    WalkingForward();
+
+                    if (Input.GetKey(KeyCode.LeftShift))
+                    {
+                        RunningForward();
+                    }
+                }
+
+                //Walking and Running Backward -----> 
+                if (Input.GetKey(KeyCode.S))
+                {
+                    WalkingBackward();
+
+                    if (Input.GetKey(KeyCode.LeftShift))
+                    {
+                        RunningBackward();
+                    }
+                } 
+
+                //Walking and Running Left
+                if (Input.GetKey(KeyCode.A))
+                {
+                    WalkingLeft();
+
+                    if (Input.GetKey(KeyCode.LeftShift))
+                    {
+                        RunningLeft();
+                    }
+                }
+                //Walking and Running Right
+                if (Input.GetKey(KeyCode.D))
+                {
+                    WalkingRight();
+
+                    if (Input.GetKey(KeyCode.LeftShift))
+                    {
+                        RunningRight();
+                    }
+                }
+
+                //Walking Forward Right
+                if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
+                {
+                    WalkingForwardRight();
+                }
+                //Walking Forward Left
+                if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
+                {
+                    WalkingForwardLeft();
+                }
+                //Running Forward Right
+                if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
+                {
+                    RunningForwardRight();
+                }
+                //Running Forward Left
+                if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
+                {
+                    RunningForwardLeft();
+                }
+                //Walking Backward Right
+                if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
+                {
+                    WalkingBackwardRight();
+                }
+                //Walking Backward Left
+                if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A))
+                {
+                    WalkingBackwardLeft();
+                }
+
+                //Running Backward Right
+                if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
+                {
+                    RunningBackwardRight();
+                }
+                //Running Backward Left
+                if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A))
+                {
+                    RunningBackwardLeft();
+                }
+
+                //Shooting
+                if (Input.GetKey(KeyCode.Mouse0))
+                {
+                    Shooting();
+                }
 
 
-        if (IsActive && !IsDead && !InMotion)
-        {
-            Debug.Log("IDLE TURNING BACK");
-            Idle();
-        }
+                //Jumping -----> 
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    Jump();
+                }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            playerMotion.runtimeAnimatorController = controllerGun2D;
 
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            playerMotion.runtimeAnimatorController = controllerRifle2D;
-        }
+                if (Input.GetKeyDown(KeyCode.Backspace))
+                {
+                    Death();
+                }
 
+
+                if (IsActive && !IsDead && !InMotion)
+                {
+                    Debug.Log("IDLE TURNING BACK");
+                    Idle();
+                }
+
+                if (Input.GetKeyDown(KeyCode.Alpha1))
+                {
+                    playerMotion.runtimeAnimatorController = controllerGun2D;
+
+                }
+                if (Input.GetKeyDown(KeyCode.Alpha2))
+                {
+                    playerMotion.runtimeAnimatorController = controllerRifle2D;
+                }
+                    */
     }
-    */
-}
+           
+    }

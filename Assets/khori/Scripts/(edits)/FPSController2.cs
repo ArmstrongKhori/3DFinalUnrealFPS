@@ -394,14 +394,31 @@ public class FPSController2 : NetworkBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            CharAnim.playerMotion.runtimeAnimatorController = CharAnim.controllerGun2D;
+            CharAnim.TurnToGunController(); 
 
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            CharAnim.playerMotion.runtimeAnimatorController = CharAnim.controllerRifle2D;
+            CharAnim.TurnToRifleController();
         }
 
+        //
+        if (Input.GetKey(KeyCode.Alpha6))
+        {
+            CharAnim.TakeLaserRifle();
+        }
+        if (Input.GetKey(KeyCode.Alpha7))
+        {
+            CharAnim.TakeSniperRifle();
+        }
+        if (Input.GetKey(KeyCode.Alpha8))
+        {
+            CharAnim.TakeGranadeLauncher();
+        }
+        if (Input.GetKey(KeyCode.Alpha9))
+        {
+            CharAnim.TakeGun();
+        }
     }
     #endregion
 
