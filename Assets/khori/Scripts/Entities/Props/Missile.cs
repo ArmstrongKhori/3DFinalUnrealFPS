@@ -8,12 +8,12 @@ public class Missile : Prop {
 
 
 
-    public override void OnSpawned()
+    public override void OnSpawned(Vector3 lookVector)
     {
-        base.OnSpawned();
+        base.OnSpawned(lookVector);
         //
         rb.useGravity = false;
-        rb.velocity = Owner.LookVector * initialVelocity;
+        rb.velocity = lookVector * initialVelocity; // Helper.GetNetworkActor(Owner).LookVector
     }
 
 }

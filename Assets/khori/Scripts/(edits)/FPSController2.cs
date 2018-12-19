@@ -27,10 +27,9 @@ public class FPSController2 : NetworkBehaviour
     private float SpeedV = 20;
     // =====================================================================================
 
-    private float pitch = 0.0f;
-    private float yaw = 0.0f;
-
-    //private CharacterController controller;
+    public float pitch = 0.0f;
+    public float yaw = 0.0f;
+    public Vector3 LookVector { get { return new Vector3(pitch, yaw, 0.0f); } }
 
     private Vector3 moveDirection = Vector3.zero;
 
@@ -68,11 +67,6 @@ public class FPSController2 : NetworkBehaviour
         {
             WeaponPickup.Add(false);
         }
-
-
-
-        Debug.Log(WeaponPickup);
-        if (!isLocalPlayer) { attachedCamera.gameObject.SetActive(false); }
     }
 
     private void MoveForward()
@@ -144,17 +138,15 @@ public class FPSController2 : NetworkBehaviour
         }
     }
 
-    public Camera attachedCamera;
-
     private void ControlAim()
     {
         yaw += SpeedH * Input.GetAxis("Mouse X");
         pitch -= SpeedV * Input.GetAxis("Mouse Y");
 
+        
         // =====================================================================================
         // *** Separated the "turning" and the "looking" between the "body" and the "camera", respectively.
-        transform.eulerAngles = new Vector3(0.0f, yaw, 0.0f);
-        attachedCamera.transform.eulerAngles = new Vector3(pitch, transform.eulerAngles.y, 0.0f);
+        transform.eulerAngles = new Vector3(0, LookVector.y, 0.0f);
         // =====================================================================================
 
         if (pitch > 80)
@@ -207,7 +199,6 @@ public class FPSController2 : NetworkBehaviour
     {
         if (!isLocalPlayer) { return; }
 
-        
         ControlAim();
         MoveForward();
         MoveBackward();
@@ -238,7 +229,6 @@ public class FPSController2 : NetworkBehaviour
         // =====================================================================================
         //
         SelectWeapon();
-        Debug.Log(rb.velocity);
 
         Vector3 localVel = transform.InverseTransformVector(rb.velocity);
         CharAnim.playerMotion.SetFloat("Speed", localVel.x / ForwardSpeed /4);

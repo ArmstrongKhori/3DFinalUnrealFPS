@@ -1,11 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class ControllableCharacter : Character {
 
     public BaseInputter input;
     public Weapon weapon;
+
+    internal FPSController2 controller;
+
+    public Cam camPerspectiveFirst;
+    public Cam camPerspectiveThird;
 
 
     public override Vector3 LookVector
@@ -13,8 +19,7 @@ public class ControllableCharacter : Character {
         // ??? <-- This needs to be implemented INTO the controller itself.
         get
         {
-            FPSController2 con = GetComponent<FPSController2>();
-            return con == null ? base.LookVector : con.attachedCamera.transform.forward;
+            return controller == null ? base.LookVector : Quaternion.Euler(controller.LookVector) * Vector3.forward; // con.attachedCamera.transform.forward
         }
     }
 
@@ -27,6 +32,30 @@ public class ControllableCharacter : Character {
 
         // ??? <-- Debugging code.
         weapon = new Weapon(new Rifle(), this);
+
+
+        controller = GetComponent<FPSController2>();
+        if (controller == null) { controller = gameObject.AddComponent<FPSController2>(); }
+    }
+
+    public override void Start()
+    {
+        base.Start();
+        //
+        if (isLocalPlayer)
+        {
+            if (camPerspectiveThird != null)
+            {
+                Cam.SetActiveCamera(camPerspectiveThird);
+            }
+            else
+            {
+                if (camPerspectiveFirst != null)
+                {
+                    Cam.SetActiveCamera(camPerspectiveFirst);
+                }
+            }
+        }
     }
 
 
@@ -39,11 +68,16 @@ public class ControllableCharacter : Character {
         //
         input.Read();
 
-
+        
 
         if (input.fire2 && !input.lastFire2)
         {
-            Network_Interact(InteractVerbs.TestBlock, NetworkID, new InteractData());
+            Helper.ClearMessages();
+            //
+            CmdSpawn("Bullet", NetworkID, LookVector);
+
+
+            // Network_Interact(InteractVerbs.TestBlock, NetworkID, new InteractData(new Vector3(transform.position.x, transform.position.y, transform.position.z)));
 
             /*
             foreach (Character c in FindObjectsOfType<Character>())

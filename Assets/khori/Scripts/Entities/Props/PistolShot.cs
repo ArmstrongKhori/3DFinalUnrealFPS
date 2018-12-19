@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PistolShot : RCProp {
 
-    public override void OnSpawned()
+    public override void OnSpawned(Vector3 lookVector)
     {
-        base.OnSpawned();
+        base.OnSpawned(lookVector);
         //
-        heading = Owner.LookVector;
+        heading = lookVector; // Helper.GetNetworkActor(Owner).LookVector
     }
 
 
