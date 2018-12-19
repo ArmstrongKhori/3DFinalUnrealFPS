@@ -10,12 +10,13 @@ using UnityEngine.Networking;
 public class Entity : NetworkBehaviour {
 
 
-
+    internal NetworkIdentity ni;
 
 
 	public virtual void Awake()
     {
-
+        ni = GetComponent<NetworkIdentity>();
+        if (ni == null) { ni = gameObject.AddComponent<NetworkIdentity>(); }
     }
     public virtual void Start()
     {

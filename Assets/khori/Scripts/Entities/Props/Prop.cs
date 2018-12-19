@@ -62,38 +62,71 @@ public class Prop : Actor {
         }
     }
 
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+        //
+        // Helper.DisplayMessage("I am " + name + ", my owner is " + Owner);
+    }
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+        //
+        // Helper.DisplayMessage("I am " + name + ", my owner is " + Owner);
+    }
 
 
     private void OnTriggerEnter(Collider collision)
     {
-        StrikingData sd = new StrikingData(this);
-        //
-        //
-        // *** Striking a character takes priority, even if they (somehow) double as a solid surface...
+        StrikingData sd;
+        Actor me = Helper.GetNetworkActor(Owner);
+
+
         Character c = collision.gameObject.GetComponent<Character>();
         if (c != null)
         {
-            if (c != Owner)
+            // *** Don't check for a hit UNLESS you are the one who controls this character! (honour system)
+            if (!c.isLocalPlayer) { }
+            else
             {
-                sd.character = c;
-                sd.originPoint = transform.position;
-                sd.pointOfImpact = collision.ClosestPoint(transform.position); // contacts[0].point
+                if (c.gameObject != me.gameObject)
+                {
+                    Debug.Log(me.name + " is hitting " + c.name);
+
+                    sd = new StrikingData(this);
+                    sd.character = c;
+                    sd.originPoint = transform.position;
+                    sd.pointOfImpact = collision.ClosestPoint(transform.position); // contacts[0].point
+                                                                                   //
+                    Strike(sd);
+                }
             }
         }
         else
         {
-            SolidSurface ss = collision.gameObject.GetComponent<SolidSurface>();
-            if (ss != null)
+            if (!me.isServer) { }
+            else
             {
-                sd.surface = ss;
-                sd.originPoint = transform.position;
-                sd.pointOfImpact = collision.ClosestPoint(transform.position); // collision.contacts[0].point;
+                SolidSurface ss = collision.gameObject.GetComponent<SolidSurface>();
+
+                // *** Don't check for a hit UNLESS you are the server!
+                if (ss != null)
+                {
+                    sd = new StrikingData(this);
+                    sd.surface = ss;
+                    sd.originPoint = transform.position;
+                    sd.pointOfImpact = collision.ClosestPoint(transform.position); // collision.contacts[0].point;
+                                                                                    //
+                    Strike(sd);
+                }
             }
         }
+
+
         // ??? <-- Currently only takes ONE point of impact.
         // ??? <-- Always assumes we're using the 0th point of impact...
         //
         //
-        Strike(sd);
+        
     }
 }

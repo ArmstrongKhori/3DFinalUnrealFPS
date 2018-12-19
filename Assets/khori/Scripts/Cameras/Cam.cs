@@ -7,15 +7,23 @@ using UnityEngine;
 /// </summary>
 public class Cam : MonoBehaviour {
 
-    internal Camera cam;
-    private AudioListener al;
+    internal Camera Camera { get { return Camera.main; } }
 
     private void Awake()
     {
-        cam = GetComponent<Camera>();
-        al = GetComponent<AudioListener>();
     }
 
+
+    private void LateUpdate()
+    {
+        if (currentCam == this)
+        {
+            Record();
+        }
+    }
+
+
+    public virtual void Record() { }
 
 
     public static Cam currentCam;

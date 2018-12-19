@@ -129,7 +129,6 @@ public class WeaponData
     public virtual void OnFire(Weapon w)
     {
         // *** Spawn the bullets!?
-        Debug.Log("I'M FIRING THE BULLETS");
     }
 
     public virtual void OnCreate(Weapon w)

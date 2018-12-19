@@ -163,27 +163,27 @@ public class CharacterStateManager : NetworkBehaviour {
             if (Direction > 0f)
             {
                 Direction -= animAdjNumber;
-                Debug.Log(Direction);
+                // Debug.Log(Direction);
             }
             if (Speed > 0f)
             {
                 Speed -= animAdjNumber;
-                Debug.Log(Speed);
+                // Debug.Log(Speed);
             }
             if (Direction < 0f)
             {
                 Direction += animAdjNumber;
-                Debug.Log(Direction);
+                // Debug.Log(Direction);
             }
             if (Speed < 0f)
             {
                 Speed += animAdjNumber;
-                Debug.Log(Speed);
+                // Debug.Log(Speed);
             }
             
             IsActive = true;
             IsDead = false;
-            Debug.Log("IDLE STARTS HERE");
+            // Debug.Log("IDLE STARTS HERE");
             playerMotion.SetFloat("Speed", Speed);
             playerMotion.SetFloat("Direction", Direction);
             playerMotion.SetBool("IsJump", false);
@@ -194,18 +194,18 @@ public class CharacterStateManager : NetworkBehaviour {
         public void WalkingForward() {
 
             if (Direction < 0.5f)
-            { Direction += animAdjNumber; Debug.Log(Direction); }
+            { Direction += animAdjNumber; }
             if (Direction > 0.5f)
-            { Direction -= animAdjNumber; Debug.Log(Direction); }
+            { Direction -= animAdjNumber; }
 
             //Set X Axis back to 0
             if (Speed < 0)
-            { Speed += animAdjNumber; Debug.Log(Speed); }
+            { Speed += animAdjNumber; }
             if (Speed > 0)
-            { Speed -= animAdjNumber; Debug.Log(Speed); }
+            { Speed -= animAdjNumber; }
 
 
-            Debug.Log("WALKING STARTS HERE");
+            // Debug.Log("WALKING STARTS HERE");
             playerMotion.SetFloat("Speed", Speed);
             playerMotion.SetFloat("Direction", Direction);
             InMotion = true;
@@ -216,17 +216,17 @@ public class CharacterStateManager : NetworkBehaviour {
         {
 
             if (Speed > -0.5f)
-            { Speed -= animAdjNumber; Debug.Log(Speed); }
+            { Speed -= animAdjNumber; }
             if (Speed < -0.5f)
-            { Speed += animAdjNumber; Debug.Log(Speed); }
+            { Speed += animAdjNumber; }
 
             //Set Y Axis back to 0
             if (Direction > 0f)
-            { Direction -= animAdjNumber; Debug.Log(Direction); }
+            { Direction -= animAdjNumber; }
             if (Direction < 0f)
-            { Direction += animAdjNumber; Debug.Log(Direction); }
+            { Direction += animAdjNumber; }
 
-            Debug.Log("WALKING STARTS HERE");
+            // Debug.Log("WALKING STARTS HERE");
             playerMotion.SetFloat("Speed", Speed);
             playerMotion.SetFloat("Direction", Direction);
             InMotion = true;
@@ -236,17 +236,17 @@ public class CharacterStateManager : NetworkBehaviour {
         public void WalkingRight()
         {
             if (Speed < 0.5f)
-            { Speed += animAdjNumber; Debug.Log(Speed); }
+            { Speed += animAdjNumber; }
             if (Speed > 0.5f)
-            { Speed -= animAdjNumber; Debug.Log(Speed); }
+            { Speed -= animAdjNumber; }
 
             //Set Y Axis back to 0
             if (Direction > 0f)
-            { Direction -= animAdjNumber; Debug.Log(Direction); }
+            { Direction -= animAdjNumber; }
             if (Direction < 0f)
-            { Direction += animAdjNumber; Debug.Log(Direction); }
+            { Direction += animAdjNumber; }
 
-            Debug.Log("WALKING STARTS HERE");
+            // Debug.Log("WALKING STARTS HERE");
             playerMotion.SetFloat("Speed", Speed);
             playerMotion.SetFloat("Direction", Direction);
             InMotion = true;
@@ -257,18 +257,18 @@ public class CharacterStateManager : NetworkBehaviour {
         public void WalkingBackward()
         {
             if (Direction > -0.5f)
-            { Direction -= animAdjNumber; Debug.Log(Direction); }
+            { Direction -= animAdjNumber; }
             if (Direction < -0.5f )
-            { Direction += animAdjNumber; Debug.Log(Direction); }
+            { Direction += animAdjNumber; }
 
 
             //Set X Axis back to 0
             if (Speed < 0)
-            { Speed += animAdjNumber; Debug.Log(Speed); }
+            { Speed += animAdjNumber; }
             if (Speed > 0)
-            { Speed -= animAdjNumber; Debug.Log(Speed); }
+            { Speed -= animAdjNumber; }
 
-            Debug.Log("WALKING STARTS HERE");
+            // Debug.Log("WALKING STARTS HERE");
             playerMotion.SetFloat("Speed", Speed);
             playerMotion.SetFloat("Direction", Direction);
             InMotion = true;
@@ -278,18 +278,18 @@ public class CharacterStateManager : NetworkBehaviour {
         public void RunningForward()
         {
             if (Direction < 1f)
-            { Direction += animAdjNumber; Debug.Log(Direction); }
+            { Direction += animAdjNumber; }
             if (Direction > 0f)
-            { Direction += animAdjNumber; Debug.Log(Direction); }
+            { Direction += animAdjNumber; }
 
 
             //Set X Axis back to 0
             if (Speed < 0)
-            { Speed += animAdjNumber; Debug.Log(Speed); }
+            { Speed += animAdjNumber; }
             if (Speed > 0)
-            { Speed -= animAdjNumber; Debug.Log(Speed); }
+            { Speed -= animAdjNumber; }
 
-            Debug.Log("HERE CHARACTER RUNS");
+            // Debug.Log("HERE CHARACTER RUNS");
             playerMotion.SetFloat("Speed", Speed);
             playerMotion.SetFloat("Direction", Direction);
             InMotion = true;
@@ -299,17 +299,17 @@ public class CharacterStateManager : NetworkBehaviour {
         public void RunningLeft()
         {
             if (Speed > -1f)
-            { Speed -= animAdjNumber; Debug.Log(Speed); }
+            { Speed -= animAdjNumber; }
             if (Speed < 0f)
-            { Speed -= animAdjNumber; Debug.Log(Speed); }
+            { Speed -= animAdjNumber; }
 
             //Set Y Axis back to 0
             if (Direction > 0f)
-            { Direction -= animAdjNumber; Debug.Log(Direction); }
+            { Direction -= animAdjNumber; }
             if (Direction < 0f)
-            { Direction += animAdjNumber; Debug.Log(Direction); }
+            { Direction += animAdjNumber; }
 
-            Debug.Log("HERE CHARACTER RUNS");
+            // Debug.Log("HERE CHARACTER RUNS");
             playerMotion.SetFloat("Speed", Speed);
             playerMotion.SetFloat("Direction", Direction);
             InMotion = true;
@@ -319,17 +319,17 @@ public class CharacterStateManager : NetworkBehaviour {
         public void RunningRight()
         {
             if (Speed < 1f)
-            { Speed += animAdjNumber; Debug.Log(Speed); }
+            { Speed += animAdjNumber; }
             if (Speed > 0f)
-            { Speed += animAdjNumber; Debug.Log(Speed); }
+            { Speed += animAdjNumber; }
 
             //Set Y Axis back to 0
             if (Direction > 0f)
-            { Direction -= animAdjNumber; Debug.Log(Direction); }
+            { Direction -= animAdjNumber; }
             if (Direction < 0f)
-            { Direction += animAdjNumber; Debug.Log(Direction); }
+            { Direction += animAdjNumber; }
 
-            Debug.Log("HERE CHARACTER RUNS");
+            // Debug.Log("HERE CHARACTER RUNS");
             playerMotion.SetFloat("Speed", Speed);
             playerMotion.SetFloat("Direction", Direction);
             InMotion = true;
@@ -343,12 +343,12 @@ public class CharacterStateManager : NetworkBehaviour {
                 Speed -= animAdjNumber; Debug.Log(Speed);
             }
             else if (Speed > -0.499f)
-            { Speed = -0.5f; Direction = 0.5f; Debug.Log(Speed); }
+            { Speed = -0.5f; Direction = 0.5f; }
 
             if (Direction < 0.5f)
-            { Direction += animAdjNumber; Debug.Log(Direction); }
+            { Direction += animAdjNumber; }
 
-            Debug.Log("WALKING STARTS HERE");
+            // Debug.Log("WALKING STARTS HERE");
             playerMotion.SetFloat("Speed", Speed);
             playerMotion.SetFloat("Direction", Direction);
             InMotion = true;
@@ -358,13 +358,13 @@ public class CharacterStateManager : NetworkBehaviour {
         public void WalkingForwardRight()
         {
             if (Speed < 0.5f)
-            { Speed += animAdjNumber; Debug.Log(Speed); }
+            { Speed += animAdjNumber; }
 
 
             if (Direction < 0.5f)
-            { Direction += animAdjNumber; Debug.Log(Direction); }
+            { Direction += animAdjNumber; }
 
-            Debug.Log("WALKING STARTS HERE");
+            // Debug.Log("WALKING STARTS HERE");
             playerMotion.SetFloat("Speed", Speed);
             playerMotion.SetFloat("Direction", Direction);
             InMotion = true;
@@ -374,18 +374,18 @@ public class CharacterStateManager : NetworkBehaviour {
         public void RunningForwardRight()
         {
             if (Speed < 1f)
-            { Speed += animAdjNumber; Debug.Log(Speed); }
+            { Speed += animAdjNumber; }
 
             if (Speed > 0f)
-            { Speed += animAdjNumber; Debug.Log(Speed); }
+            { Speed += animAdjNumber; }
 
             if (Direction < 1f)
-            { Direction += animAdjNumber; Debug.Log(Direction); }
+            { Direction += animAdjNumber; }
 
             else if (Speed > -0.999f)
-            { Speed = -1f; Direction = 1f; Debug.Log(Speed); }
+            { Speed = -1f; Direction = 1f; }
 
-            Debug.Log("WALKING STARTS HERE");
+            // Debug.Log("WALKING STARTS HERE");
             playerMotion.SetFloat("Speed", Speed);
             playerMotion.SetFloat("Direction", Direction);
             InMotion = true;
@@ -395,19 +395,19 @@ public class CharacterStateManager : NetworkBehaviour {
         public void RunningForwardLeft()
         {
             if (Speed > -1f)
-            { Speed -= animAdjNumber; Debug.Log(Speed); }
+            { Speed -= animAdjNumber; }
             if (Speed < 0f)
-            { Speed -= animAdjNumber; Debug.Log(Speed); }
+            { Speed -= animAdjNumber; }
             if (Direction < 1f)
-            { Direction += animAdjNumber; Debug.Log(Direction); }
+            { Direction += animAdjNumber; }
             if (Direction > 0f)
-            { Direction += animAdjNumber; Debug.Log(Direction); }
+            { Direction += animAdjNumber; }
 
             else if (Speed > -0.999f)
             { Speed = -1;  Direction = 1; }
 
 
-            Debug.Log("WALKING STARTS HERE");
+            // Debug.Log("WALKING STARTS HERE");
             playerMotion.SetFloat("Speed", Speed);
             playerMotion.SetFloat("Direction", Direction);
             InMotion = true;
@@ -417,17 +417,17 @@ public class CharacterStateManager : NetworkBehaviour {
         public void RunningBackward()
         {
             if (Direction > -1f)
-            { Direction -= animAdjNumber; Debug.Log(Direction); }
+            { Direction -= animAdjNumber; }
             if (Direction < 0f)
-            { Direction -= animAdjNumber; Debug.Log(Direction); }
+            { Direction -= animAdjNumber; }
 
             //Set X Axis back to 0
             if (Speed < 0)
-            { Speed += animAdjNumber; Debug.Log(Speed); }
+            { Speed += animAdjNumber; }
             if (Speed > 0)
-            { Speed -= animAdjNumber; Debug.Log(Speed); }
+            { Speed -= animAdjNumber; }
 
-            Debug.Log("HERE CHARACTER RUNS");
+            // Debug.Log("HERE CHARACTER RUNS");
             playerMotion.SetFloat("Speed", Speed);
             playerMotion.SetFloat("Direction", Direction);
             InMotion = true;
@@ -437,11 +437,11 @@ public class CharacterStateManager : NetworkBehaviour {
         public void WalkingBackwardRight()
         {
             if (Speed < 0.5f)
-            { Speed += animAdjNumber; Debug.Log(Speed); }
+            { Speed += animAdjNumber; }
             if (Direction > -0.5f)
-            { Direction -= animAdjNumber; Debug.Log(Direction); }
+            { Direction -= animAdjNumber; }
 
-            Debug.Log("WALKING STARTS HERE");
+            // Debug.Log("WALKING STARTS HERE");
             playerMotion.SetFloat("Speed", Speed);
             playerMotion.SetFloat("Direction", Direction);
             InMotion = true;
@@ -451,11 +451,11 @@ public class CharacterStateManager : NetworkBehaviour {
         public void WalkingBackwardLeft()
         {
             if (Speed > -0.5f)
-            { Speed -= animAdjNumber; Debug.Log(Speed); }
+            { Speed -= animAdjNumber; }
             if (Direction > -0.5f)
-            { Direction -= animAdjNumber; Debug.Log(Direction); }
+            { Direction -= animAdjNumber; }
 
-            Debug.Log("WALKING STARTS HERE");
+            // Debug.Log("WALKING STARTS HERE");
             playerMotion.SetFloat("Speed", Speed);
             playerMotion.SetFloat("Direction", Direction);
             InMotion = true;
@@ -467,17 +467,17 @@ public class CharacterStateManager : NetworkBehaviour {
         {
 
             if (Speed < 1f)
-            { Speed += animAdjNumber; Debug.Log(Speed); }
+            { Speed += animAdjNumber; }
             if (Speed > 0f)
-            { Speed += animAdjNumber; Debug.Log(Speed); }
+            { Speed += animAdjNumber; }
             if (Direction > -1f)
-            { Direction -= animAdjNumber; Debug.Log(Direction); }
+            { Direction -= animAdjNumber; }
             if (Direction < 0f)
-            { Direction -= animAdjNumber; Debug.Log(Direction); }
+            { Direction -= animAdjNumber; }
             else if (Speed > 0.999f)
             { Speed = 1; Direction = -1; }
 
-            Debug.Log("HERE CHARACTER RUNS");
+            // Debug.Log("HERE CHARACTER RUNS");
             playerMotion.SetFloat("Speed", Speed);
             playerMotion.SetFloat("Direction", Direction);
             InMotion = true;
@@ -487,17 +487,17 @@ public class CharacterStateManager : NetworkBehaviour {
         public void RunningBackwardLeft()
         {
             if (Speed > -1f)
-            { Speed -= animAdjNumber; Debug.Log(Speed); }
+            { Speed -= animAdjNumber; }
             if (Speed < 0f)
-            { Speed -= animAdjNumber; Debug.Log(Speed); }
+            { Speed -= animAdjNumber; }
             if (Direction > -1f)
-            { Direction -= animAdjNumber; Debug.Log(Direction); }
+            { Direction -= animAdjNumber; }
             if (Direction < 0f)
-            { Direction -= animAdjNumber; Debug.Log(Direction); }
+            { Direction -= animAdjNumber; }
             else if (Direction < -0.999f)
             { Speed = -1; Direction = -1; }
 
-            Debug.Log("HERE CHARACTER RUNS");
+            // Debug.Log("HERE CHARACTER RUNS");
             playerMotion.SetFloat("Speed", Speed);
             playerMotion.SetFloat("Direction", Direction);
             InMotion = true;
@@ -509,11 +509,11 @@ public class CharacterStateManager : NetworkBehaviour {
 
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
             {
-                Debug.Log("HERE CHARACTER SHOOTING");
+                // Debug.Log("HERE CHARACTER SHOOTING");
                 InMotion = true;
                 playerMotion.SetBool("IsShot", true);
             }
-            Debug.Log("HERE CHARACTER SHOOTING");
+            // Debug.Log("HERE CHARACTER SHOOTING");
             playerMotion.SetBool("IsShot", true);
             
         }
@@ -522,7 +522,7 @@ public class CharacterStateManager : NetworkBehaviour {
         //JUMP
         public void Jump()
         {
-            Debug.Log("HERE CHARACTER JUMPS");
+            // Debug.Log("HERE CHARACTER JUMPS");
             InMotion = true;
             playerMotion.SetBool("IsJump", true);
         }
@@ -657,7 +657,7 @@ public class CharacterStateManager : NetworkBehaviour {
 
         if (IsActive && !IsDead && !InMotion)
         {
-            Debug.Log("IDLE TURNING BACK");
+            // Debug.Log("IDLE TURNING BACK");
             Idle();
         }
 

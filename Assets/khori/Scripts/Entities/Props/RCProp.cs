@@ -53,9 +53,9 @@ public class RCProp : Prop {
         // ??? <-- Raycasted Props shouldn't even HAVE rigidbodies...
     }
 
-    public override void OnSpawned()
+    public override void OnSpawned(Vector3 lookVector)
     {
-        base.OnSpawned();
+        base.OnSpawned(lookVector);
         //
         startingPoint = transform.position;
     }
@@ -76,7 +76,7 @@ public class RCProp : Prop {
     /// </summary>
     public void Resolve()
     {
-        Debug.Log("Resolving as: " + resolutionShape);
+        // Debug.Log("Resolving as: " + resolutionShape);
 
         ResolutionResult rr = new ResolutionResult(this);
         rr.randomRoll = Random.Range(0f, 100f);
@@ -91,7 +91,7 @@ public class RCProp : Prop {
                 // ??? <-- There is currently no deviance for raycasting whatsoever...
                 // !!! <-- Use the 10-modded value of the roll for left-right, and the 10-divved value of the roll for the up-down...
                 rays = Physics.RaycastAll(startingPoint, heading, falloff, 1 << 9| 1 << 10);
-                Debug.Log("Heading: " + heading);
+                // Debug.Log("Heading: " + heading);
                 //
                 // *** Let's find the closest point of impact out of all possible candidates!
                 int closest = -1;

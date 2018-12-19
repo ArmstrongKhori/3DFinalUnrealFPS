@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class BattleManager : SystemObj {
 
@@ -30,6 +31,10 @@ public class BattleManager : SystemObj {
 
 
         testObj = (GameObject)Resources.Load("Spawnables/testpref", typeof(GameObject));
+
+
+
+        ClientScene.RegisterPrefab((GameObject)Resources.Load("Spawnables/Bullet", typeof(GameObject)));
     }
 
     private void FixedUpdate()
@@ -53,15 +58,26 @@ public class BattleManager : SystemObj {
     }
 
 
-    public Actor Spawn(string name, Character by)
+    public Actor Spawn(string name, Actor by)
     {
-        Actor a = (Actor)Instantiate(Resources.Load("Spawnables/" + name, typeof(Actor)), by.gunPoint.transform);
-        a.Owner = by;
+        return Spawn(name, by, Vector3.zero);
+    }
+    public Actor Spawn(string name, Actor by, Vector3 lookingVector)
+    {
+        Transform trans;
+        if (by is Character) { trans = ((Character)by).gunPoint.transform; }
+        else if (by != null) { trans = by.transform; }
+        else { trans = gameSpace.transform; }
+
+
+        Actor a = (Actor)Instantiate(Resources.Load("Spawnables/" + name, typeof(Actor)), trans.position, trans.rotation);
+        a.Owner = by.netId;
+        // Helper.DisplayMessage("Created by Network ID: " + a.Owner);
         //
-        a.transform.parent = gameSpace.transform; // *** Detach it from the target after spawning it ONTO the target.
+        a.transform.parent = null; //  gameSpace.transform;
         //
         //
-        a.OnSpawned();
+        a.OnSpawned(lookingVector == Vector3.zero ? by.LookVector : lookingVector);
 
 
         return a;
