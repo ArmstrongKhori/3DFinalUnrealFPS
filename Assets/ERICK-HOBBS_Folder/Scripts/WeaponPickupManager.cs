@@ -31,12 +31,12 @@ public class WeaponPickupManager : MonoBehaviour {
         AddWeaponToList();
         //FindPlayerHand();
 
-        /*for (int i = 0; i < Weapons.Count; i++)
+        for (int i = 0; i < Weapons.Count; i++)
         {
             Weapons[i].transform.position = GunHolder.position;
             Weapons[i].SetActive(false);
         }
-        Weapons[0].SetActive(true);*/
+        Weapons[0].SetActive(true);
     }
 
     private void AddWeaponToList()
