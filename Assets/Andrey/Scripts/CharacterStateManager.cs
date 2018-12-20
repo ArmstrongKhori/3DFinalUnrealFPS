@@ -588,6 +588,21 @@ public class CharacterStateManager : NetworkBehaviour {
         TurnToGunController();
     }
 
+    //SniperAiming 
+    public void SniperAim()
+    {
+
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+        {
+            Debug.Log("HERE CHARACTER AIMING");
+            InMotion = true;
+            playerMotion.SetBool("IsSniperAim", true);
+        }
+        Debug.Log("HERE CHARACTER AIMING");
+        playerMotion.SetBool("IsSniperAim", true);
+
+    }
+
     //Switch controller to Rifle controller
     public void TurnToRifleController()
     {

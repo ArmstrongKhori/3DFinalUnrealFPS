@@ -278,6 +278,7 @@ public class FPSController2 : NetworkBehaviour
         if(isJumping) { return; }
         CharAnim.InMotion = false;
         CharAnim.playerMotion.SetBool("IsShot", false);
+        CharAnim.playerMotion.SetBool("IsSniperAim", false);
 
         // JUST FOR TESTING 
 
@@ -372,6 +373,11 @@ public class FPSController2 : NetworkBehaviour
             CharAnim.Shooting();
         }
 
+        //Sniper Aiming
+        if (Input.GetKey(KeyCode.Mouse1))
+        {
+            CharAnim.SniperAim();
+        }
 
         //Jumping -----> 
         if (Input.GetKeyDown(KeyCode.Space))
