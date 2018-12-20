@@ -48,6 +48,15 @@ public class FPSController2 : NetworkBehaviour
     public Character character;
 
     private CharacterStateManager CharAnim;
+    public GameObject playerModelFPS;
+
+    public GameObject Sniper;
+
+    public Transform[] WayPointPOS;
+    private bool IsLauncherInHands = false;
+    public float Speed;
+    private int CurrWayPoint;
+
 
     // Use this for initialization
     void Start()
@@ -175,6 +184,24 @@ public class FPSController2 : NetworkBehaviour
         CharAnim.Idle();
     }
 
+    void AimWeapon()
+    {
+        if (Input.GetMouseButton(1) && !IsLauncherInHands)
+        {
+            CurrWayPoint = 1;
+            Sniper.transform.position = Vector3.MoveTowards(Sniper.transform.position, WayPointPOS[CurrWayPoint].position, Speed);
+            Sniper.transform.rotation = WayPointPOS[CurrWayPoint].rotation;
+        }
+        else
+        {
+
+            CurrWayPoint = 0;
+            Sniper.transform.position = Vector3.MoveTowards(Sniper.transform.position, WayPointPOS[CurrWayPoint].position, Speed);
+            Sniper.transform.rotation = WayPointPOS[CurrWayPoint].rotation;
+
+        }
+    }
+
     private void SelectWeapon()
     {
         /*
@@ -214,7 +241,8 @@ public class FPSController2 : NetworkBehaviour
     void FixedUpdate()
     {
         if (!isLocalPlayer) { return; }
-        
+
+        playerModelFPS.SetActive(false);
 
         Idle();
         ControlAim();
@@ -248,7 +276,7 @@ public class FPSController2 : NetworkBehaviour
         // =====================================================================================
         //
         SelectWeapon();
-        Debug.Log(rb.velocity);
+        //Debug.Log(rb.velocity);
 
         Vector3 localVel = transform.InverseTransformVector(rb.velocity);
 
@@ -412,19 +440,24 @@ public class FPSController2 : NetworkBehaviour
         if (Input.GetKey(KeyCode.Alpha6))
         {
             CharAnim.TakeLaserRifle();
+            IsLauncherInHands = false;
         }
         if (Input.GetKey(KeyCode.Alpha7))
         {
             CharAnim.TakeSniperRifle();
+            IsLauncherInHands = false;
         }
         if (Input.GetKey(KeyCode.Alpha8))
         {
             CharAnim.TakeGranadeLauncher();
+            IsLauncherInHands = true;
         }
         if (Input.GetKey(KeyCode.Alpha9))
         {
             CharAnim.TakeGun();
+            IsLauncherInHands = false;
         }
+        AimWeapon();
     }
     #endregion
 
