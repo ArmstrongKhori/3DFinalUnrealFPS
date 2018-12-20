@@ -33,10 +33,10 @@ public class WeaponPickupManager : MonoBehaviour {
 
         for (int i = 0; i < Weapons.Count; i++)
         {
-            Weapons[i].transform.position = GunHolder.position;
-            Weapons[i].SetActive(false);
+            //Weapons[i].transform.position = GunHolder.position;
+            //Weapons[i].SetActive(false);
         }
-        Weapons[0].SetActive(true);
+        //Weapons[0].SetActive(true);
     }
 
     private void AddWeaponToList()
@@ -58,7 +58,7 @@ public class WeaponPickupManager : MonoBehaviour {
         
         for(int i =1; i < Weapons.Count; i++)
         {
-            Debug.Log(Weapons[i].gameObject.tag);
+            //Debug.Log(Weapons[i].gameObject.tag);
         }
     }
 

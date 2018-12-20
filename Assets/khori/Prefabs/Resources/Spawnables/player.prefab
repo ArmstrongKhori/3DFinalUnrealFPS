@@ -889,7 +889,7 @@ GameObject:
   - component: {fileID: 114337154317473740}
   - component: {fileID: 95260595170859858}
   - component: {fileID: 114640155669539420}
-  - component: {fileID: 114471363043717668}
+  - component: {fileID: 114929092153285574}
   m_Layer: 10
   m_Name: player
   m_TagString: Player
@@ -1294,7 +1294,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1798686586251010}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.47651452, y: 0.219, z: 0.4350876}
+  m_LocalPosition: {x: 0.47350183, y: -2.828103e-17, z: 1.2736644}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
   - {fileID: 4201599716711734}
@@ -2593,19 +2593,6 @@ MonoBehaviour:
   m_MovementThreshold: 0.001
   m_InterpolateRotation: 0.5
   m_InterpolateMovement: 0.5
---- !u!114 &114471363043717668
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1798686586251010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4ccfc846593a4645b1029cf9afc10bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Weapons: []
-  GunHolder: {fileID: 4572763890364650}
 --- !u!114 &114564372157839568
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2685,6 +2672,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   c: {fileID: 114584861281649972}
+--- !u!114 &114929092153285574
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1798686586251010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ccfc846593a4645b1029cf9afc10bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Weapons: []
+  GunHolder: {fileID: 4572763890364650}
 --- !u!135 &135067345318149068
 SphereCollider:
   m_ObjectHideFlags: 1

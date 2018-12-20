@@ -233,7 +233,7 @@ public class FPSController2 : NetworkBehaviour
             Debug.Log(CurrentGun);
         }
 
-        for (int i = 0; i<= PickupManager.Weapons.Count; i++)
+        /*for (int i = 0; i<= PickupManager.Weapons.Count; i++)
         {
             if (i+1 != (CurrentGun))
             {
@@ -243,7 +243,7 @@ public class FPSController2 : NetworkBehaviour
             {
                 PickupManager.Weapons[i].SetActive(true);
             }
-        }
+        }*/
     }
 
     // Update is called once per frame
