@@ -14,13 +14,18 @@ public class Rifle : WeaponData
         fireRate = 1 / 32.0f;
         firingMode = FiringModes.Hold;
         appearance = "rifle";
+        recoilStrength = 0.07f;
+        devianceMinimum = 0.02f;
+        devianceMaximum = 0.12f;
     }
 
     public override void OnFire(Weapon w)
     {
         base.OnFire(w);
         //
-        w.owner.pch.CmdSpawn("Bullet", w.owner.NetworkID, w.owner.LookVector);
+        Vector3 lookVec = Helper.DevianceAdjustedLook(w.owner.LookVector, Mathf.Lerp(devianceMinimum, devianceMaximum, w.owner.RecoilValue));
+        //
+        w.owner.pch.CmdSpawn("Bullet", w.owner.NetworkID, lookVec);
     }
 
 }

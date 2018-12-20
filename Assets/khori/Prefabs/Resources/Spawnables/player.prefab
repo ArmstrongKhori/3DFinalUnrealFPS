@@ -425,6 +425,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4978011767545382}
+  - component: {fileID: 114438278942469692}
   m_Layer: 0
   m_Name: model
   m_TagString: Untagged
@@ -2416,6 +2417,33 @@ MonoBehaviour:
   m_MovementThreshold: 0.001
   m_InterpolateRotation: 0.5
   m_InterpolateMovement: 0.5
+--- !u!114 &114438278942469692
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1355076336575386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b8de81f6807c4c41b01808150f0858d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 1355076336575386}
+  bodyParts:
+  - name: head
+    bodyPart: {fileID: 1441040480327028}
+  - name: hand_right
+    bodyPart: {fileID: 1141804122915582}
+  - name: hand_left
+    bodyPart: {fileID: 1519779901297726}
+  - name: foot_left
+    bodyPart: {fileID: 1598042684744848}
+  - name: foot_right
+    bodyPart: {fileID: 1557728160798586}
+  - name: hips
+    bodyPart: {fileID: 1443542732180466}
+  - name: torso
+    bodyPart: {fileID: 1237910768883000}
 --- !u!114 &114564372157839568
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2456,9 +2484,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b85de637a7d3ad147884b9180799af2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armor: 25
-  health: 100
   modelHolder: {fileID: 1504410566235628}
+  playerModel: {fileID: 114438278942469692}
   stateManager: {fileID: 114214299585352292}
   gunPoint: {fileID: 114564372157839568}
   camPerspectiveFirst: {fileID: 114737943819725524}

@@ -37,6 +37,15 @@ public static class Helper {
 
 
 
+    public static Vector3 DevianceAdjustedLook(Vector3 lookVector, float deviance)
+    {
+        Vector2 randDev = Random.insideUnitCircle * deviance;
+        //
+        return (new Vector3(lookVector.x + 1*randDev.x, lookVector.y + 1 * randDev.y, lookVector.z)).normalized;
+    }
+
+
+
     public static void ClearMessages()
     {
         GameManager.Instance().DisplayMessage("");

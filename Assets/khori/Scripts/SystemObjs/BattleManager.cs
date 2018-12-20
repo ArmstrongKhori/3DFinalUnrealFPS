@@ -52,6 +52,11 @@ public class BattleManager : SystemObj {
         {
             a.Act();
         }
+        //
+        foreach (Actor a in runningList)
+        {
+            a.LateAct();
+        }
     }
 
 

@@ -44,6 +44,7 @@ public class Actor : Entity {
 
 
     public virtual void Act() { }
+    public virtual void LateAct() { }
 
 
     public void Despawn()

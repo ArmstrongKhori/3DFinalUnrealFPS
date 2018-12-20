@@ -3,8 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+
+/// <summary>
+/// A "separator" for network-type functions (aka: "Commands" and Remote-Procedure Calls)
+/// </summary>
 public class PlayerCommandHolder : NetworkBehaviour {
-    
+
+
+
+    [Command]
+    public void CmdNetwork_Interact(Character.InteractVerbs verb, NetworkInstanceId from, NetworkInstanceId to, InteractData data)
+    {
+        GameManager.Instance().AppendMessage("Within COMMAND!");
+
+        foreach (ControllableCharacter c in FindObjectsOfType<ControllableCharacter>())
+        {
+            if (c.isClient)
+            {
+                c.pch.RpcNetwork_Interact(verb, from, to, data);
+            }
+        }
+    }
+    [ClientRpc]
+    public void RpcNetwork_Interact(Character.InteractVerbs verb, NetworkInstanceId from, NetworkInstanceId to, InteractData data)
+    {
+        GameManager.Instance().AppendMessage("Within REMOTE!");
+
+
+        Character cFrom = Helper.GetNetworkActor(from) as Character;
+        Character cTo = Helper.GetNetworkActor(to) as Character;
+        //
+        cTo.Network_Respond(verb, cFrom, data);
+    }
+
+
+
 
     [Command]
     public void CmdSpawn(string name, NetworkInstanceId id, Vector3 lookVector)

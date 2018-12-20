@@ -13,6 +13,7 @@ public class Pistol : WeaponData {
         fireRate = 1 / 2.5f;
         firingMode = FiringModes.Press;
         appearance = "pistol";
+        recoilStrength = 0.3f;
     }
 
 

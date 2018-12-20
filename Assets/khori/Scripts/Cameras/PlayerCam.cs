@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A camera-point that mimics the player's movements.
+/// Allows a "player perspective" type of camera.
+/// </summary>
 public class PlayerCam : Cam {
 
 

@@ -6,9 +6,11 @@ using UnityEngine.Networking;
 
 /// <summary>
 /// A "Character" is an actor which interacts with projectiles, physics, or characters.
+/// It has special rules, such as walking, gravity, etc...
 /// </summary>
 public class Character : Actor
 {
+    /*
     /// <summary>
     /// Soft cap for health.
     /// Health above this amount will deplete by 1 every second.
@@ -37,9 +39,11 @@ public class Character : Actor
     public float armor = 25;
     [SyncVar]
     public float health = 100;
+    */
 
 
     public GameObject modelHolder;
+    public PlayerModel playerModel;
     public CharacterStateManager stateManager;
 
     public POI gunPoint;
@@ -81,6 +85,11 @@ public class Character : Actor
 
 
 
+    /// <summary>
+    /// The character's "response" to being hit by a prop-- Usually as damage and grunting.
+    /// </summary>
+    /// <param name="prop"></param>
+    /// <param name="data"></param>
     public void Struck(Prop prop, StrikingData data)
     {
         // *** The owner of the prop is responsible for dealing the damage. If there's no owner, you (the target) are considered as its owner.
@@ -118,13 +127,6 @@ public class Character : Actor
         /// Cause damage.
         /// </summary>
         Damage,
-        /// <summary>
-        /// Creates an object in the world space.
-        /// </summary>
-        Spawn,
-
-
-        TestBlock,
     }
 
     /// <summary>
@@ -139,31 +141,8 @@ public class Character : Actor
 
         // ??? <-- This PROBABLY is sorta lazy, but... Eh.
         // *** I'm making sure to ALWAYS call this from the local player's context, even if they're not even involved in the interaction.
-        Character localChar = Helper.GetLocalPlayer();
-        localChar.CmdNetwork_Interact(verb, from, to, data);
-    }
-
-    [Command]
-    public void CmdNetwork_Interact(InteractVerbs verb, NetworkInstanceId from, NetworkInstanceId to, InteractData data) {
-        GameManager.Instance().AppendMessage("Within COMMAND!");
-
-        foreach (Character c in FindObjectsOfType<Character>())
-        {
-            if (c.isClient)
-            {
-                c.RpcNetwork_Interact(verb, from, to, data);
-            }
-        }
-    }
-    [ClientRpc]
-    public void RpcNetwork_Interact(InteractVerbs verb, NetworkInstanceId from, NetworkInstanceId to, InteractData data) {
-        GameManager.Instance().AppendMessage("Within REMOTE!");
-
-
-        Character cFrom = Helper.GetNetworkActor(from) as Character;
-        Character cTo = Helper.GetNetworkActor(to) as Character;
-        //
-        cTo.Network_Respond(verb, cFrom, data);
+        ControllableCharacter localChar = Helper.GetLocalPlayer();
+        localChar.pch.CmdNetwork_Interact(verb, from, to, data);
     }
 
     /// <summary>
@@ -184,115 +163,11 @@ public class Character : Actor
                 rb.velocity = new Vector3(0, data.floatVal, 0);
                 break;
             case InteractVerbs.Tell:
+                Helper.DisplayMessage(origin.name + ": \"" + data.stringVal + "\"");
                 // Network_Interact(InteractVerbs.Tell, NetworkID, new InteractData("Ouch! You hit " + name+"!"));
                 break;
-
-            case InteractVerbs.Spawn:
-                break;
-
-            case InteractVerbs.TestBlock:
-                GameManager.Instance().AppendMessage("At position: " + transform.position);
-
-                GameObject tmp = Instantiate(BattleManager.Instance().testObj, data.vector3Val, transform.rotation);
-                tmp.transform.parent = null;
-                //
-                // tmp.transform.Translate(new Vector3(0, 0, 5));
-
-                NetworkServer.Spawn(tmp);
-                break;
         }
     }
-
-
-    /*
-     * 
-    /// <summary>
-    /// Tells other players what you intend to do to them, as well as passing some data regarding "how" you're doing it.
-    /// </summary>
-    /// <param name="verb"></param>
-    /// <param name="id"></param>
-    /// <param name="data"></param>
-    public void Network_Interact(InteractVerbs verb, NetworkInstanceId id, InteractData data)
-    {
-        foreach (Character c in FindObjectsOfType<Character>())
-        {
-            if (c.NetworkID == id)
-            {
-                GameManager.Instance().AppendMessage("Found applicable character (" + c.name + ")");
-
-                // *** What are we?
-                if (isServer)
-                {
-                    GameManager.Instance().AppendMessage("Performing REMOTE call...");
-
-                    c.RpcNetwork_Interact(verb, data);
-                }
-                else
-                {
-                    GameManager.Instance().AppendMessage("Performing COMMAND call...");
-
-                    CmdNetwork_Interact(verb, data, id);
-                }
-                break;
-            }
-        }
-    }
-
-    [Command]
-    public void CmdNetwork_Interact(InteractVerbs verb, InteractData data, NetworkInstanceId id) {
-        GameManager.Instance().AppendMessage("Within COMMAND!");
-
-        foreach (Character c in FindObjectsOfType<Character>())
-        {
-            if (c.NetworkID == id)
-            {
-                c.Network_Respond(verb, data);
-            }
-        }
-    }
-    [ClientRpc]
-    public void RpcNetwork_Interact(InteractVerbs verb, InteractData data) {
-        GameManager.Instance().AppendMessage("Within REMOTE!");
-        Network_Respond(verb, data);
-    }
-
-    /// <summary>
-    /// The player's "reaction" to the thing being done to them. 
-    /// </summary>
-    /// <param name="verb"></param>
-    /// <param name="data"></param>
-    public void Network_Respond(InteractVerbs verb, InteractData data)
-    {
-        GameManager.Instance().AppendMessage("Interaction received!");
-
-        switch (verb)
-        {
-            case InteractVerbs.None:
-                break;
-            case InteractVerbs.Damage:
-                // *** float: "damage"
-                rb.velocity = new Vector3(0, data.floatVal, 0);
-                break;
-            case InteractVerbs.Tell:
-                Network_Interact(InteractVerbs.Tell, NetworkID, new InteractData("Ouch! You hit " + name+"!"));
-                break;
-
-            case InteractVerbs.Spawn:
-                break;
-
-            case InteractVerbs.TestBlock:
-                GameManager.Instance().AppendMessage("At position: " + transform.position);
-
-                GameObject tmp = Instantiate(BattleManager.Instance().testObj, data.vector3Val, transform.rotation);
-                tmp.transform.parent = null;
-                //
-                // tmp.transform.Translate(new Vector3(0, 0, 5));
-
-                NetworkServer.Spawn(tmp);
-                break;
-        }
-    }
-     * */
 }
 
 
@@ -308,10 +183,8 @@ public struct InteractData
 
     // ??? <-- The coupling is a bit loose here... I wonder if there's a better way to do this...?
 
-    /// <summary>
-    /// Used for passing a float value.
-    /// </summary>
-    /// <param name="val"></param>
+
+    
     public InteractData(float val)
     {
         intVal = 0;

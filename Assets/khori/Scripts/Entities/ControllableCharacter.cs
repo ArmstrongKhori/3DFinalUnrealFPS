@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+/// <summary>
+/// Represents a character that is controlled by a player.
+/// Its primary difference is that it can receive and respond to inputs.
+/// </summary>
 public class ControllableCharacter : Character {
 
     public BaseInputter input;
@@ -14,15 +18,27 @@ public class ControllableCharacter : Character {
     public Cam camPerspectiveThird;
 
 
+    /// <summary>
+    /// Contains all the network functionality that players use.
+    /// </summary>
     internal PlayerCommandHolder pch;
 
 
+    /// <summary>
+    /// This override uses a "special" Look Vector if an FPSController exists.
+    /// </summary>
     public override Vector3 LookVector
     {
         // ??? <-- This needs to be implemented INTO the controller itself.
         get
         {
-            return controller == null ? base.LookVector : Quaternion.Euler(controller.LookVector) * Vector3.forward; // con.attachedCamera.transform.forward
+            if (controller == null) { return base.LookVector; }
+            Vector3 look = controller.LookVector; // con.attachedCamera.transform.forward
+            //
+            look.x -= 90 * followReeling;
+            look.x = Mathf.Max(-90, look.x);
+            //
+            return Quaternion.Euler(look) * Vector3.forward;
         }
     }
 
@@ -34,11 +50,14 @@ public class ControllableCharacter : Character {
         input = new PlayerInputter();
 
         // ??? <-- Debugging code.
-        weapon = new Weapon(new Pistol(), this);
+        weapon = new Weapon(new Rifle(), this); // Pistol
 
 
         controller = GetComponent<FPSController2>();
         if (controller == null) { controller = gameObject.AddComponent<FPSController2>(); }
+
+
+        pch = GetComponent<PlayerCommandHolder>();
     }
 
     public override void Start()
@@ -47,7 +66,7 @@ public class ControllableCharacter : Character {
         //
         if (isLocalPlayer)
         {
-            if (camPerspectiveThird != null)
+            if (false && camPerspectiveThird != null)
             {
                 Cam.SetActiveCamera(camPerspectiveThird);
             }
@@ -61,7 +80,13 @@ public class ControllableCharacter : Character {
         }
 
 
-        pch = GetComponent<PlayerCommandHolder>();
+        
+
+        // *** Hide the player model if you're in first person view!
+        if (isLocalPlayer && Cam.currentCam == camPerspectiveFirst)
+        {
+            playerModel.gameObject.SetActive(false);
+        }
     }
 
 
@@ -78,38 +103,12 @@ public class ControllableCharacter : Character {
 
         if (input.fire2 && !input.lastFire2)
         {
-            // BulletTrail.Create(transform.position, transform.position + LookVector*100, 1.0f, Color.blue);
-
-
             // Helper.ClearMessages();
             //
             pch.CmdCreateBulletTrail(transform.position, transform.position + LookVector * 100, 1.0f, Color.blue);
             // pch.CmdSpawn("Bullet", NetworkID, LookVector);
-
-
-            // Network_Interact(InteractVerbs.TestBlock, NetworkID, new InteractData(new Vector3(transform.position.x, transform.position.y, transform.position.z)));
-
-            /*
-            foreach (Character c in FindObjectsOfType<Character>())
-            {
-                if (c.NetworkID != NetworkID)
-                {
-                    Network_Interact(InteractVerbs.Damage, c.NetworkID, new InteractData(5));
-                }
-            }
-            */
         }
-        
 
-        /*
-        Vector3 moveDirection = Vector3.zero;
-        //
-        moveDirection += new Vector3(10 * 0, 0, 10 * input.moving); // input.strafing
-
-        transform.Rotate(new Vector3(0, 1 * input.strafing, 0));
-        //
-        rb.velocity = transform.TransformDirection(moveDirection); //  * Time.deltaTime
-        */
 
 
         // *** Weapon stuff.
@@ -119,15 +118,17 @@ public class ControllableCharacter : Character {
     }
 
 
-    public virtual void LateAct()
+    public override void LateAct()
     {
         followReeling = Mathf.Lerp(followReeling, recoilReeling, 0.1f); // ??? <-- This number is completely made up... I have no real reason for using it...
         //
-        recoilReeling -= 2.5f * Time.deltaTime; // *** Takes roughly a 3rd of a second to recover from maximum recoil reeling.
+        recoilReeling = Mathf.Max(0, recoilReeling - 2.5f * Time.deltaTime); // *** Takes roughly a 3rd of a second to recover from maximum recoil reeling.
         //
         // ??? <-- TODO: Make this value actually adjust the character's POV...
     }
 
+
+    public float RecoilValue { get { return Mathf.Clamp01(followReeling); } }
 
     /// <summary>
     /// This value "adjusts" your view's pitch.
