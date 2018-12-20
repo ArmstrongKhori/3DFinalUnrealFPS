@@ -891,9 +891,10 @@ GameObject:
   - component: {fileID: 114337154317473740}
   - component: {fileID: 95260595170859858}
   - component: {fileID: 114640155669539420}
+  - component: {fileID: 114929092153285574}
   m_Layer: 10
   m_Name: player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1094,6 +1095,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1941940514301284
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4572763890364650}
+  m_Layer: 0
+  m_Name: GunHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1946553199104726
 GameObject:
   m_ObjectHideFlags: 1
@@ -1244,7 +1260,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1798686586251010}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.20838404, y: 1.4633864, z: -0.9741783}
+  m_LocalPosition: {x: 0.47350183, y: -2.828103e-17, z: 1.2736644}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
   - {fileID: 4979972405390084}
@@ -1656,6 +1672,7 @@ Transform:
   - {fileID: 4625733329818854}
   - {fileID: 4342796618907472}
   - {fileID: 4068475155853854}
+  - {fileID: 4572763890364650}
   m_Father: {fileID: 4720436667068228}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1847,6 +1864,19 @@ Transform:
   m_Father: {fileID: 4342920594881456}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4572763890364650
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1941940514301284}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4437622929834808}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
 --- !u!4 &4573424701568200
 Transform:
   m_ObjectHideFlags: 1
@@ -2472,6 +2502,7 @@ MonoBehaviour:
   pitch: 0
   yaw: 0
   Gravity: 9.81
+  WeaponPickup: 
   character: {fileID: 0}
 --- !u!114 &114584861281649972
 MonoBehaviour:
@@ -2521,8 +2552,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   c: {fileID: 114584861281649972}
---- !u!114 &114916834892933454
+--- !u!114 &114929092153285574
 MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1798686586251010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ccfc846593a4645b1029cf9afc10bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Weapons: []
+  GunHolder: {fileID: 4572763890364650}
+--- !u!135 &135067345318149068
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1988642821756878}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &135577254625241578
+SphereCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}

@@ -39,14 +39,17 @@ public class FPSController2 : NetworkBehaviour
 
     Rigidbody rb;
 
-    private int CurrentGun;
+    private int CurrentGun = 1;
 
-    private List<bool> WeaponPickup;
+    private int GetCurrentGun() { return CurrentGun; }
 
+    public List<bool> WeaponPickup;
 
     public Character character;
 
     private CharacterStateManager CharAnim;
+
+    private WeaponPickupManager PickupManager;
 
     // Use this for initialization
     void Start()
@@ -58,7 +61,7 @@ public class FPSController2 : NetworkBehaviour
         //
         CharAnim = character.stateManager;
 
-
+        PickupManager = GetComponent<WeaponPickupManager>();
 
 
         WeaponPickup = new List<bool>();
@@ -67,6 +70,7 @@ public class FPSController2 : NetworkBehaviour
         {
             WeaponPickup.Add(false);
         }
+
     }
 
     private void MoveForward()
@@ -161,36 +165,84 @@ public class FPSController2 : NetworkBehaviour
 
     private void SelectWeapon()
     {
-        /*
-        if (Input.GetKey(KeyCode.Alpha1) && )
+        
+        if (Input.GetKey(KeyCode.Alpha1) && WeaponPickup[0] == true)
         {
             CurrentGun = 1;
 
+            /*PickupManager.Weapons[0].SetActive(true);
+            PickupManager.Weapons[1].SetActive(false);
+            PickupManager.Weapons[2].SetActive(false);
+            PickupManager.Weapons[3].SetActive(false);
+            PickupManager.Weapons[4].SetActive(false);*/
+
+            
+
             Debug.Log(CurrentGun);
         }
 
-        if (Input.GetKey(KeyCode.Alpha2) && )
+        if (Input.GetKey(KeyCode.Alpha2) && WeaponPickup[1] == true)
         {
             CurrentGun = 2;
+
+            /*PickupManager.Weapons[0].SetActive(false);
+            PickupManager.Weapons[1].SetActive(true);
+            PickupManager.Weapons[2].SetActive(false);
+            PickupManager.Weapons[3].SetActive(false);
+            PickupManager.Weapons[4].SetActive(false);*/
+
             Debug.Log(CurrentGun);
         }
 
-        if (Input.GetKey(KeyCode.Alpha3) && )
+        if (Input.GetKey(KeyCode.Alpha3) && WeaponPickup[2] == true)
         {
             CurrentGun = 3;
+
+            /*PickupManager.Weapons[0].SetActive(false);
+            PickupManager.Weapons[1].SetActive(false);
+            PickupManager.Weapons[2].SetActive(true);
+            PickupManager.Weapons[3].SetActive(false);
+            PickupManager.Weapons[4].SetActive(false);*/
+
             Debug.Log(CurrentGun);
         }
 
-        if (Input.GetKey(KeyCode.Alpha4) && )
+        if (Input.GetKey(KeyCode.Alpha4) && WeaponPickup[3] == true)
         {
             CurrentGun = 4;
+
+            /*PickupManager.Weapons[0].SetActive(false);
+            PickupManager.Weapons[1].SetActive(false);
+            PickupManager.Weapons[2].SetActive(false);
+            PickupManager.Weapons[3].SetActive(true);
+            PickupManager.Weapons[4].SetActive(false);*/
+
             Debug.Log(CurrentGun);
         }
 
-        if (Input.GetKey(KeyCode.Alpha5) && )
+        if (Input.GetKey(KeyCode.Alpha5) && WeaponPickup[4] == true)
         {
             CurrentGun = 5;
+
+            /*PickupManager.Weapons[0].SetActive(false);
+            PickupManager.Weapons[1].SetActive(false);
+            PickupManager.Weapons[2].SetActive(false);
+            PickupManager.Weapons[3].SetActive(false);
+            PickupManager.Weapons[4].SetActive(true);*/
+
             Debug.Log(CurrentGun);
+        }
+
+        /*for (int i = 0; i<= PickupManager.Weapons.Count; i++)
+        {
+            if (i+1 != (CurrentGun))
+            {
+                PickupManager.Weapons[i].SetActive(false);
+            }
+            else
+            {
+                PickupManager.Weapons[i].SetActive(true);
+            }
         }*/
     }
 
