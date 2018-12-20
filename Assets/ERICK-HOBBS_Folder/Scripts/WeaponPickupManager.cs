@@ -10,6 +10,7 @@ public class WeaponPickupManager : MonoBehaviour {
     private GameObject Axe;
     private GameObject RocketLauncher;
 
+
     private GameObject RightHand;
 
 
@@ -17,22 +18,25 @@ public class WeaponPickupManager : MonoBehaviour {
 
     private FPSController2 Controller;
 
+    public Transform GunHolder;
+
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 
         Weapons = new List<GameObject>();
 
-        Controller = GameObject.Find("Player").GetComponent<FPSController2>();
+        // Controller = GameObject.Find("Player").GetComponent<FPSController2>();
+        Controller = this.gameObject.GetComponent<FPSController2>();
 
         AddWeaponToList();
-        FindPlayerHand();
+        //FindPlayerHand();
 
-        for (int i = 0; i < Weapons.Count; i++)
+        /*for (int i = 0; i < Weapons.Count; i++)
         {
-            Weapons[i].transform.position = RightHand.transform.position;
+            Weapons[i].transform.position = GunHolder.position;
             Weapons[i].SetActive(false);
         }
-        Weapons[0].SetActive(true);
+        Weapons[0].SetActive(true);*/
     }
 
     private void AddWeaponToList()
@@ -51,6 +55,11 @@ public class WeaponPickupManager : MonoBehaviour {
 
         RocketLauncher = (GameObject)Resources.Load("ERICK-HOBBS_Folder/Prefabs/RealWeapons/rocketlauncher_Real", typeof(GameObject));
         Weapons.Add(RocketLauncher);
+        
+        for(int i =1; i < Weapons.Count; i++)
+        {
+            Debug.Log(Weapons[i].gameObject.tag);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -85,7 +94,7 @@ public class WeaponPickupManager : MonoBehaviour {
 
     private void FindPlayerHand()
     {
-        RightHand = GameObject.Find("Player/model/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:RightShoulder/mixamorig:RightArm/mixamorig:RightForeArm/mixamorig:RightHand");
+        RightHand = GameObject.Find("player/Player/model/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:RightShoulder/mixamorig:RightArm/mixamorig:RightForeArm/mixamorig:RightHand");
     }
 
     private void CheckPlayerWeapon()

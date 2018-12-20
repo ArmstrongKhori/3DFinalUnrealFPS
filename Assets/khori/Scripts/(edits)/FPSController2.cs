@@ -170,11 +170,13 @@ public class FPSController2 : NetworkBehaviour
         {
             CurrentGun = 1;
 
-            PickupManager.Weapons[0].SetActive(true);
+            /*PickupManager.Weapons[0].SetActive(true);
             PickupManager.Weapons[1].SetActive(false);
             PickupManager.Weapons[2].SetActive(false);
             PickupManager.Weapons[3].SetActive(false);
-            PickupManager.Weapons[4].SetActive(false);
+            PickupManager.Weapons[4].SetActive(false);*/
+
+            
 
             Debug.Log(CurrentGun);
         }
@@ -183,11 +185,11 @@ public class FPSController2 : NetworkBehaviour
         {
             CurrentGun = 2;
 
-            PickupManager.Weapons[0].SetActive(false);
+            /*PickupManager.Weapons[0].SetActive(false);
             PickupManager.Weapons[1].SetActive(true);
             PickupManager.Weapons[2].SetActive(false);
             PickupManager.Weapons[3].SetActive(false);
-            PickupManager.Weapons[4].SetActive(false);
+            PickupManager.Weapons[4].SetActive(false);*/
 
             Debug.Log(CurrentGun);
         }
@@ -196,11 +198,11 @@ public class FPSController2 : NetworkBehaviour
         {
             CurrentGun = 3;
 
-            PickupManager.Weapons[0].SetActive(false);
+            /*PickupManager.Weapons[0].SetActive(false);
             PickupManager.Weapons[1].SetActive(false);
             PickupManager.Weapons[2].SetActive(true);
             PickupManager.Weapons[3].SetActive(false);
-            PickupManager.Weapons[4].SetActive(false);
+            PickupManager.Weapons[4].SetActive(false);*/
 
             Debug.Log(CurrentGun);
         }
@@ -209,11 +211,11 @@ public class FPSController2 : NetworkBehaviour
         {
             CurrentGun = 4;
 
-            PickupManager.Weapons[0].SetActive(false);
+            /*PickupManager.Weapons[0].SetActive(false);
             PickupManager.Weapons[1].SetActive(false);
             PickupManager.Weapons[2].SetActive(false);
             PickupManager.Weapons[3].SetActive(true);
-            PickupManager.Weapons[4].SetActive(false);
+            PickupManager.Weapons[4].SetActive(false);*/
 
             Debug.Log(CurrentGun);
         }
@@ -222,13 +224,25 @@ public class FPSController2 : NetworkBehaviour
         {
             CurrentGun = 5;
 
-            PickupManager.Weapons[0].SetActive(false);
+            /*PickupManager.Weapons[0].SetActive(false);
             PickupManager.Weapons[1].SetActive(false);
             PickupManager.Weapons[2].SetActive(false);
             PickupManager.Weapons[3].SetActive(false);
-            PickupManager.Weapons[4].SetActive(true);
+            PickupManager.Weapons[4].SetActive(true);*/
 
             Debug.Log(CurrentGun);
+        }
+
+        for (int i = 0; i<= PickupManager.Weapons.Count; i++)
+        {
+            if (i+1 != (CurrentGun))
+            {
+                PickupManager.Weapons[i].SetActive(false);
+            }
+            else
+            {
+                PickupManager.Weapons[i].SetActive(true);
+            }
         }
     }
 

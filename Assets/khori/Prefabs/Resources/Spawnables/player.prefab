@@ -518,7 +518,6 @@ GameObject:
   - component: {fileID: 114214299585352292}
   - component: {fileID: 95103912124114284}
   - component: {fileID: 114278707542270602}
-  - component: {fileID: 114651811333251432}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -893,7 +892,7 @@ GameObject:
   - component: {fileID: 114471363043717668}
   m_Layer: 10
   m_Name: player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1112,6 +1111,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1941940514301284
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4572763890364650}
+  m_Layer: 0
+  m_Name: GunHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1946553199104726
 GameObject:
   m_ObjectHideFlags: 1
@@ -1280,7 +1294,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1798686586251010}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.20838404, y: 1.4633864, z: -0.9741783}
+  m_LocalPosition: {x: 0.47651452, y: 0.219, z: 0.4350876}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
   - {fileID: 4201599716711734}
@@ -1707,6 +1721,7 @@ Transform:
   - {fileID: 4625733329818854}
   - {fileID: 4342796618907472}
   - {fileID: 4068475155853854}
+  - {fileID: 4572763890364650}
   m_Father: {fileID: 4720436667068228}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1898,6 +1913,19 @@ Transform:
   m_Father: {fileID: 4342920594881456}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4572763890364650
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1941940514301284}
+  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4437622929834808}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
 --- !u!4 &4573424701568200
 Transform:
   m_ObjectHideFlags: 1
@@ -2577,6 +2605,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Weapons: []
+  GunHolder: {fileID: 4572763890364650}
 --- !u!114 &114564372157839568
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2605,6 +2634,7 @@ MonoBehaviour:
   pitch: 0
   yaw: 0
   Gravity: 9.81
+  WeaponPickup: 
   character: {fileID: 0}
 --- !u!114 &114584861281649972
 MonoBehaviour:
