@@ -31,11 +31,8 @@ public class BattleManager : SystemObj {
 
 
         testObj = (GameObject)Resources.Load("Spawnables/testpref", typeof(GameObject));
-
-
-
-        ClientScene.RegisterPrefab((GameObject)Resources.Load("Spawnables/Bullet", typeof(GameObject)));
     }
+
 
     private void FixedUpdate()
     {
@@ -72,7 +69,6 @@ public class BattleManager : SystemObj {
 
         Actor a = (Actor)Instantiate(Resources.Load("Spawnables/" + name, typeof(Actor)), trans.position, trans.rotation);
         a.Owner = by.netId;
-        // Helper.DisplayMessage("Created by Network ID: " + a.Owner);
         //
         a.transform.parent = null; //  gameSpace.transform;
         //

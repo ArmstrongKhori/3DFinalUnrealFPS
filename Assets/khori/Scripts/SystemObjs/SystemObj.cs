@@ -8,7 +8,7 @@ using UnityEngine.Networking;
  * Instead, they are used for managing various individual elements of the program/gameplay, much like a team of engineers making a machine work.
  * The "boss" of all the SystemObjs is the "GameManager", whom manages all the managers.
  * */
-public class SystemObj : NetworkBehaviour {
+public class SystemObj : MonoBehaviour {
 
 	// Use this for initialization
 	public virtual void Start () {

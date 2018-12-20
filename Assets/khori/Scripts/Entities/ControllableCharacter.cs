@@ -14,6 +14,9 @@ public class ControllableCharacter : Character {
     public Cam camPerspectiveThird;
 
 
+    internal PlayerCommandHolder pch;
+
+
     public override Vector3 LookVector
     {
         // ??? <-- This needs to be implemented INTO the controller itself.
@@ -31,7 +34,7 @@ public class ControllableCharacter : Character {
         input = new PlayerInputter();
 
         // ??? <-- Debugging code.
-        weapon = new Weapon(new Rifle(), this);
+        weapon = new Weapon(new Pistol(), this);
 
 
         controller = GetComponent<FPSController2>();
@@ -56,6 +59,9 @@ public class ControllableCharacter : Character {
                 }
             }
         }
+
+
+        pch = GetComponent<PlayerCommandHolder>();
     }
 
 
@@ -72,9 +78,13 @@ public class ControllableCharacter : Character {
 
         if (input.fire2 && !input.lastFire2)
         {
-            Helper.ClearMessages();
+            // BulletTrail.Create(transform.position, transform.position + LookVector*100, 1.0f, Color.blue);
+
+
+            // Helper.ClearMessages();
             //
-            CmdSpawn("Bullet", NetworkID, LookVector);
+            pch.CmdCreateBulletTrail(transform.position, transform.position + LookVector * 100, 1.0f, Color.blue);
+            // pch.CmdSpawn("Bullet", NetworkID, LookVector);
 
 
             // Network_Interact(InteractVerbs.TestBlock, NetworkID, new InteractData(new Vector3(transform.position.x, transform.position.y, transform.position.z)));

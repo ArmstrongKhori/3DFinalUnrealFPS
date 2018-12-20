@@ -88,6 +88,7 @@ public class Character : Actor
         if (c == null) { c = this; }
         //
         GameManager.Instance().DisplayMessage(c.name + " strikes " + name);
+        //
         Network_Interact(InteractVerbs.Damage, c.NetworkID, NetworkID, new InteractData(prop.power));
     }
 
@@ -95,15 +96,9 @@ public class Character : Actor
 
 
 
-    [Command]
-    public void CmdSpawn(string name, NetworkInstanceId id, Vector3 lookVector)
-    {
-        // ??? <-- I hate that I have to send it my looking vector... What's with that??
 
-        Actor a = BattleManager.Instance().Spawn(name, Helper.GetNetworkActor(id), lookVector);
-        //
-        NetworkServer.Spawn(a.gameObject);
-    }
+
+
 
 
     /// <summary>
@@ -142,7 +137,10 @@ public class Character : Actor
     {
         GameManager.Instance().AppendMessage("Within interact!");
 
-        CmdNetwork_Interact(verb, from, to, data);
+        // ??? <-- This PROBABLY is sorta lazy, but... Eh.
+        // *** I'm making sure to ALWAYS call this from the local player's context, even if they're not even involved in the interaction.
+        Character localChar = Helper.GetLocalPlayer();
+        localChar.CmdNetwork_Interact(verb, from, to, data);
     }
 
     [Command]

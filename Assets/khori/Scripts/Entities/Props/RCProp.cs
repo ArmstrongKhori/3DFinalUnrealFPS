@@ -104,6 +104,8 @@ public class RCProp : Prop {
                     {
                         continue;
                     }
+                    // *** Don't hit yourself, please!
+                    if (ray.collider.gameObject == CharacterOwner.gameObject) { continue; }
 
 
                     if (closest < 0)

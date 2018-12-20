@@ -14,6 +14,9 @@ public class Missile : Prop {
         //
         rb.useGravity = false;
         rb.velocity = lookVector * initialVelocity; // Helper.GetNetworkActor(Owner).LookVector
+
+
+        AudioManager.Instance().AK47SHOT();
     }
 
 }

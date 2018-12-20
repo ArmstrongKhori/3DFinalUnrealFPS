@@ -14,13 +14,14 @@ public class PistolShot : RCProp {
 
     public override bool OnResolved(ResolutionResult rr)
     {
+        AudioManager.Instance().GUNSHOT();
+
         foreach (StrikingData sd in rr.allStrikes)
         {
             // ??? <-- I should probably catch this somewhere...
-            BulletTrail.Create(sd.originPoint, sd.pointOfImpact, 1.0f, Color.yellow);
+            CharacterOwner.pch.CmdCreateBulletTrail(sd.originPoint, sd.pointOfImpact, 0.1f, Color.yellow);
         }
         //
         return base.OnResolved(rr);
     }
-
 }

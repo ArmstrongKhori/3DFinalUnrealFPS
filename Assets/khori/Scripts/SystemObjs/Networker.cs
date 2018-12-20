@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class Networker : SystemObj {
 
-    NetworkManager networkManager;
-    NetworkManagerHUD networkHUD;
+    internal NetworkManager networkManager;
+    internal NetworkManagerHUD networkHUD;
 
     private Scene scene;
 
@@ -21,7 +21,14 @@ public class Networker : SystemObj {
         networkManager.offlineScene = scene.name;
         networkManager.onlineScene = scene.name;
         networkManager.playerPrefab = (GameObject)Resources.Load("Spawnables/player", typeof(GameObject));
-        networkManager.spawnPrefabs.Add(BattleManager.Instance().testObj);
+        //
+        foreach (GameObject obj in GameManager.Instance().networkSpawnablePrefabs)
+        {
+            // ClientScene.RegisterPrefab(obj);
+
+            // Debug.Log(obj);
+            networkManager.spawnPrefabs.Add(obj);
+        }
 
         networkHUD = gameObject.AddComponent<NetworkManagerHUD>();
     }

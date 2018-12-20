@@ -20,10 +20,7 @@ public class Rifle : WeaponData
     {
         base.OnFire(w);
         //
-        // ??? <-- Debugging code.
-        BattleManager.Instance().Spawn("Bullet", w.owner);
-
-        AudioManager.Instance().AK47SHOT();
+        w.owner.pch.CmdSpawn("Bullet", w.owner.NetworkID, w.owner.LookVector);
     }
 
 }

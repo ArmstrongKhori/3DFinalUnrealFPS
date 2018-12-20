@@ -28,6 +28,9 @@ public class Prop : Actor {
     public bool hasDiminishingArea = true;
 
 
+    public ControllableCharacter CharacterOwner { get { return Helper.GetNetworkActor(Owner) as ControllableCharacter; } }
+
+
     public override void Act()
     {
         base.Act();

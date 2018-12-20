@@ -9,17 +9,23 @@ using UnityEngine.UI;
 /// </summary>
 public class GameManager : SystemObj {
 
+
+    public List<GameObject> networkSpawnablePrefabs;
+
+
     public override void Start()
     {
         base.Start();
         //
-        GameObject battleManager = new GameObject("BattleManager");
-        battleManager.transform.parent = transform;
-        battleManager.AddComponent<BattleManager>();
+        GameObject go;
+        go = new GameObject("BattleManager");
+        go.transform.parent = transform;
+        go.AddComponent<BattleManager>();
 
-        GameObject networker = new GameObject("Networker");
-        networker.transform.parent = transform;
-        networker.AddComponent<Networker>();
+        go = new GameObject("Networker");
+        go.transform.parent = transform;
+        go.AddComponent<Networker>();
+        //
         //
         /*
         foreach (SystemObj a in FindObjectsOfType<SystemObj>())

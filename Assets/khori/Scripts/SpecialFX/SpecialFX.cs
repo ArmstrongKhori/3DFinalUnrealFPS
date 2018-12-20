@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 /// <summary>
 /// This class utilizes a combination of particle effects, trail renderers, etc... To produce special effects.
 /// </summary>
-public class SpecialFX : MonoBehaviour {
+public class SpecialFX : NetworkBehaviour {
 
 
     internal bool hasBegun = false;
@@ -53,6 +54,22 @@ public class SpecialFX : MonoBehaviour {
         }
     }
 
+
+    public virtual void OnNetworkCreation()
+    {
+        // CmdSpawnMe();
+    }
+
+
+    [Command]
+    public void CmdSpawnMe()
+    {
+        NetworkServer.Spawn(this.gameObject);
+        //
+        OnCreated();
+    }
+
+
     private void FixedUpdate()
     {
         if (hasBegun)
@@ -95,4 +112,10 @@ public class SpecialFX : MonoBehaviour {
     public virtual void OnBegin() { }
     public virtual void OnEnded() { }
 
+
+    [ClientRpc]
+    public virtual void RpcOnServerSpawned()
+    {
+        OnCreated();
+    }
 }

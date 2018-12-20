@@ -21,11 +21,8 @@ public class Pistol : WeaponData {
     {
         base.OnFire(w);
         //
-        // ??? <-- Debugging code.
-        // BattleManager.Instance().Spawn("Bullet", w.owner);
-        BattleManager.Instance().Spawn("PistolShot", w.owner);
-
-        AudioManager.Instance().GUNSHOT();
+        BattleManager.Instance().Spawn("PistolShot", w.owner, w.owner.LookVector);
+        // w.owner.pch.CmdSpawn("PistolShot", w.owner.NetworkID, w.owner.LookVector);
     }
 
 }

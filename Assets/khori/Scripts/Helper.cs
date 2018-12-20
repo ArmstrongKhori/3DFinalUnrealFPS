@@ -25,6 +25,16 @@ public static class Helper {
         return null;
     }
 
+    public static ControllableCharacter GetLocalPlayer()
+    {
+        foreach (ControllableCharacter cc in GameObject.FindObjectsOfType<ControllableCharacter>())
+        {
+            if (cc.isLocalPlayer) { return cc; }
+        }
+
+        return null;
+    }
+
 
 
     public static void ClearMessages()
