@@ -43,6 +43,8 @@ public class FPSController : MonoBehaviour {
             WeaponPickup.Add(false);
         }
 
+        Debug.Log(WeaponPickup);
+
     }
 	
     private void MoveForward()

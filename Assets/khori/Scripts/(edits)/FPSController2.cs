@@ -39,17 +39,23 @@ public class FPSController2 : NetworkBehaviour
 
     Rigidbody rb;
 
-    private int CurrentGun = 1;
+    private int CurrentGun;
 
-    private int GetCurrentGun() { return CurrentGun; }
+    private List<bool> WeaponPickup;
 
-    public List<bool> WeaponPickup;
 
     public Character character;
 
     private CharacterStateManager CharAnim;
+    public GameObject playerModelFPS;
 
-    private WeaponPickupManager PickupManager;
+    public GameObject Sniper;
+
+    public Transform[] WayPointPOS;
+    private bool IsLauncherInHands = false;
+    public float Speed;
+    private int CurrWayPoint;
+
 
     // Use this for initialization
     void Start()
@@ -61,7 +67,7 @@ public class FPSController2 : NetworkBehaviour
         //
         CharAnim = character.stateManager;
 
-        PickupManager = GetComponent<WeaponPickupManager>();
+
 
 
         WeaponPickup = new List<bool>();
@@ -71,12 +77,16 @@ public class FPSController2 : NetworkBehaviour
             WeaponPickup.Add(false);
         }
 
+
     }
 
     private void MoveForward()
     {
+        
         if (Input.GetKey(KeyCode.W))
         {
+            
+
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 rb.velocity += transform.TransformDirection(new Vector3(0, 0, ForwardSpeed* RUNNINGMULT));
@@ -92,12 +102,8 @@ public class FPSController2 : NetworkBehaviour
     {
         if (Input.GetKey(KeyCode.S))
         {
-            CharAnim.WalkingBackward();
+
             rb.velocity += transform.TransformDirection(new Vector3(0, 0, BackwardSpeed));
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                CharAnim.RunningBackward();
-            }
         }
     }
 
@@ -105,31 +111,35 @@ public class FPSController2 : NetworkBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            if (!isJumping)
-            {
-                CharAnim.Jump();
+            Invoke("JumpAction", 0.2f);
 
-                float temp = transform.position.y;
-                isJumping = true;
-
-                rb.velocity = new Vector3(rb.velocity.x, JumpHeight, rb.velocity.z);
-            }
         }
 
+    }
+
+    private void JumpAction()
+    {
+
+        if (!isJumping)
+        {
+
+            float temp = transform.position.y;
+            isJumping = true;
+
+            rb.velocity = new Vector3(rb.velocity.x, JumpHeight, rb.velocity.z);
+        }
     }
 
     private void Strafe()
     {
         if (Input.GetKey(KeyCode.D))
         {
-            CharAnim.WalkingRight();
             rb.velocity += transform.TransformDirection(new Vector3(StrafeSpeed, 0, 0));
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            CharAnim.WalkingLeft();
-            rb.velocity += transform.TransformDirection(new Vector3(-StrafeSpeed, 0, 0));
+           rb.velocity += transform.TransformDirection(new Vector3(-StrafeSpeed, 0, 0));
         }
     }
 
@@ -163,12 +173,36 @@ public class FPSController2 : NetworkBehaviour
         }
     }
 
+    private void Idle()
+    {
+        CharAnim.Idle();
+    }
+
+    void AimWeapon()
+    {
+        if (Input.GetMouseButton(1) && !IsLauncherInHands)
+        {
+            CurrWayPoint = 1;
+            Sniper.transform.position = Vector3.MoveTowards(Sniper.transform.position, WayPointPOS[CurrWayPoint].position, Speed);
+            Sniper.transform.rotation = WayPointPOS[CurrWayPoint].rotation;
+        }
+        else
+        {
+
+            CurrWayPoint = 0;
+            Sniper.transform.position = Vector3.MoveTowards(Sniper.transform.position, WayPointPOS[CurrWayPoint].position, Speed);
+            Sniper.transform.rotation = WayPointPOS[CurrWayPoint].rotation;
+
+        }
+    }
+
     private void SelectWeapon()
     {
         
-        if (Input.GetKey(KeyCode.Alpha1) && WeaponPickup[0] == true)
+        if (Input.GetKey(KeyCode.Alpha1) && )
         {
             CurrentGun = 1;
+
 
             /*PickupManager.Weapons[0].SetActive(true);
             PickupManager.Weapons[1].SetActive(false);
@@ -181,9 +215,10 @@ public class FPSController2 : NetworkBehaviour
             Debug.Log(CurrentGun);
         }
 
-        if (Input.GetKey(KeyCode.Alpha2) && WeaponPickup[1] == true)
+        if (Input.GetKey(KeyCode.Alpha2) && )
         {
             CurrentGun = 2;
+
 
             /*PickupManager.Weapons[0].SetActive(false);
             PickupManager.Weapons[1].SetActive(true);
@@ -191,10 +226,11 @@ public class FPSController2 : NetworkBehaviour
             PickupManager.Weapons[3].SetActive(false);
             PickupManager.Weapons[4].SetActive(false);*/
 
+
             Debug.Log(CurrentGun);
         }
 
-        if (Input.GetKey(KeyCode.Alpha3) && WeaponPickup[2] == true)
+        if (Input.GetKey(KeyCode.Alpha3) && )
         {
             CurrentGun = 3;
 
@@ -204,12 +240,14 @@ public class FPSController2 : NetworkBehaviour
             PickupManager.Weapons[3].SetActive(false);
             PickupManager.Weapons[4].SetActive(false);*/
 
+
             Debug.Log(CurrentGun);
         }
 
-        if (Input.GetKey(KeyCode.Alpha4) && WeaponPickup[3] == true)
+        if (Input.GetKey(KeyCode.Alpha4) && )
         {
             CurrentGun = 4;
+
 
             /*PickupManager.Weapons[0].SetActive(false);
             PickupManager.Weapons[1].SetActive(false);
@@ -220,7 +258,7 @@ public class FPSController2 : NetworkBehaviour
             Debug.Log(CurrentGun);
         }
 
-        if (Input.GetKey(KeyCode.Alpha5) && WeaponPickup[4] == true)
+        if (Input.GetKey(KeyCode.Alpha5) && )
         {
             CurrentGun = 5;
 
@@ -243,6 +281,8 @@ public class FPSController2 : NetworkBehaviour
             {
                 PickupManager.Weapons[i].SetActive(true);
             }
+            Debug.Log(CurrentGun);
+
         }*/
     }
 
@@ -251,6 +291,10 @@ public class FPSController2 : NetworkBehaviour
     {
         if (!isLocalPlayer) { return; }
 
+
+        playerModelFPS.SetActive(false);
+
+        Idle();
         ControlAim();
         MoveForward();
         MoveBackward();
@@ -260,6 +304,7 @@ public class FPSController2 : NetworkBehaviour
         // One can move faster than normal by walking and strafing simultaneously. You need to multiply movement speed by "0.7" when both are being done at the same time to prevent this.
         // =====================================================================================
         Jump();
+        
         //
         // =====================================================================================
         // *** Movement friction that ignores up/down velocity.
@@ -283,8 +328,6 @@ public class FPSController2 : NetworkBehaviour
         SelectWeapon();
 
         Vector3 localVel = transform.InverseTransformVector(rb.velocity);
-        CharAnim.playerMotion.SetFloat("Speed", localVel.x / ForwardSpeed /4);
-        CharAnim.playerMotion.SetFloat("Direction", localVel.z / StrafeSpeed /4);
 
         /*
         if (localVel.z > 0)
@@ -297,9 +340,174 @@ public class FPSController2 : NetworkBehaviour
         }
         else
         {
-            CharAnim.Idle();
+            
         }
         */
-
+        
     }
+
+    // Input logic for Animator!!! ----->
+    #region
+    void Update()
+    {
+
+        if (!isLocalPlayer) { return; }
+        if(isJumping) { return; }
+        CharAnim.InMotion = false;
+        CharAnim.playerMotion.SetBool("IsShot", false);
+        CharAnim.playerMotion.SetBool("IsSniperAim", false);
+
+        // JUST FOR TESTING 
+
+        //Walking and Run Forward -----> 
+        if (Input.GetKey(KeyCode.W))
+        {
+            CharAnim.WalkingForward();
+
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                CharAnim.RunningForward();
+            }
+        }
+
+        //Walking and Running Backward -----> 
+        if (Input.GetKey(KeyCode.S))
+        {
+            CharAnim.WalkingBackward();
+
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                CharAnim.RunningBackward();
+            }
+        }
+
+        //Walking and Running Left
+        if (Input.GetKey(KeyCode.A))
+        {
+            CharAnim.WalkingLeft();
+
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                CharAnim.RunningLeft();
+            }
+        }
+        //Walking and Running Right
+        if (Input.GetKey(KeyCode.D))
+        {
+            CharAnim.WalkingRight();
+
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                CharAnim.RunningRight();
+            }
+        }
+
+        //Walking Forward Right
+        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
+        {
+            CharAnim.WalkingForwardRight();
+        }
+        //Walking Forward Left
+        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
+        {
+            CharAnim.WalkingForwardLeft();
+        }
+        //Running Forward Right
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
+        {
+            CharAnim.RunningForwardRight();
+        }
+        //Running Forward Left
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
+        {
+            CharAnim.RunningForwardLeft();
+        }
+        //Walking Backward Right
+        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
+        {
+            CharAnim.WalkingBackwardRight();
+        }
+        //Walking Backward Left
+        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A))
+        {
+            CharAnim.WalkingBackwardLeft();
+        }
+
+        //Running Backward Right
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
+        {
+            CharAnim.RunningBackwardRight();
+        }
+        //Running Backward Left
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A))
+        {
+            CharAnim.RunningBackwardLeft();
+        }
+
+        //Shooting
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            CharAnim.Shooting();
+        }
+
+        //Sniper Aiming
+        if (Input.GetKey(KeyCode.Mouse1))
+        {
+            CharAnim.SniperAim();
+        }
+
+        //Jumping -----> 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            CharAnim.Jump();
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            CharAnim.Death();
+        }
+
+
+        if (CharAnim.IsActive && !CharAnim.IsDead && !CharAnim.InMotion)
+        {
+            Debug.Log("IDLE TURNING BACK");
+            Idle();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            CharAnim.TurnToGunController(); 
+
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            CharAnim.TurnToRifleController();
+        }
+
+        //
+        if (Input.GetKey(KeyCode.Alpha6))
+        {
+            CharAnim.TakeLaserRifle();
+            IsLauncherInHands = false;
+        }
+        if (Input.GetKey(KeyCode.Alpha7))
+        {
+            CharAnim.TakeSniperRifle();
+            IsLauncherInHands = false;
+        }
+        if (Input.GetKey(KeyCode.Alpha8))
+        {
+            CharAnim.TakeGranadeLauncher();
+            IsLauncherInHands = true;
+        }
+        if (Input.GetKey(KeyCode.Alpha9))
+        {
+            CharAnim.TakeGun();
+            IsLauncherInHands = false;
+        }
+        AimWeapon();
+    }
+    #endregion
+
 }
