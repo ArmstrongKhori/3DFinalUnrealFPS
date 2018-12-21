@@ -41,7 +41,7 @@ public class FPSController2 : NetworkBehaviour
 
     private int CurrentGun;
 
-    private List<bool> WeaponPickup;
+    public List<bool> WeaponPickup;
 
 
     public Character character;
@@ -198,8 +198,7 @@ public class FPSController2 : NetworkBehaviour
 
     private void SelectWeapon()
     {
-        
-        if (Input.GetKey(KeyCode.Alpha1) && )
+        if (Input.GetKey(KeyCode.Alpha1))
         {
             CurrentGun = 1;
 
@@ -215,7 +214,7 @@ public class FPSController2 : NetworkBehaviour
             Debug.Log(CurrentGun);
         }
 
-        if (Input.GetKey(KeyCode.Alpha2) && )
+        if (Input.GetKey(KeyCode.Alpha2))
         {
             CurrentGun = 2;
 
@@ -230,7 +229,7 @@ public class FPSController2 : NetworkBehaviour
             Debug.Log(CurrentGun);
         }
 
-        if (Input.GetKey(KeyCode.Alpha3) && )
+        if (Input.GetKey(KeyCode.Alpha3))
         {
             CurrentGun = 3;
 
@@ -244,7 +243,7 @@ public class FPSController2 : NetworkBehaviour
             Debug.Log(CurrentGun);
         }
 
-        if (Input.GetKey(KeyCode.Alpha4) && )
+        if (Input.GetKey(KeyCode.Alpha4))
         {
             CurrentGun = 4;
 
@@ -258,7 +257,7 @@ public class FPSController2 : NetworkBehaviour
             Debug.Log(CurrentGun);
         }
 
-        if (Input.GetKey(KeyCode.Alpha5) && )
+        if (Input.GetKey(KeyCode.Alpha5))
         {
             CurrentGun = 5;
 
@@ -270,20 +269,6 @@ public class FPSController2 : NetworkBehaviour
 
             Debug.Log(CurrentGun);
         }
-
-        /*for (int i = 0; i<= PickupManager.Weapons.Count; i++)
-        {
-            if (i+1 != (CurrentGun))
-            {
-                PickupManager.Weapons[i].SetActive(false);
-            }
-            else
-            {
-                PickupManager.Weapons[i].SetActive(true);
-            }
-            Debug.Log(CurrentGun);
-
-        }*/
     }
 
     // Update is called once per frame

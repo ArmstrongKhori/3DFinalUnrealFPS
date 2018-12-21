@@ -485,8 +485,6 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4978011767545382}
-  - component: {fileID: 114438278942469692}
   - component: {fileID: 4380516097194446}
   m_Layer: 0
   m_Name: mixamorig:RightHandIndex1
@@ -979,22 +977,12 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-
-  - component: {fileID: 4117264018735428}
-  - component: {fileID: 65752417410827516}
-  - component: {fileID: 114584861281649972}
-  - component: {fileID: 114584179570524390}
-  - component: {fileID: 114916834892933454}
-  - component: {fileID: 114268377898447354}
-  - component: {fileID: 114030033277452676}
-  - component: {fileID: 114337154317473740}
-  - component: {fileID: 95260595170859858}
-  - component: {fileID: 114640155669539420}
-  - component: {fileID: 114929092153285574}
+  - component: {fileID: 4815161986483466}
+  - component: {fileID: 33039718849589306}
+  - component: {fileID: 23242907270097972}
   m_Layer: 10
-  m_Name: player
-  m_TagString: Player
-
+  m_Name: Point1
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1188,23 +1176,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1924698680055888
-GameObject:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4309061266777900}
-  - component: {fileID: 114737943819725524}
-  m_Layer: 0
-  m_Name: (1st viewport)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1936323931853472
 --- !u!1 &1623466696773588
 GameObject:
   m_ObjectHideFlags: 1
@@ -1236,7 +1207,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1941940514301284
 --- !u!1 &1646917897244134
 GameObject:
   m_ObjectHideFlags: 1
@@ -1260,70 +1230,45 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-
-  - component: {fileID: 4662467475446584}
-  m_Layer: 0
-  m_Name: mixamorig:RightUpLeg
   - component: {fileID: 4550501443275280}
   - component: {fileID: 33411848474865254}
   - component: {fileID: 23989881931448862}
   m_Layer: 0
   m_Name: deserteagle_slide
-
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-
---- !u!1 &1951897298874446
-
 --- !u!1 &1657669726080324
-
 GameObject:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-
-  - component: {fileID: 4587962577210468}
-  m_Layer: 0
-  m_Name: mixamorig:LeftArm
-
   - component: {fileID: 4252397811569736}
   - component: {fileID: 33677046952144758}
   - component: {fileID: 23916338269401296}
   m_Layer: 0
   m_Name: desert eagle_mag
-
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-
---- !u!1 &1969050689729338
-
 --- !u!1 &1659958961255498
-
 GameObject:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-
-  - component: {fileID: 4389245485949648}
-  m_Layer: 0
-  m_Name: mixamorig:LeftHandThumb2
-
   - component: {fileID: 4910108450139720}
   - component: {fileID: 33604588548926094}
   - component: {fileID: 23461488879142788}
   m_Layer: 10
   m_Name: PointCenter
-
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1610,7 +1555,7 @@ GameObject:
   - component: {fileID: 95260595170859858}
   - component: {fileID: 114640155669539420}
   m_Layer: 10
-  m_Name: player
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1842,7 +1787,6 @@ GameObject:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4900813373074280}
@@ -1855,7 +1799,6 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &1936323931853472
 GameObject:
-
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -5390,7 +5333,6 @@ MeshFilter:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-
   m_GameObject: {fileID: 1179200007959610}
   m_Mesh: {fileID: 4300000, guid: 71fe7518d83b8a74b89faabc684b8f5d, type: 3}
 --- !u!33 &33882114003083792
@@ -5456,7 +5398,6 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
-
 --- !u!65 &65752417410827516
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -5469,7 +5410,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
-
 --- !u!81 &81897672427817698
 AudioListener:
   m_ObjectHideFlags: 1
@@ -5477,7 +5417,6 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1806663779873530}
   m_Enabled: 1
-
 --- !u!95 &95103912124114284
 Animator:
   serializedVersion: 3
@@ -5553,18 +5492,6 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 0.5
---- !u!114 &114058358924620206
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1529421505093590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06ea2b84a1b8d1340a7a9fea628f6643, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  c: {fileID: 114584861281649972}
 --- !u!114 &114214299585352292
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5661,7 +5588,7 @@ MonoBehaviour:
   m_Script: {fileID: -1267208747, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Target: {fileID: 4979972405390084}
+  m_Target: {fileID: 4201599716711734}
   m_ChildIndex: 0
   m_SendInterval: 0.033333335
   m_SyncRotationAxis: 7
@@ -5669,38 +5596,7 @@ MonoBehaviour:
   m_MovementThreshold: 0.001
   m_InterpolateRotation: 0.5
   m_InterpolateMovement: 0.5
-
---- !u!114 &114438278942469692
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1355076336575386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b8de81f6807c4c41b01808150f0858d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  model: {fileID: 1355076336575386}
-  bodyParts:
-  - name: head
-    bodyPart: {fileID: 1441040480327028}
-  - name: hand_right
-    bodyPart: {fileID: 1141804122915582}
-  - name: hand_left
-    bodyPart: {fileID: 1519779901297726}
-  - name: foot_left
-    bodyPart: {fileID: 1598042684744848}
-  - name: foot_right
-    bodyPart: {fileID: 1557728160798586}
-  - name: hips
-    bodyPart: {fileID: 1443542732180466}
-  - name: torso
-    bodyPart: {fileID: 1237910768883000}
---- !u!114 &114564372157839568
-
 --- !u!114 &114377648101905686
-
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5728,16 +5624,14 @@ MonoBehaviour:
   pitch: 0
   yaw: 0
   Gravity: 9.81
-
-  WeaponPickup:
-  character: {fileID: 0}
+  WeaponPickup: 
+  character: {fileID: 114584861281649972}
   playerModelFPS: {fileID: 1355076336575386}
   Sniper: {fileID: 1030462813943946}
   WayPointPOS:
   - {fileID: 4869002494592232}
   - {fileID: 4815161986483466}
   Speed: 5
-  attachedCamera: {fileID: 20309986249342778}
 --- !u!114 &114584861281649972
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5750,13 +5644,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   modelHolder: {fileID: 1504410566235628}
-  playerModel: {fileID: 114438278942469692}
+  playerModel: {fileID: 0}
   stateManager: {fileID: 114214299585352292}
-
-  camPerspectiveFirst: {fileID: 114737943819725524}
-  camPerspectiveThird: {fileID: 114058358924620206}
-
   gunPoint: {fileID: 114377648101905686}
+  camPerspectiveFirst: {fileID: 0}
+  camPerspectiveThird: {fileID: 0}
 --- !u!114 &114615093642692932
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5780,7 +5672,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93ef89349467508438ddf1f092e8d221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-
 --- !u!114 &114640155669539420
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5800,11 +5691,7 @@ MonoBehaviour:
   param3: 
   param4: 
   param5: 
-
---- !u!114 &114737943819725524
-
 --- !u!114 &114841291705229108
-
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5865,7 +5752,9 @@ SphereCollider:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1798686586251010}
+  m_GameObject: {fileID: 1900597089811744}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5

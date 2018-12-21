@@ -601,13 +601,16 @@ public class CharacterStateManager : NetworkBehaviour {
         Debug.Log("HERE CHARACTER AIMING");
         playerMotion.SetBool("IsSniperAim", true);
 
-    }
+
 
         if (IsActive && !IsDead && !InMotion)
         {
             // Debug.Log("IDLE TURNING BACK");
             Idle();
         }
+
+    }
+
     //Switch controller to Rifle controller
     public void TurnToRifleController()
     {
