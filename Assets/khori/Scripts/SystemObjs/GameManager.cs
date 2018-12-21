@@ -10,6 +10,8 @@ using UnityEngine.UI;
 public class GameManager : SystemObj {
 
 
+    internal GameObject gunHolder;
+
     public List<GameObject> networkSpawnablePrefabs;
 
 
@@ -65,6 +67,9 @@ public class GameManager : SystemObj {
             screenText.rectTransform.offsetMin = new Vector2(0, 0);
             screenText.rectTransform.offsetMax = new Vector2(0, 0);
         }
+
+
+        gunHolder = Camera.main.transform.Find("GunHolder").gameObject;
     }
 
 

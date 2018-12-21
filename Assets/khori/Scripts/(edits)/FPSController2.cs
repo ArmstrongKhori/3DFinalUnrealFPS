@@ -47,9 +47,8 @@ public class FPSController2 : NetworkBehaviour
     public Character character;
 
     private CharacterStateManager CharAnim;
-    public GameObject playerModelFPS;
 
-    public GameObject Sniper;
+    public GameObject gunHolder;
 
     public Transform[] WayPointPOS;
     private bool IsLauncherInHands = false;
@@ -78,6 +77,11 @@ public class FPSController2 : NetworkBehaviour
         }
 
 
+
+        gunHolder = GameManager.Instance().gunHolder;
+
+        WayPointPOS[0] = Camera.main.transform.Find("WayPoints").Find("Point0");
+        WayPointPOS[1] = Camera.main.transform.Find("WayPoints").Find("Point1");
     }
 
     private void MoveForward()
@@ -111,8 +115,8 @@ public class FPSController2 : NetworkBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            Invoke("JumpAction", 0.2f);
-
+            // Invoke("JumpAction", 0.2f);
+            JumpAction();
         }
 
     }
@@ -183,15 +187,15 @@ public class FPSController2 : NetworkBehaviour
         if (Input.GetMouseButton(1) && !IsLauncherInHands)
         {
             CurrWayPoint = 1;
-            Sniper.transform.position = Vector3.MoveTowards(Sniper.transform.position, WayPointPOS[CurrWayPoint].position, Speed);
-            Sniper.transform.rotation = WayPointPOS[CurrWayPoint].rotation;
+            gunHolder.transform.position = Vector3.MoveTowards(gunHolder.transform.position, WayPointPOS[CurrWayPoint].position, Speed);
+            gunHolder.transform.rotation = WayPointPOS[CurrWayPoint].rotation;
         }
         else
         {
 
             CurrWayPoint = 0;
-            Sniper.transform.position = Vector3.MoveTowards(Sniper.transform.position, WayPointPOS[CurrWayPoint].position, Speed);
-            Sniper.transform.rotation = WayPointPOS[CurrWayPoint].rotation;
+            gunHolder.transform.position = Vector3.MoveTowards(gunHolder.transform.position, WayPointPOS[CurrWayPoint].position, Speed);
+            gunHolder.transform.rotation = WayPointPOS[CurrWayPoint].rotation;
 
         }
     }
@@ -275,9 +279,7 @@ public class FPSController2 : NetworkBehaviour
     void FixedUpdate()
     {
         if (!isLocalPlayer) { return; }
-
-
-        playerModelFPS.SetActive(false);
+        
 
         Idle();
         ControlAim();
@@ -456,7 +458,7 @@ public class FPSController2 : NetworkBehaviour
 
         if (CharAnim.IsActive && !CharAnim.IsDead && !CharAnim.InMotion)
         {
-            Debug.Log("IDLE TURNING BACK");
+            // Debug.Log("IDLE TURNING BACK");
             Idle();
         }
 
