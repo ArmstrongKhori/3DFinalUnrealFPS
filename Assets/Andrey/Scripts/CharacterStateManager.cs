@@ -31,9 +31,9 @@ public class CharacterStateManager : NetworkBehaviour
         playerMotion.SetFloat("Speed", 0);
         playerMotion.SetFloat("Direction", 0);
         IsActive = true;
-        
 
 
+        Debug.Log(GameManager.Instance());
         laserRifle = GameManager.Instance().gunHolder.transform.Find("LaserRifle").gameObject;
         sniperRifle = GameManager.Instance().gunHolder.transform.Find("SniperRifle").gameObject;
         granadeLauncher = GameManager.Instance().gunHolder.transform.Find("GranadeLauncher").gameObject;

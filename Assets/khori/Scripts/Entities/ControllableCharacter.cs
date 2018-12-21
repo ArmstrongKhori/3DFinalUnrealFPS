@@ -43,6 +43,24 @@ public class ControllableCharacter : Character {
     }
 
 
+    public Color screenFlashColor = Color.white;
+    public float screenFlashTimer = 10.0f; // *** A high number so it doesn't flash after spawning.
+
+    private void OnGUI()
+    {
+        if (isLocalPlayer)
+        {
+            if (screenFlashTimer < 1.0f)
+            {
+                float jist = Helper.Longevity(screenFlashTimer, 0, 0.5f);
+                //
+                GUI.color = new Color(screenFlashColor.r, screenFlashColor.g, screenFlashColor.b, 0.3f * Mathf.Sin(Mathf.PI * jist));
+                GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), Graphics.Instance().screenTex);
+            }
+        }
+    }
+
+
     public override void Awake()
     {
         base.Awake();
@@ -64,27 +82,23 @@ public class ControllableCharacter : Character {
     {
         base.Start();
         //
-        if (isLocalPlayer)
-        {
-            if (false && camPerspectiveThird != null)
-            {
-                Cam.SetActiveCamera(camPerspectiveThird);
-            }
-            else
-            {
-                if (camPerspectiveFirst != null)
-                {
-                    Cam.SetActiveCamera(camPerspectiveFirst);
-                }
-            }
-        }
+    }
 
 
-        
+    public void SetThirdPerson(bool state)
+    {
+        if (!isLocalPlayer) { return; }
+
 
         // *** Hide the player model if you're in first person view!
-        if (isLocalPlayer && Cam.currentCam == camPerspectiveFirst)
+        if (state)
         {
+            Cam.SetActiveCamera(camPerspectiveThird);
+            playerModel.gameObject.SetActive(true);
+        }
+        else
+        {
+            Cam.SetActiveCamera(camPerspectiveFirst);
             playerModel.gameObject.SetActive(false);
         }
     }
@@ -95,6 +109,10 @@ public class ControllableCharacter : Character {
         if (!isLocalPlayer) { return; }
 
 
+        screenFlashTimer += Time.deltaTime;
+        lifeTimer += Time.deltaTime;
+
+
         base.Act();
         //
         input.Read();
@@ -103,9 +121,13 @@ public class ControllableCharacter : Character {
 
         if (input.fire2 && !input.lastFire2)
         {
+            healthStatus.AlterHealth(-10);
+            OnTakeDamage(-10);
+
+
             // Helper.ClearMessages();
             //
-            pch.CmdCreateBulletTrail(transform.position, transform.position + LookVector * 100, 1.0f, Color.blue);
+            // pch.CmdCreateBulletTrail(transform.position, transform.position + LookVector * 100, 1.0f, Color.blue);
             // pch.CmdSpawn("Bullet", NetworkID, LookVector);
         }
 
@@ -128,6 +150,20 @@ public class ControllableCharacter : Character {
     }
 
 
+
+
+    internal float lifeTimer = 0.0f;
+    public override void Die()
+    {
+        controller.enabled = false;
+        lifeTimer = 0.0f;
+
+        SetThirdPerson(true);
+    }
+
+
+
+    #region Recoil stuff.
     public float RecoilValue { get { return Mathf.Clamp01(followReeling); } }
 
     /// <summary>
@@ -142,6 +178,27 @@ public class ControllableCharacter : Character {
     public void ApplyRecoil(float amount)
     {
         recoilReeling += amount;
+    }
+    #endregion
+
+
+
+    public override void OnSpawned(Vector3 lookVector)
+    {
+        base.OnSpawned(lookVector);
+        //
+        SetThirdPerson(false);
+    }
+
+    public override void OnTakeDamage(float amount)
+    {
+        base.OnTakeDamage(amount);
+        //
+        if (amount < 0)
+        {
+            screenFlashColor = Color.red;
+            screenFlashTimer = 0.0f;
+        }
     }
 
 }

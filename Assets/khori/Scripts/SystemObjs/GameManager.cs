@@ -20,6 +20,10 @@ public class GameManager : SystemObj {
         base.Start();
         //
         GameObject go;
+        go = new GameObject("Graphics");
+        go.transform.parent = transform;
+        go.AddComponent<Graphics>();
+
         go = new GameObject("BattleManager");
         go.transform.parent = transform;
         go.AddComponent<BattleManager>();

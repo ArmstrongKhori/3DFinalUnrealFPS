@@ -42,6 +42,8 @@ public class Character : Actor
     */
 
 
+
+    public PlayerHealth2 healthStatus;
     public GameObject modelHolder;
     public PlayerModel playerModel;
     public CharacterStateManager stateManager;
@@ -65,7 +67,12 @@ public class Character : Actor
         modelHolder = transform.Find("Player").gameObject;
         //
         stateManager = modelHolder.GetComponent<CharacterStateManager>();
-        
+
+
+        healthStatus = GetComponent<PlayerHealth2>();
+        healthStatus.currentHealthText = GameObject.Find("(erick)").transform.Find("Canvas").Find("CurrentHealthText").GetComponent<UnityEngine.UI.Text>();
+        healthStatus.deadScreen = GameObject.Find("(erick)").transform.Find("Canvas").Find("deadScreen").GetComponent<UnityEngine.UI.Image>();
+
 
 
 
@@ -81,6 +88,14 @@ public class Character : Actor
         {
             GameManager.Instance().DisplayMessage("You are " + name);
         }
+    }
+
+
+    public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
+        //
+        OnSpawned(LookVector);
     }
 
 
@@ -103,8 +118,17 @@ public class Character : Actor
 
 
 
+    public override void OnSpawned(Vector3 lookVector)
+    {
+        base.OnSpawned(lookVector);
+        //
 
+    }
 
+    public virtual void Die()
+    {
+        stateManager.Death();
+    }
 
 
 
@@ -160,13 +184,25 @@ public class Character : Actor
                 break;
             case InteractVerbs.Damage:
                 // *** float: "damage"
-                rb.velocity = new Vector3(0, data.floatVal, 0);
+                healthStatus.AlterHealth(-data.floatVal);
+                //
+                OnTakeDamage(-data.floatVal);
+
+                // rb.velocity = new Vector3(0, data.floatVal, 0);
                 break;
             case InteractVerbs.Tell:
+                // *** string: "message"
                 Helper.DisplayMessage(origin.name + ": \"" + data.stringVal + "\"");
                 // Network_Interact(InteractVerbs.Tell, NetworkID, new InteractData("Ouch! You hit " + name+"!"));
                 break;
         }
+    }
+
+
+
+    public virtual void OnTakeDamage(float amount)
+    {
+
     }
 }
 

@@ -596,6 +596,7 @@ GameObject:
   - component: {fileID: 114214299585352292}
   - component: {fileID: 95103912124114284}
   - component: {fileID: 114278707542270602}
+  - component: {fileID: 114228616911202924}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -898,14 +899,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4117264018735428}
   - component: {fileID: 65752417410827516}
+  - component: {fileID: 114178217219461072}
   - component: {fileID: 114158557405125522}
   - component: {fileID: 114584861281649972}
   - component: {fileID: 114584179570524390}
   - component: {fileID: 114268377898447354}
   - component: {fileID: 114030033277452676}
   - component: {fileID: 114337154317473740}
-  - component: {fileID: 95260595170859858}
-  - component: {fileID: 114640155669539420}
   - component: {fileID: 114147268739517260}
   m_Layer: 10
   m_Name: player
@@ -2267,24 +2267,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!95 &95260595170859858
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1798686586251010}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114030033277452676
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2330,6 +2312,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 1494924393580416}
   bodyParts: []
+--- !u!114 &114178217219461072
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1798686586251010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 544649a7c854c004aa25ce0b85439c0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealthText: {fileID: 0}
+  deadScreen: {fileID: 0}
 --- !u!114 &114214299585352292
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2351,6 +2347,25 @@ MonoBehaviour:
   sniperRifle: {fileID: 0}
   granadeLauncher: {fileID: 0}
   gun: {fileID: 0}
+--- !u!114 &114228616911202924
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1504410566235628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1590678366, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 95103912124114284}
+  m_ParameterSendBits: 63
+  param0: 
+  param1: 
+  param2: 
+  param3: 
+  param4: 
+  param5: 
 --- !u!114 &114244799168416804
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2495,12 +2510,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b85de637a7d3ad147884b9180799af2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthStatus: {fileID: 0}
   modelHolder: {fileID: 1504410566235628}
   playerModel: {fileID: 114244799168416804}
   stateManager: {fileID: 114214299585352292}
   gunPoint: {fileID: 114777499102996008}
   camPerspectiveFirst: {fileID: 114586049643283594}
   camPerspectiveThird: {fileID: 114825128429640734}
+  screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+  screenFlashTimer: 10
 --- !u!114 &114586049643283594
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2513,25 +2531,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   c: {fileID: 114584861281649972}
---- !u!114 &114640155669539420
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1798686586251010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1590678366, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Animator: {fileID: 95103912124114284}
-  m_ParameterSendBits: 31
-  param0: 
-  param1: 
-  param2: 
-  param3: 
-  param4: 
-  param5: 
 --- !u!114 &114777499102996008
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -337,7 +337,6 @@ public class FPSController2 : NetworkBehaviour
     #region
     void Update()
     {
-
         if (!isLocalPlayer) { return; }
         if(isJumping) { return; }
         CharAnim.InMotion = false;
