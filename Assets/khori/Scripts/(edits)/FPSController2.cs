@@ -280,6 +280,7 @@ public class FPSController2 : NetworkBehaviour
     {
         if (!isLocalPlayer) { return; }
         
+        if (character.stateManager.IsDead) { return; }
 
         Idle();
         ControlAim();
@@ -339,6 +340,8 @@ public class FPSController2 : NetworkBehaviour
     {
         if (!isLocalPlayer) { return; }
         if(isJumping) { return; }
+
+
         CharAnim.InMotion = false;
         CharAnim.playerMotion.SetBool("IsShot", false);
         CharAnim.playerMotion.SetBool("IsSniperAim", false);

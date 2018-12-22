@@ -25,6 +25,7 @@ public class Rifle : WeaponData
         //
         Vector3 lookVec = Helper.DevianceAdjustedLook(w.owner.LookVector, Mathf.Lerp(devianceMinimum, devianceMaximum, w.owner.RecoilValue));
         //
+        Debug.Log("trying to spawn a thing...");
         w.owner.pch.CmdSpawn("Bullet", w.owner.NetworkID, lookVec);
     }
 

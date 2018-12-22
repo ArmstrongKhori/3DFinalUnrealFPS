@@ -28,10 +28,8 @@ public class CharacterStateManager : NetworkBehaviour
 
     private void Awake()
     {
-        playerMotion.SetFloat("Speed", 0);
-        playerMotion.SetFloat("Direction", 0);
-        IsActive = true;
-
+        InitializeMe();
+        
 
         Debug.Log(GameManager.Instance());
         laserRifle = GameManager.Instance().gunHolder.transform.Find("LaserRifle").gameObject;
@@ -44,8 +42,24 @@ public class CharacterStateManager : NetworkBehaviour
         granadeLauncher.SetActive(false);
         gun.SetActive(false);
     }
-    
-    
+
+
+    public void InitializeMe()
+    {
+        playerMotion.SetFloat("Speed", 0);
+        playerMotion.SetFloat("Direction", 0);
+        playerMotion.SetBool("IsJump", false);
+        playerMotion.SetBool("IsDead", false);
+        playerMotion.SetBool("IsSniperAim", false);
+        playerMotion.SetBool("IsShot", false);
+        IsActive = true;
+        IsDead = false;
+        InMotion = false;
+
+
+}
+
+
     // FOR 2D BLEND TREE
     #region ANIMATIONS METHODS ARE HERE
 
@@ -478,11 +492,11 @@ public class CharacterStateManager : NetworkBehaviour
 
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
         {
-            Debug.Log("HERE CHARACTER AIMING");
+            // Debug.Log("HERE CHARACTER AIMING");
             InMotion = true;
             playerMotion.SetBool("IsSniperAim", true);
         }
-        Debug.Log("HERE CHARACTER AIMING");
+        // Debug.Log("HERE CHARACTER AIMING");
         playerMotion.SetBool("IsSniperAim", true);
 
 

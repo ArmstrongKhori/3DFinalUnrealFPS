@@ -81,6 +81,8 @@ public class Prop : Actor {
 
     private void OnTriggerEnter(Collider collision)
     {
+        Debug.Log("In prop: " + Owner);
+
         StrikingData sd;
         Actor me = Helper.GetNetworkActor(Owner);
 

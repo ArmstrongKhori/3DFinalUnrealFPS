@@ -27,6 +27,8 @@ public class PlayerHealth2 : NetworkBehaviour
     {
         currentHealth = maxHealth;
         isDead = false;
+        //
+        UpdateGUI();
     }
 
 
@@ -39,7 +41,7 @@ public class PlayerHealth2 : NetworkBehaviour
         }
         else
         {
-            gameObject.SetActive(false);
+            enabled = false;
         }
     }
 

@@ -67,10 +67,7 @@ public class ControllableCharacter : Character {
         //
         input = new PlayerInputter();
 
-        // ??? <-- Debugging code.
-        weapon = new Weapon(new Rifle(), this); // Pistol
-
-
+        
         controller = GetComponent<FPSController2>();
         if (controller == null) { controller = gameObject.AddComponent<FPSController2>(); }
 
@@ -117,7 +114,18 @@ public class ControllableCharacter : Character {
         //
         input.Read();
 
-        
+
+
+        if (stateManager.IsDead)
+        {
+            if (input.jump && !input.lastJump)
+            {
+                Respawn();
+            }
+            return;
+        }
+
+
 
         if (input.fire2 && !input.lastFire2)
         {
@@ -151,10 +159,27 @@ public class ControllableCharacter : Character {
 
 
 
+    public override void InitializeMe()
+    {
+        base.InitializeMe();
+        //
+        controller.enabled = true;
+
+
+        // ??? <-- Debugging code.
+        weapon = new Weapon(new Rifle(), this); // Pistol
+    }
+    public override void Respawn()
+    {
+        base.Respawn();
+    }
+
 
     internal float lifeTimer = 0.0f;
     public override void Die()
     {
+        base.Die();
+        //
         controller.enabled = false;
         lifeTimer = 0.0f;
 

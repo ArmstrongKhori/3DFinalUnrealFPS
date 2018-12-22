@@ -88,15 +88,19 @@ public class Character : Actor
         {
             GameManager.Instance().DisplayMessage("You are " + name);
         }
+
+
+        InitializeMe();
     }
 
 
-    public override void OnStartLocalPlayer()
+    public virtual void InitializeMe()
     {
-        base.OnStartLocalPlayer();
-        //
-        OnSpawned(LookVector);
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
     }
+
+
 
 
 
@@ -117,19 +121,28 @@ public class Character : Actor
     }
 
 
-
-    public override void OnSpawned(Vector3 lookVector)
-    {
-        base.OnSpawned(lookVector);
-        //
-
-    }
+    
 
     public virtual void Die()
     {
         stateManager.Death();
     }
 
+
+    public virtual void Respawn()
+    {
+        stateManager.InitializeMe();
+        healthStatus.InitializeMe();
+        InitializeMe();
+        //
+        foreach (NetworkStartPosition pos in FindObjectsOfType<NetworkStartPosition>())
+        {
+            transform.position = pos.transform.position; // new Vector3(0, 0, 0)
+            break;
+        }
+        //
+        OnSpawned(LookVector);
+    }
 
 
 
@@ -203,6 +216,14 @@ public class Character : Actor
     public virtual void OnTakeDamage(float amount)
     {
 
+    }
+
+
+    public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
+        //
+        OnSpawned(LookVector);
     }
 }
 

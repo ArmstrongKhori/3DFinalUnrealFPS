@@ -42,9 +42,14 @@ public class PlayerCommandHolder : NetworkBehaviour {
     [Command]
     public void CmdSpawn(string name, NetworkInstanceId id, Vector3 lookVector)
     {
+        Debug.Log("doing the spawn!    " + id);
+
+
         // ??? <-- I hate that I have to send it my looking vector... What's with that??
 
         Actor a = BattleManager.Instance().Spawn(name, Helper.GetNetworkActor(id), lookVector);
+        //
+        Debug.Log(a);
         //
         NetworkServer.Spawn(a.gameObject);
     }

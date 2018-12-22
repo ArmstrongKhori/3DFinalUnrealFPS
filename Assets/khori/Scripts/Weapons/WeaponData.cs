@@ -121,6 +121,8 @@ public class WeaponData
     }
 
 
+
+
     public virtual void OnInitialize(Weapon w)
     {
         // *** Information about the weapon! Max ammo? How it fires? All here!

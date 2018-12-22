@@ -72,7 +72,9 @@ public class BattleManager : SystemObj {
         else { trans = gameSpace.transform; }
 
 
-        Actor a = (Actor)Instantiate(Resources.Load("Spawnables/" + name, typeof(Actor)), trans.position, trans.rotation);
+        Debug.Log("spawning: " + name);
+        Object o = Resources.Load("Spawnables/" + name); // , typeof(Actor)
+        Actor a = ((GameObject)Instantiate(o, trans.position, trans.rotation)).GetComponent<Actor>();
         a.Owner = by.netId;
         //
         a.transform.parent = null; //  gameSpace.transform;
