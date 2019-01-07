@@ -33,7 +33,6 @@ public class Networker : SystemObj {
         networkHUD = gameObject.AddComponent<NetworkManagerHUD>();
     }
 
-
     #region Singleton Stuff
     private static Networker _instance;
     public static Networker Instance() { return _instance; }

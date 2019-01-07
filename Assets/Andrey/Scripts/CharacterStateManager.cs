@@ -31,7 +31,7 @@ public class CharacterStateManager : NetworkBehaviour
         InitializeMe();
         
 
-        Debug.Log(GameManager.Instance());
+
         laserRifle = GameManager.Instance().gunHolder.transform.Find("LaserRifle").gameObject;
         sniperRifle = GameManager.Instance().gunHolder.transform.Find("SniperRifle").gameObject;
         granadeLauncher = GameManager.Instance().gunHolder.transform.Find("GranadeLauncher").gameObject;

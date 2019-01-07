@@ -21,7 +21,7 @@ public class PlayerArmor : MonoBehaviour {
 
     void UpdateGUI()
     {
-        currentArmorText.text = currentArmor.ToString();
+    //    currentArmorText.text = currentArmor.ToString();
     }
 
     public void AlterArmor(int amount)
