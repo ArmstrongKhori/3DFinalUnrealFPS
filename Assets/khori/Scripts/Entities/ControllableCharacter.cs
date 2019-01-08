@@ -149,12 +149,15 @@ public class ControllableCharacter : Character {
 
 
         // *** Ability stuff.
-        ability.Run();
-        if (ability.IsActivated) { ability.RunWhileActive(); }
-        else { ability.RunWhileActive(); }
-        ability.LateRun();
-        //
-        ability.Interact(input);
+        if (ability != null)
+        {
+            ability.Run();
+            if (ability.IsActivated) { ability.RunWhileActive(); }
+            else { ability.RunWhileActive(); }
+            ability.LateRun();
+            //
+            ability.Interact(input);
+        }
     }
 
 
