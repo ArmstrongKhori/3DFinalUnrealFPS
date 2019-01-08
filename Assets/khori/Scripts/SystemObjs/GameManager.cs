@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 //MIKE
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// The "GameManager" is the place where all behind-the-scenes game management happens (as the name implies.)
@@ -37,6 +38,7 @@ public class GameManager : SystemObj {
         //MIKE
         //assigning the networknmg for the Client ManagerScript
         GetComponent<ClientManager>().NMScript = go.GetComponent<NetworkManager>();
+        go.GetComponent<NetworkManager>().onlineScene = "Complex";
         //
         //
         /*

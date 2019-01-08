@@ -5677,6 +5677,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NMScript: {fileID: 0}
   NetworkerScript: {fileID: 0}
+  NetworkHUD: {fileID: 0}
   ConnectedPlayers: 0
   cTimer: 0
 --- !u!1 &1047551350

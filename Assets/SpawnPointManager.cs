@@ -8,7 +8,7 @@ public class SpawnPointManager : MonoBehaviour {
     public GameObject[] BlueTeamSpawnPointList;
     public GameObject[] RedTeamSpawnPointList;
 	void Start () {
-        CurrentNetManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
+        CurrentNetManager = GameObject.Find("Networker").GetComponent<NetworkManager>();
         BlueTeamSpawnPointList = GameObject.FindGameObjectsWithTag("BlueTeamSpawnPoint");
         RedTeamSpawnPointList = GameObject.FindGameObjectsWithTag("RedTeamSpawnPoint");
 	}
