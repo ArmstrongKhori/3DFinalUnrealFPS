@@ -11,6 +11,7 @@ public class ControllableCharacter : Character {
 
     public BaseInputter input;
     public Weapon weapon;
+    public Ability ability;
 
     internal FPSController2 controller;
 
@@ -145,6 +146,15 @@ public class ControllableCharacter : Character {
         weapon.Check();
         //
         weapon.Interact();
+
+
+        // *** Ability stuff.
+        ability.Run();
+        if (ability.IsActivated) { ability.RunWhileActive(); }
+        else { ability.RunWhileActive(); }
+        ability.LateRun();
+        //
+        ability.Interact(input);
     }
 
 
