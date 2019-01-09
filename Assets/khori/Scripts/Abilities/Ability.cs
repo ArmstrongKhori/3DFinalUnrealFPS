@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 
-public class Ability : NetworkBehaviour {
+public class Ability {
 
 
     /// <summary>

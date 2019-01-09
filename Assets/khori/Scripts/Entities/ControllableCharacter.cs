@@ -181,7 +181,9 @@ public class ControllableCharacter : Character {
 
         // ??? <-- Debugging code.
         weapon = new Weapon(new Rifle(), this); // Pistol
+        ability = new WaveDashAbility(this);
     }
+
     public override void Respawn()
     {
         base.Respawn();
