@@ -69,8 +69,8 @@ public class Character : Actor
         stateManager = modelHolder.GetComponent<CharacterStateManager>();
 
         healthStatus = GetComponent<PlayerHealth2>();
-        healthStatus.currentHealthText = GameObject.Find("Canvas").transform.Find("Canvas").Find("CurrentHealthText").GetComponent<UnityEngine.UI.Text>();
-        healthStatus.deadScreen = GameObject.Find("Canvas").transform.Find("Canvas").Find("deadScreen").GetComponent<UnityEngine.UI.Image>();
+        healthStatus.currentHealthText = GameObject.Find("(erick)").transform.Find("Canvas").Find("CurrentHealthText").GetComponent<UnityEngine.UI.Text>();
+        healthStatus.deadScreen = GameObject.Find("(erick)").transform.Find("Canvas").Find("deadScreen").GetComponent<UnityEngine.UI.Image>();
 
         name = "PlayerNo_" + FindObjectsOfType<Character>().Length;
 

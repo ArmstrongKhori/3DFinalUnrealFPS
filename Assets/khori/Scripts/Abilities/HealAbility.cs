@@ -2,31 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RailgunAbility : Ability {
-
+public class HealAbility : Ability
+{
 
     /// <summary>
     /// Constructor.
     /// PLEASE call the "base()" part or else you'll break everything!
     /// </summary>
     /// <param name="cc"></param>
-    public RailgunAbility(ControllableCharacter cc) : base(cc)
+    public HealAbility(ControllableCharacter cc) : base(cc)
     {
 
     }
-
-
 
     public override void Init()
     {
         base.Init();
-        //
-
+        activationMode = ActivationMode.Lingering;      
     }
+
     public override void Run()
     {
         base.Run();
         //
+        if (Input.GetKey(KeyCode.Q))
+        {
+            RegisterKill();
+
+        }
 
     }
     public override void LateRun()
@@ -38,6 +41,8 @@ public class RailgunAbility : Ability {
     public override void RunWhileActive()
     {
         base.RunWhileActive();
+        ErickStatus.AlterHealth(1 * Time.deltaTime);
+
         //
 
     }
@@ -57,18 +62,22 @@ public class RailgunAbility : Ability {
     {
         base.OnFiveKills();
         //
-
     }
     public override void OnTriggered()
     {
         base.OnTriggered();
+
         //
 
     }
     public override void OnActivate()
     {
         base.OnActivate();
+        ErickStatus.AlterHealth(10);
+        ErickStatus.AlterHealth(-50);
+        Debug.Log("ACTIVATE");
         //
+
 
     }
     public override void OnDeactivate()

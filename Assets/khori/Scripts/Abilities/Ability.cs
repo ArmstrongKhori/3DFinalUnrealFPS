@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 
-public class Ability : NetworkBehaviour {
+public class Ability { 
 
 
     /// <summary>
@@ -78,7 +78,7 @@ public class Ability : NetworkBehaviour {
 
     public void Interact(BaseInputter input)
     {
-        if (activeTimer > 0)
+        if (IsActivated && activeTimer > 0)
         {
             activeTimer -= Time.deltaTime;
             //
@@ -119,6 +119,8 @@ public class Ability : NetworkBehaviour {
 
     public void Activate()
     {
+        Debug.Log("activated");
+
         isActivated = true;
         activeTimer = activatedDuration;
         //
@@ -127,6 +129,8 @@ public class Ability : NetworkBehaviour {
 
     public void Deactivate()
     {
+
+        Debug.Log("deactivated");
         isActivated = false;
         //
         OnDeactivate();

@@ -38,7 +38,7 @@ public class GameManager : SystemObj {
         //MIKE
         //assigning the networknmg for the Client ManagerScript
         GetComponent<ClientManager>().NMScript = go.GetComponent<NetworkManager>();
-        go.GetComponent<NetworkManager>().onlineScene = "Complex";
+        go.GetComponent<NetworkManager>().onlineScene = "LevelLobby";
         //
         //
         /*
