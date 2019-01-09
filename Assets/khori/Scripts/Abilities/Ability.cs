@@ -274,6 +274,12 @@ public class Ability {
     }
 
 
+
+    public virtual void OnTakenDamage(Character c, float val)
+    {
+
+    }
+
 }
 
 

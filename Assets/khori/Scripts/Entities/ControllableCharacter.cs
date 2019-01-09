@@ -153,7 +153,7 @@ public class ControllableCharacter : Character {
         {
             ability.Run();
             if (ability.IsActivated) { ability.RunWhileActive(); }
-            else { ability.RunWhileActive(); }
+            else { ability.RunWhileInactive(); }
             ability.LateRun();
             //
             ability.Interact(input);
@@ -181,7 +181,7 @@ public class ControllableCharacter : Character {
 
         // ??? <-- Debugging code.
         weapon = new Weapon(new Rifle(), this); // Pistol
-        ability = new WaveDashAbility(this);
+        ability = new DamageReflectorAbility(this);
     }
 
     public override void Respawn()
