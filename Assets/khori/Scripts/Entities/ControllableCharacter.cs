@@ -130,8 +130,8 @@ public class ControllableCharacter : Character {
 
         if (input.fire2 && !input.lastFire2)
         {
-            healthStatus.AlterHealth(-10);
-            OnTakeDamage(-10);
+            //healthStatus.AlterHealth(-10);
+            //OnTakeDamage(-10);
 
 
             // Helper.ClearMessages();
@@ -153,7 +153,7 @@ public class ControllableCharacter : Character {
         {
             ability.Run();
             if (ability.IsActivated) { ability.RunWhileActive(); }
-            else { ability.RunWhileActive(); }
+            else { ability.RunWhileInactive(); }
             ability.LateRun();
             //
             ability.Interact(input);

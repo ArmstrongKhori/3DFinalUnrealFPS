@@ -56,6 +56,11 @@ public class FPSController2 : NetworkBehaviour
     private int CurrWayPoint;
 
 
+    public int HPress;
+    public int VPress;
+
+    public bool NoJump = false;
+
     // Use this for initialization
     void Start()
     {
@@ -89,7 +94,7 @@ public class FPSController2 : NetworkBehaviour
         
         if (Input.GetKey(KeyCode.W))
         {
-            
+            VPress = 1;
 
             if (Input.GetKey(KeyCode.LeftShift))
             {
@@ -106,14 +111,14 @@ public class FPSController2 : NetworkBehaviour
     {
         if (Input.GetKey(KeyCode.S))
         {
-
+            VPress = -1;
             rb.velocity += transform.TransformDirection(new Vector3(0, 0, BackwardSpeed));
         }
     }
 
     private void Jump()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && !NoJump)
         {
             // Invoke("JumpAction", 0.2f);
             JumpAction();
@@ -138,11 +143,13 @@ public class FPSController2 : NetworkBehaviour
     {
         if (Input.GetKey(KeyCode.D))
         {
+            HPress = 1;
             rb.velocity += transform.TransformDirection(new Vector3(StrafeSpeed, 0, 0));
         }
 
         if (Input.GetKey(KeyCode.A))
         {
+            HPress = -1;
            rb.velocity += transform.TransformDirection(new Vector3(-StrafeSpeed, 0, 0));
         }
     }
@@ -180,6 +187,8 @@ public class FPSController2 : NetworkBehaviour
     private void Idle()
     {
         CharAnim.Idle();
+        HPress = 0;
+        VPress = 0;
     }
 
     void AimWeapon()
