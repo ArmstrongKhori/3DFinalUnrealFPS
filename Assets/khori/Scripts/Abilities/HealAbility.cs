@@ -28,7 +28,6 @@ public class HealAbility : Ability
         if (Input.GetKey(KeyCode.Q))
         {
             RegisterKill();
-
         }
 
     }
@@ -36,7 +35,6 @@ public class HealAbility : Ability
     {
         base.LateRun();
         //
-
     }
     public override void RunWhileActive()
     {
@@ -75,9 +73,7 @@ public class HealAbility : Ability
         base.OnActivate();
         ErickStatus.AlterHealth(50);
         ErickStatus.AlterHealth(-50);
-        Debug.Log("ACTIVATE");
         //
-
 
     }
     public override void OnDeactivate()

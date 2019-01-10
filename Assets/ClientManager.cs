@@ -11,15 +11,36 @@ public class ClientManager : MonoBehaviour {
     public int ConnectedPlayers;
     public float cTimer;
     private int prevCount = 0;
+    public GameObject StartGameBtn;
+    public GameObject ReadyBtn;
+    public NetworkIdentity PlayerNetworkIdentity;
 
     private void Start()
     {
         NetworkHUD = NMScript.GetComponent<NetworkManagerHUD>();
         NetworkerScript = NMScript.GetComponent<Networker>();
+        StartGameBtn = GameObject.FindGameObjectWithTag("StartButton");
+        ReadyBtn = GameObject.FindGameObjectWithTag("ReadyButton");
+        HideButtons();
+        PlayerNetworkIdentity = NetworkerScript.SpawnedPlayer.GetComponent<NetworkIdentity>();
     }
 
     private void Update()
     {
+       if (PlayerNetworkIdentity.isServer)
+       {
+            Debug.Log("Server");
+         //  ReadyBtn.SetActive(false);
+         //  StartGameBtn.SetActive(true);
+       }else if (!PlayerNetworkIdentity.isServer)
+        {
+            Debug.Log("Client");
+
+            //  ReadyBtn.SetActive(true);
+            //  StartGameBtn.SetActive(false);
+        }
+
+
         cTimer += Time.deltaTime;
         if (cTimer >= .5f)
         {
@@ -47,10 +68,22 @@ public class ClientManager : MonoBehaviour {
         public void PlayercConnected()
     {
         Debug.Log("PlayerConnected");
+
     }
     public void PlayercDisconnected()
     {
         Debug.Log("PlayerDisconnected");
     }
-    
+
+
+    private void HideButtons()
+    {
+        ReadyBtn.SetActive(false);
+        StartGameBtn.SetActive(false);
+    }
+    private void ShowButtons()
+    {
+        ReadyBtn.SetActive(true);
+        StartGameBtn.SetActive(true);
+    }
 }

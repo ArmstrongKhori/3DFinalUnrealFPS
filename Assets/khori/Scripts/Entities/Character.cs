@@ -85,7 +85,8 @@ public class Character : Actor
         {
             GameManager.Instance().DisplayMessage("You are " + name);
         }
-
+        ///MIKE
+      //  GameObject.Find("Networker").GetComponent<Networker>().SpawnedPlayer = this.gameObject;
 
         InitializeMe();
     }

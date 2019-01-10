@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - RedTeamSpawnPoint
+  - BlueTeamSpawnPoint
+  - ReadyButton
+  - StartButton
   layers:
   - Default
   - TransparentFX
