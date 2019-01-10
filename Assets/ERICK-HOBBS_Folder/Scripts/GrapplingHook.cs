@@ -32,6 +32,14 @@ public class GrapplingHook : MonoBehaviour {
         if (Input.GetMouseButtonDown(1) && fired == false)
             fired = true;
 
+        if (fired)
+        {
+            LineRenderer rope = hook.GetComponent<LineRenderer>();
+            rope.SetVertexCount(2);
+            rope.SetPosition(0, hookHolder.transform.position);
+            rope.SetPosition(1, hook.transform.position);
+        }
+
         if (fired == true  && hooked == false)
         {
             // moved hook towards aimed point
@@ -55,7 +63,7 @@ public class GrapplingHook : MonoBehaviour {
             //disable player rigidbody
             this.GetComponent<Rigidbody>().useGravity = false;
 
-            if (distanceToHook < 1)
+            if (distanceToHook < 1.5)
             {
                 if (grounded == false)
                 {
@@ -89,6 +97,10 @@ public class GrapplingHook : MonoBehaviour {
         hook.transform.position = hookHolder.transform.position;
         fired = false;
         hooked = false;
+
+        //disable line renderer for rope
+        LineRenderer rope = hook.GetComponent<LineRenderer>();
+        rope.SetVertexCount(0);
     }
 
     void CheckIfGrounded()
