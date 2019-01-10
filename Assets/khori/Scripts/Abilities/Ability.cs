@@ -119,8 +119,6 @@ public class Ability {
 
     public void Activate()
     {
-        Debug.Log("activated");
-
         isActivated = true;
         activeTimer = activatedDuration;
         //
@@ -130,7 +128,6 @@ public class Ability {
     public void Deactivate()
     {
 
-        Debug.Log("deactivated");
         isActivated = false;
         //
         OnDeactivate();

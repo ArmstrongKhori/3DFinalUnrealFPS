@@ -41,7 +41,7 @@ public class HealAbility : Ability
     public override void RunWhileActive()
     {
         base.RunWhileActive();
-        ErickStatus.AlterHealth(1 * Time.deltaTime);
+        ErickStatus.AlterHealth(15 * Time.deltaTime);
 
         //
 
@@ -73,7 +73,7 @@ public class HealAbility : Ability
     public override void OnActivate()
     {
         base.OnActivate();
-        ErickStatus.AlterHealth(10);
+        ErickStatus.AlterHealth(50);
         ErickStatus.AlterHealth(-50);
         Debug.Log("ACTIVATE");
         //
