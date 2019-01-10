@@ -26,10 +26,16 @@ public class GrapplingHook : MonoBehaviour {
 
     private bool grounded;
 
+    private void Start()
+    {
+        hook = GameObject.Find("Hook");
+        hookHolder = GameObject.Find("Hook Holder");
+    }
+
     void Update()
     {
         // firing hook
-        if (Input.GetMouseButtonDown(1) && fired == false)
+        if (Input.GetMouseButtonDown(2) && fired == false)
             fired = true;
 
         if (fired)
