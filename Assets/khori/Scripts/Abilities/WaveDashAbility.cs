@@ -14,18 +14,16 @@ public override void Init()
 {
     base.Init();
         //
-        activationMode = ActivationMode.SinglePress;
+        activationMode = ActivationMode.Lingering;
+        activatedDuration = 1.5f;
 }
+
 public override void Run()
 {
     base.Run();
         //
-        if (Input.GetKey(KeyCode.I))
-        {
-            Debug.Log("FUCK");
-            RegisterKill();
-        }
     }
+
 public override void LateRun()
 {
     base.LateRun();
@@ -35,9 +33,13 @@ public override void LateRun()
 public override void RunWhileActive()
 {
     base.RunWhileActive();
-    //
-
-}
+        //
+        if(KhoriController.input.jump && !KhoriController.input.lastJump)
+        {
+            owner.transform.Translate(new Vector3(RickController.HPress * 5, 0, RickController.VPress * 5));
+        }
+        RickController.ActivateTrail();
+    }
 public override void RunWhileInactive()
 {
     base.RunWhileInactive();
@@ -63,15 +65,20 @@ public override void OnTriggered()
     Debug.Log("HERE WE USE THIS ABILITY!!!");
 
 }
+    }
 public override void OnActivate()
 {
     base.OnActivate();
-    //
-}
-public override void OnDeactivate()
-{
-    base.OnDeactivate();
-    //
+        //
 
+        RickController.NoJump = true;
 }
+    public override void OnDeactivate()
+    {
+        base.OnDeactivate();
+        //
+        RickController.NoJump = false;
+
+        RickController.DeactivateTrail();
+    }
 }

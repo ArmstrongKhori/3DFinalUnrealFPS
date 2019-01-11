@@ -134,8 +134,8 @@ public class ControllableCharacter : Character {
 
         if (input.fire2 && !input.lastFire2)
         {
-            healthStatus.AlterHealth(-10);
-            OnTakeDamage(-10);
+            //healthStatus.AlterHealth(-10);
+            //OnTakeDamage(-10);
 
 
             // Helper.ClearMessages();
