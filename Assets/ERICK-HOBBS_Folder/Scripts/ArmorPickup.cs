@@ -2,18 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArmorPickup : MonoBehaviour {
+public class ArmorPickup : Interactable {
 
-    public int armorAmount = 10;
+    public int armorAmount = 100;
 
     void OnTriggerEnter(Collider other)
     {
+        if (!isOn) { return; }
+
+
         PlayerArmor player = other.GetComponent<PlayerArmor>();
 
         if (player != null)
         {
             player.AlterArmor(armorAmount);
-            gameObject.SetActive(false);
+
+            TurnOff();
         }
     }
 }

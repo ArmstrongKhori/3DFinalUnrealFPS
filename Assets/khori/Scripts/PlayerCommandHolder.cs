@@ -127,4 +127,17 @@ public class PlayerCommandHolder : NetworkBehaviour {
         //
         GameManager.Instance().DisplayMessage(message);
     }
+
+
+    [Command]
+    public void CmdRespawnMe(NetworkInstanceId id)
+    {
+        RpcRespawnMe(id);
+    }
+    [ClientRpc]
+    public void RpcRespawnMe(NetworkInstanceId id)
+    {
+        ControllableCharacter cc = Helper.GetNetworkPlayer(id);
+        cc._Respawn();
+    }
 }

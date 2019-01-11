@@ -32,6 +32,10 @@ public class GameManager : SystemObj {
         go.transform.parent = transform;
         go.AddComponent<Networker>();
         //
+        go = new GameObject("SpawnPointManager");
+        go.transform.parent = transform;
+        go.AddComponent<SpawnPointManager>();
+        //
         //
         /*
         foreach (SystemObj a in FindObjectsOfType<SystemObj>())

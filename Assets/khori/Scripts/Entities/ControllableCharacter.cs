@@ -201,9 +201,9 @@ public class ControllableCharacter : Character {
         weapon = new Weapon(new Rifle(), this); // Pistol
         ability = new RailgunAbility(this);
     }
-    public override void Respawn()
+    internal override void _Respawn()
     {
-        base.Respawn();
+        base._Respawn();
     }
 
 

@@ -134,7 +134,16 @@ public class Character : Actor
     }
 
 
-    public virtual void Respawn()
+
+    public void Respawn() {
+        PCH.CmdRespawnMe(NetworkID);
+    }
+
+
+    /// <summary>
+    /// This version is intended to be called locally. Don't use it!
+    /// </summary>
+    internal virtual void _Respawn()
     {
         stateManager.InitializeMe();
         healthStatus.InitializeMe();

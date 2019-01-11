@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/MIKE/Scenes/LevelLobby.unity
     guid: 7f5d210e35b38d6439a440412da55339
-  - enabled: 0
+  - enabled: 1
     path: Assets/MIKE/Scenes/Complex.unity
     guid: f9169b26960e5c745b3e66f57959bb46
   - enabled: 0
@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/khori/Scenes/KhoriScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/CharacterAnimsRickAndrey/CharacterMovementScene.unity
     guid: d261531a078039549b256895799f2f2b
   m_configObjects: {}
