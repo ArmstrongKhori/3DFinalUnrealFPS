@@ -62,11 +62,11 @@ public class GrapplingHook : Ability {
         //
         // firing hook
         Debug.Log(hookHolder);
-        if (Input.GetMouseButtonDown(2) && fired == false)
+        if (Input.GetMouseButtonDown(1) && fired == false)
             fired = true;
 
         if (fired)
-        {
+        {   //line renderer for rope behind grappling hook
             LineRenderer rope = hook.GetComponent<LineRenderer>();
             rope.positionCount = 2;
             rope.SetPosition(0, hookHolder.transform.position);
@@ -75,7 +75,7 @@ public class GrapplingHook : Ability {
 
         if (fired == true && HookCheck.hooked == false)
         {
-            // moved hook towards aimed point
+            // moved hook towards fired point
             hook.transform.Translate(Vector3.forward * Time.deltaTime * hookTravelSpeed);
 
             //calculate the distance between the hook and player so hook doesnt travel to far
@@ -89,7 +89,7 @@ public class GrapplingHook : Ability {
         //start moving player to hooked location
         if (HookCheck.hooked == true && fired == true)
         {
-            RickController.NoJump = true;
+            //RickController.NoJump = true;
             hook.transform.parent = HookCheck.HookedObject.transform;
             owner.transform.position = Vector3.MoveTowards(owner.transform.position, hook.transform.position, Time.deltaTime * playerTravelSpeed);
             float distanceToHook = Vector3.Distance(owner.transform.position, hook.transform.position);
@@ -152,7 +152,7 @@ public class GrapplingHook : Ability {
     {
         base.OnDeactivate();
         //
-        RickController.NoJump = false;
+        //RickController.NoJump = false;
     }
 
     IEnumerator Climb()
