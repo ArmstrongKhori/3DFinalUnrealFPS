@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class DamageReflectorAbility : Ability {
 
-    GameObject abilityIndicator;
-
-
+    
     public DamageReflectorAbility(ControllableCharacter cc) : base(cc)
     {
 
@@ -17,7 +15,8 @@ public class DamageReflectorAbility : Ability {
         base.Init();
         //
         activationMode = ActivationMode.Lingering;
-        activatedDuration = 30.0f;
+        activatedDuration = 5.0f;
+        
     }
     public override void Run()
     {
@@ -26,8 +25,8 @@ public class DamageReflectorAbility : Ability {
         if (Input.GetKey(KeyCode.I))
         {
             Debug.Log("ABILITY IS READY FOR USE");
+            
             RegisterKill();
-
         }
     }
     public override void LateRun()
@@ -66,16 +65,17 @@ public class DamageReflectorAbility : Ability {
         //
 
         Debug.Log("HERE ABILITY ACTIVATES");
+        AndreAnimator.TurnIndicatorON();
+        
+        
     }
     public override void OnDeactivate()
     {
         base.OnDeactivate();
         //
 
-            Debug.Log("DEACTIVATE ABILITY");
-            
-  
-
+         Debug.Log("DEACTIVATE ABILITY");
+        AndreAnimator.TurnIndicatorOFF();
     }
 
 

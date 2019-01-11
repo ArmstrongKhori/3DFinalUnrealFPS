@@ -18,6 +18,7 @@ public class ControllableCharacter : Character {
     public Cam camPerspectiveFirst;
     public Cam camPerspectiveThird;
 
+    
 
     /// <summary>
     /// Contains all the network functionality that players use.
@@ -80,6 +81,9 @@ public class ControllableCharacter : Character {
     {
         base.Start();
         //
+
+
+
     }
 
 
@@ -182,6 +186,7 @@ public class ControllableCharacter : Character {
         // ??? <-- Debugging code.
         weapon = new Weapon(new Rifle(), this); // Pistol
         ability = new DamageReflectorAbility(this);
+
     }
 
     public override void Respawn()
@@ -240,5 +245,8 @@ public class ControllableCharacter : Character {
             screenFlashTimer = 0.0f;
         }
     }
+
+
+
 
 }

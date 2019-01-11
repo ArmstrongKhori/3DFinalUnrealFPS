@@ -2347,6 +2347,8 @@ MonoBehaviour:
   sniperRifle: {fileID: 0}
   granadeLauncher: {fileID: 0}
   gun: {fileID: 0}
+  damageReflectorIndicator_prefab: {fileID: 1762356521790090, guid: 82bedb0f1d026394ba299715e0f4de3f,
+    type: 2}
 --- !u!114 &114228616911202924
 MonoBehaviour:
   m_ObjectHideFlags: 1
