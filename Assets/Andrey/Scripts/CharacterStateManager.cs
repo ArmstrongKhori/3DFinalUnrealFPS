@@ -26,6 +26,16 @@ public class CharacterStateManager : NetworkBehaviour
     private float Speed = 0.0f;
     private float animAdjNumber = 0.3f; // number which effects how fast switching between states
 
+
+    /// <summary>
+    /// SOME STUFF FOR MY ABILITY
+    public GameObject damageReflectorIndicator_prefab;
+    internal GameObject damageReflectorIndicator;
+    Transform tempShield;
+    /// </summary>
+    /// 
+
+
     private void Awake()
     {
         InitializeMe();
@@ -56,7 +66,13 @@ public class CharacterStateManager : NetworkBehaviour
         InMotion = false;
 
 
-}
+        //ANDREY ----->
+        InstDamageReflectorIndicator();
+        TurnIndicatorOFF();
+        
+        /////// ------>
+
+    }
 
 
     // FOR 2D BLEND TREE
@@ -519,4 +535,35 @@ public class CharacterStateManager : NetworkBehaviour
         playerMotion.runtimeAnimatorController = controllerGun2D;
     }
 
+
+
+    // Andrey's Ability ---->
+    public void InstDamageReflectorIndicator()
+    {
+
+        damageReflectorIndicator = Instantiate(damageReflectorIndicator_prefab);
+        damageReflectorIndicator.name = "Shield";
+
+        TurnIndicatorOFF();
+    }
+    public void TurnIndicatorON()
+    {
+        damageReflectorIndicator.SetActive(true);
+        tempShield = GameObject.Find("Shield").GetComponent<Transform>();
+        
+    }
+    public void TurnIndicatorOFF()
+    {
+        damageReflectorIndicator.SetActive(false);
+    }
+
+    private void Update()
+    {
+
+        if (damageReflectorIndicator.activeSelf == true)
+        {
+            tempShield.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z);
+        }
+        
+    }
 }

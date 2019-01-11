@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ScopeSR : MonoBehaviour {
 
-    float zoom = 60;
+    float zoom = 5;
     bool max = false;
     bool min = false;
 
@@ -20,19 +20,19 @@ public class ScopeSR : MonoBehaviour {
 
         if (Input.mouseScrollDelta.y > 0 && !max)
         {
-            zoom = zoom - 10;
+            zoom = zoom - 0.5f;
             min = false;
         }
         if (Input.mouseScrollDelta.y < 0 && !min)
         {
-            zoom = zoom + 10;
+            zoom = zoom + 0.5f;
             max = false;
         }
-        if (zoom == 10)
+        if (zoom == 1)
         {
             max = true;
         }
-        if (zoom == 60)
+        if (zoom == 5)
         {
             min = true;
         }

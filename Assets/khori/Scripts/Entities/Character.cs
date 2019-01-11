@@ -200,6 +200,9 @@ public class Character : Actor
                 OnTakeDamage(-data.floatVal);
 
                 // rb.velocity = new Vector3(0, data.floatVal, 0);
+
+                // ??? <-- THIS IS VERY BAD PROGRAMMING.
+                ((ControllableCharacter)this).ability.OnTakenDamage(origin, data.floatVal);
                 break;
             case InteractVerbs.Tell:
                 // *** string: "message"
