@@ -61,6 +61,8 @@ public class FPSController2 : NetworkBehaviour
 
     public bool NoJump = false;
 
+    private TrailRenderer trail;
+
     // Use this for initialization
     void Start()
     {
@@ -71,8 +73,9 @@ public class FPSController2 : NetworkBehaviour
         //
         CharAnim = character.stateManager;
 
+        trail = GetComponent<TrailRenderer>();
 
-
+        trail.enabled = false;
 
         WeaponPickup = new List<bool>();
 
@@ -80,8 +83,6 @@ public class FPSController2 : NetworkBehaviour
         {
             WeaponPickup.Add(false);
         }
-
-
 
         gunHolder = GameManager.Instance().gunHolder;
 
@@ -284,6 +285,18 @@ public class FPSController2 : NetworkBehaviour
         }
     }
 
+    public void ActivateTrail()
+    {
+            trail.enabled = true;
+    }
+
+    public void DeactivateTrail()
+    {
+        trail.enabled = false;
+
+        trail.Clear();
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -296,6 +309,7 @@ public class FPSController2 : NetworkBehaviour
         MoveForward();
         MoveBackward();
         Strafe();
+
         // =====================================================================================
         // ??? <-- Beware of the "Half-Life" bug!
         // One can move faster than normal by walking and strafing simultaneously. You need to multiply movement speed by "0.7" when both are being done at the same time to prevent this.

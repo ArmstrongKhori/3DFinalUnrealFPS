@@ -17,15 +17,13 @@ public override void Init()
         activationMode = ActivationMode.Lingering;
         activatedDuration = 1.5f;
 }
+
 public override void Run()
 {
     base.Run();
         //
-        if (Input.GetKey(KeyCode.I))
-        {
-            RegisterKill();
-        }
     }
+
 public override void LateRun()
 {
     base.LateRun();
@@ -40,6 +38,7 @@ public override void RunWhileActive()
         {
             owner.transform.Translate(new Vector3(RickController.HPress * 5, 0, RickController.VPress * 5));
         }
+        RickController.ActivateTrail();
     }
 public override void RunWhileInactive()
 {
@@ -76,5 +75,7 @@ public override void OnActivate()
         base.OnDeactivate();
         //
         RickController.NoJump = false;
+
+        RickController.DeactivateTrail();
     }
 }
