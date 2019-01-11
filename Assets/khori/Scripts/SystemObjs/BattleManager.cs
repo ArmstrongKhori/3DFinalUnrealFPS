@@ -6,6 +6,10 @@ using UnityEngine.Networking;
 public class BattleManager : SystemObj {
 
 
+    public GameConditions gameConditions;
+
+
+
 
     internal GameObject gameSpace;
     internal List<Actor> allActors;
@@ -23,6 +27,8 @@ public class BattleManager : SystemObj {
         gameSpace = new GameObject("(gamespace)"); //  GameObject.Find("(gamespace)");
         allActors = new List<Actor>();
 
+        gameConditions = new GameConditions();
+
 
         foreach (Actor a in FindObjectsOfType<Actor>())
         {
@@ -31,12 +37,26 @@ public class BattleManager : SystemObj {
 
 
         testObj = (GameObject)Resources.Load("Spawnables/testpref", typeof(GameObject));
+
+
+
+        gameConditions.Match_Begin();
     }
 
 
     private void FixedUpdate()
     {
         Run();
+        //
+        if (gameConditions.matchTime < gameConditions.matchDuration)
+        {
+            gameConditions.matchTime += Time.deltaTime;
+            //
+            if (gameConditions.matchTime >= gameConditions.matchDuration)
+            {
+                Helper.GetHostPlayer().PCH.CmdConcludeMatch("Time is up!");
+            }
+        }
     }
 
 
@@ -87,6 +107,14 @@ public class BattleManager : SystemObj {
     }
 
 
+    
+    public void RegisterPlayer(ControllableCharacter c)
+    {
+        // ??? <-- Does nothing atm...
+    }
+
+
+
     #region Singleton Stuff
     private static BattleManager _instance;
     public static BattleManager Instance() { return _instance; }
@@ -113,9 +141,70 @@ public class BattleManager : SystemObj {
 
 
 
-public class ParticipantData
+public class GameConditions
 {
-    public int kills = 0;
-    public int deaths = 0;
-    public Character character = null;
+    private BattleManager bm;
+
+    public enum GameModes
+    {
+        /// <summary>
+        /// The match will run indefinitely.
+        /// </summary>
+        None,
+        /// <summary>
+        /// The winner is the first to reach [threshold] kills.
+        /// </summary>
+        FreeForAll,
+    }
+    public GameModes gameMode;
+
+    
+    /// <summary>
+    /// The required number of "points" required in the appropriate context.
+    /// </summary>
+    public int pointThreshold = 3; // 20
+
+
+
+    /// <summary>
+    /// The length of the match (in seconds).
+    /// </summary>
+    public float matchDuration = 600.0f;
+
+    internal float matchTime = 0.0f;
+
+
+    public bool matchInitiated = false;
+    public bool matchConcluded = false;
+
+
+
+    public GameConditions() {
+        bm = BattleManager.Instance();
+
+
+        gameMode = GameModes.FreeForAll;
+    }
+
+
+    public void Match_Begin()
+    {
+        if (matchInitiated) { return; }
+
+
+        if (bm.isServer)
+        {
+
+        }
+
+
+        matchInitiated = true;
+    }
+    public void Match_End()
+    {
+        if (matchConcluded) { return; }
+
+
+        matchConcluded = true;
+    }
 }

@@ -27,7 +27,6 @@ public class RailgunAbility : Ability {
     {
         base.Run();
         //
-
     }
     public override void LateRun()
     {

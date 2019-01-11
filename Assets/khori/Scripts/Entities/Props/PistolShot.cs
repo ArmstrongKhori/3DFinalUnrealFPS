@@ -19,7 +19,7 @@ public class PistolShot : RCProp {
         foreach (StrikingData sd in rr.allStrikes)
         {
             // ??? <-- I should probably catch this somewhere...
-            CharacterOwner.pch.CmdCreateBulletTrail(sd.originPoint, sd.pointOfImpact, 0.1f, Color.yellow);
+            CharacterOwner.PCH.CmdCreateBulletTrail(sd.originPoint, sd.pointOfImpact, 0.1f, Color.yellow);
         }
         //
         return base.OnResolved(rr);

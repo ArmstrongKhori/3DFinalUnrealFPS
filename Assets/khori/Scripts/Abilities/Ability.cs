@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 
-public class Ability : NetworkBehaviour {
+public class Ability {
 
 
     /// <summary>
@@ -78,7 +78,7 @@ public class Ability : NetworkBehaviour {
 
     public void Interact(BaseInputter input)
     {
-        if (activeTimer > 0)
+        if (isActivated && activeTimer > 0)
         {
             activeTimer -= Time.deltaTime;
             //
@@ -90,6 +90,7 @@ public class Ability : NetworkBehaviour {
 
 
 
+        
         if (input.fire2 && !input.lastFire2)
         {
             Trigger();
@@ -99,22 +100,29 @@ public class Ability : NetworkBehaviour {
 
     public void Trigger()
     {
-        usedCount += 1;
-        //
-        switch (activationMode)
+        if (IsReady)
         {
-            case ActivationMode.None:
-                break;
-            case ActivationMode.SinglePress:
-                OnTriggered();
-                break;
-            case ActivationMode.Lingering:
-                Activate();
-                break;
+            usedCount += 1;
+            //
+            switch (activationMode)
+            {
+                case ActivationMode.None:
+                    break;
+                case ActivationMode.SinglePress:
+                    OnTriggered();
+                    break;
+                case ActivationMode.Lingering:
+                    Activate();
+                    break;
+            }
+            //
+            //
+            isReady = false;
         }
-        //
-        //
-        isReady = false;
+        else
+        {
+            // ??? <-- ("Not ready" sound)
+        }
     }
 
     public void Activate()

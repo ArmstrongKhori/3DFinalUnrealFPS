@@ -56,6 +56,11 @@ public class Character : Actor
 
 
 
+    // *** "ControllableCharacter" overrides this... Pay no mind to this!
+    internal virtual PlayerCommandHolder PCH { get { return null; } }
+
+
+
     public override void Awake()
     {
         base.Awake();
@@ -179,7 +184,7 @@ public class Character : Actor
         // ??? <-- This PROBABLY is sorta lazy, but... Eh.
         // *** I'm making sure to ALWAYS call this from the local player's context, even if they're not even involved in the interaction.
         ControllableCharacter localChar = Helper.GetLocalPlayer();
-        localChar.pch.CmdNetwork_Interact(verb, from, to, data);
+        localChar.PCH.CmdNetwork_Interact(verb, from, to, data);
     }
 
     /// <summary>
@@ -196,12 +201,21 @@ public class Character : Actor
             case InteractVerbs.None:
                 break;
             case InteractVerbs.Damage:
-                // *** float: "damage"
-                healthStatus.AlterHealth(-data.floatVal);
-                //
-                OnTakeDamage(-data.floatVal);
+                // ??? <-- Occasionally getting a "double kill"... Inspect later.
+                if (!healthStatus.isDead)
+                {
+                    // *** float: "damage"
+                    healthStatus.AlterHealth(-data.floatVal);
+                    //
+                    OnTakeDamage(-data.floatVal);
 
-                // rb.velocity = new Vector3(0, data.floatVal, 0);
+                    // rb.velocity = new Vector3(0, data.floatVal, 0);
+
+                    if (healthStatus.isDead)
+                    {
+                        PCH.CmdLogKilling(origin.NetworkID);
+                    }
+                }
                 break;
             case InteractVerbs.Tell:
                 // *** string: "message"
