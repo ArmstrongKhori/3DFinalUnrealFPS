@@ -146,7 +146,7 @@ public class ControllableCharacter : Character {
 
 
 
-        if (input.fire2 && !input.lastFire2)
+        if (input.debug1 && !input.lastDebug1)
         {
             healthStatus.AlterHealth(-10);
             OnTakeDamage(-10);

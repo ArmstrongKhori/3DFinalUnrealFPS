@@ -45,6 +45,13 @@ public class RCProp : Prop {
     public float count = 1;
 
 
+    /// <summary>
+    /// (Added for X-Railgun.)
+    /// Tells the raycast to ignore walls.
+    /// </summary>
+    public bool piercesWalls = false;
+
+
     public override void Awake()
     {
         base.Awake();
@@ -106,6 +113,9 @@ public class RCProp : Prop {
                     }
                     // *** Don't hit yourself, please!
                     if (ray.collider.gameObject == CharacterOwner.gameObject) { continue; }
+
+                    // *** Ignore walls if you can pierce them!
+                    if (piercesWalls && ray.collider.gameObject.GetComponent<SolidSurface>()) { continue; }
 
 
                     if (closest < 0)

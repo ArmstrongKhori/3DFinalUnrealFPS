@@ -88,7 +88,9 @@ public class PlayerCommandHolder : NetworkBehaviour {
     [Command]
     public void CmdLogKilling(NetworkInstanceId instigator)
     {
-        Helper.GetNetworkPlayer(instigator).kills += 1;
+        ControllableCharacter cc = Helper.GetNetworkPlayer(instigator);
+        cc.kills += 1;
+        cc.ability.RegisterKill();
         //
         CmdCheckGameConditions();
     }
@@ -100,14 +102,16 @@ public class PlayerCommandHolder : NetworkBehaviour {
     {
         BattleManager bm = BattleManager.Instance();
 
-
-        if (bm.gameConditions.gameMode == GameConditions.GameModes.FreeForAll)
+        if (bm.gameConditions.matchInitiated && !bm.gameConditions.matchConcluded)
         {
-            foreach (ControllableCharacter cc in FindObjectsOfType<ControllableCharacter>())
+            if (bm.gameConditions.gameMode == GameConditions.GameModes.FreeForAll)
             {
-                if (cc.kills >= bm.gameConditions.pointThreshold)
+                foreach (ControllableCharacter cc in FindObjectsOfType<ControllableCharacter>())
                 {
-                    CmdConcludeMatch(cc.name + " has reached the kill threshold!");
+                    if (cc.kills >= bm.gameConditions.pointThreshold)
+                    {
+                        CmdConcludeMatch(cc.name + " has reached the kill threshold!");
+                    }
                 }
             }
         }

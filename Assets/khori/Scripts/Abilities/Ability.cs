@@ -78,13 +78,24 @@ public class Ability {
 
     public void Interact(BaseInputter input)
     {
-        if (isActivated && activeTimer > 0)
+        if (isActivated)
         {
-            activeTimer -= Time.deltaTime;
-            //
-            if (activeTimer <= 0)
+            if (activeTimer > 0)
             {
-                Deactivate();
+                activeTimer -= Time.deltaTime;
+                //
+                if (activeTimer <= 0)
+                {
+                    Deactivate();
+                }
+            }
+
+            if (activationMode == ActivationMode.HoldAndRelease)
+            {
+                if (!input.fire2)
+                {
+                    Deactivate();
+                }
             }
         }
 
@@ -112,6 +123,9 @@ public class Ability {
                     OnTriggered();
                     break;
                 case ActivationMode.Lingering:
+                    Activate();
+                    break;
+                case ActivationMode.HoldAndRelease:
                     Activate();
                     break;
             }
@@ -181,6 +195,10 @@ public class Ability {
         /// Does something for a period of time, then goes back to being inactive.
         /// </summary>
         Lingering,
+        /// <summary>
+        /// Activates when pressed, then deactivates when released.
+        /// </summary>
+        HoldAndRelease,
     }
     public ActivationMode activationMode;
 

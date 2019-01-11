@@ -45,6 +45,18 @@ public class GameManager : SystemObj {
             a.Initialize();
         }
         */
+        // *** Automatically gives all things considered as "Ground" the "SolidSurface" component.
+        GameObject level = GameObject.Find("Level");
+        if (level != null)
+        {
+            foreach (Transform thing in level.GetComponentsInChildren<Transform>())
+            {
+                if (thing.CompareTag("Ground")) // ??? <-- This is hard-coded... That's gross.
+                {
+                    thing.gameObject.AddComponent<SolidSurface>();
+                }
+            }
+        }
     }
 
     internal Canvas screenCanvas;

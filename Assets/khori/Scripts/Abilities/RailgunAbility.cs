@@ -21,7 +21,8 @@ public class RailgunAbility : Ability {
     {
         base.Init();
         //
-
+        activationMode = ActivationMode.HoldAndRelease;
+        activatedDuration = 10.0f; // *** You can hold it for 10 seconds.
     }
     public override void Run()
     {
@@ -62,7 +63,6 @@ public class RailgunAbility : Ability {
     {
         base.OnTriggered();
         //
-
     }
     public override void OnActivate()
     {
@@ -74,7 +74,7 @@ public class RailgunAbility : Ability {
     {
         base.OnDeactivate();
         //
-
+        BattleManager.Instance().Spawn("RailgunShot", owner, owner.LookVector);
     }
 
 

@@ -158,11 +158,11 @@ public class GameConditions
     }
     public GameModes gameMode;
 
-    
+
     /// <summary>
     /// The required number of "points" required in the appropriate context.
     /// </summary>
-    public int pointThreshold = 3; // 20
+    public int pointThreshold = 20;
 
 
 

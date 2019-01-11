@@ -27484,7 +27484,7 @@ GameObject:
   m_Layer: 0
   m_Name: RedSpawnPoint (1)
   m_TagString: RedTeamSpawnPoint
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -27526,7 +27526,7 @@ GameObject:
   m_Layer: 0
   m_Name: RedSpawnPoint (5)
   m_TagString: RedTeamSpawnPoint
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -27723,7 +27723,7 @@ GameObject:
   m_Layer: 0
   m_Name: RedSpawnPoint (6)
   m_TagString: RedTeamSpawnPoint
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -39091,7 +39091,7 @@ GameObject:
   m_Layer: 0
   m_Name: RedSpawnPoint (3)
   m_TagString: RedTeamSpawnPoint
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -39133,7 +39133,7 @@ GameObject:
   m_Layer: 0
   m_Name: BlueSpawnPoint (1)
   m_TagString: BlueTeamSpawnPoint
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -47631,7 +47631,7 @@ GameObject:
   m_Layer: 0
   m_Name: BlueSpawnPoint (2)
   m_TagString: BlueTeamSpawnPoint
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -48045,7 +48045,7 @@ GameObject:
   m_Layer: 0
   m_Name: RedSpawnPoint (2)
   m_TagString: RedTeamSpawnPoint
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -54413,7 +54413,7 @@ GameObject:
   m_Layer: 0
   m_Name: RedSpawnPoint (9)
   m_TagString: RedTeamSpawnPoint
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -54519,7 +54519,7 @@ GameObject:
   m_Layer: 0
   m_Name: BlueSpawnPoint (5)
   m_TagString: BlueTeamSpawnPoint
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -55292,7 +55292,7 @@ GameObject:
   m_Layer: 0
   m_Name: BlueSpawnPoint (8)
   m_TagString: BlueTeamSpawnPoint
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -55334,7 +55334,7 @@ GameObject:
   m_Layer: 0
   m_Name: BlueSpawnPoint (7)
   m_TagString: BlueTeamSpawnPoint
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -55376,7 +55376,7 @@ GameObject:
   m_Layer: 0
   m_Name: BlueSpawnPoint (6)
   m_TagString: BlueTeamSpawnPoint
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -55418,7 +55418,7 @@ GameObject:
   m_Layer: 0
   m_Name: BlueSpawnPoint (10)
   m_TagString: BlueTeamSpawnPoint
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -55460,7 +55460,7 @@ GameObject:
   m_Layer: 0
   m_Name: RedSpawnPoint (7)
   m_TagString: RedTeamSpawnPoint
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -61476,7 +61476,7 @@ GameObject:
   m_Layer: 0
   m_Name: RedSpawnPoint (4)
   m_TagString: RedTeamSpawnPoint
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -63153,7 +63153,7 @@ GameObject:
   m_Layer: 0
   m_Name: RedSpawnPoint (8)
   m_TagString: RedTeamSpawnPoint
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -63195,7 +63195,7 @@ GameObject:
   m_Layer: 0
   m_Name: BlueSpawnPoint (9)
   m_TagString: BlueTeamSpawnPoint
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -64189,7 +64189,7 @@ GameObject:
   m_Layer: 0
   m_Name: BlueSpawnPoint (3)
   m_TagString: BlueTeamSpawnPoint
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -69728,7 +69728,7 @@ GameObject:
   m_Layer: 0
   m_Name: RedSpawnPoint (10)
   m_TagString: RedTeamSpawnPoint
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -91562,7 +91562,7 @@ GameObject:
   m_Layer: 0
   m_Name: BlueSpawnPoint (4)
   m_TagString: BlueTeamSpawnPoint
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
