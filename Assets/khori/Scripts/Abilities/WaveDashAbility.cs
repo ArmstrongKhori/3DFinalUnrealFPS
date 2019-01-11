@@ -65,7 +65,7 @@ public override void OnTriggered()
     Debug.Log("HERE WE USE THIS ABILITY!!!");
 
 }
-    }
+   
 public override void OnActivate()
 {
     base.OnActivate();

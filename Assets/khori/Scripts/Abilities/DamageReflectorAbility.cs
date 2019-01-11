@@ -15,7 +15,7 @@ public class DamageReflectorAbility : Ability {
         base.Init();
         //
         activationMode = ActivationMode.Lingering;
-        activatedDuration = 5.0f;
+        activatedDuration = 30.0f;
         
     }
     public override void Run()
@@ -85,6 +85,8 @@ public class DamageReflectorAbility : Ability {
         //
         if (IsActivated)
         {
+
+            ErickStatus.AlterHealth(20);
             Debug.Log("I hit you back!");
             // owner.Network_Interact(Character.InteractVerbs.Damage, c.NetworkID, owner.NetworkID, new InteractData(val));
         }
