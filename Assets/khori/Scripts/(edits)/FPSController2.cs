@@ -55,6 +55,9 @@ public class FPSController2 : NetworkBehaviour
     public float Speed;
     private int CurrWayPoint;
 
+    public GameObject Grapplinghook;
+    public GameObject GrappleHolder;
+
 
     // Use this for initialization
     void Start()
@@ -66,7 +69,8 @@ public class FPSController2 : NetworkBehaviour
         //
         CharAnim = character.stateManager;
 
-
+        Grapplinghook = GameObject.Find("Hook");
+        GrappleHolder = GameObject.Find("Hook Holder");
 
 
         WeaponPickup = new List<bool>();

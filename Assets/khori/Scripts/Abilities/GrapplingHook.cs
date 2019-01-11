@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GrapplingHook : MonoBehaviour {
+public class GrapplingHook : Ability {
 
     public GameObject hook;
     public GameObject hookHolder;
@@ -26,15 +26,45 @@ public class GrapplingHook : MonoBehaviour {
 
     private bool grounded;
 
-    private void Start()
+    public GrapplingHook(ControllableCharacter cc) : base(cc)
     {
-        hook = GameObject.Find("Hook");
-        hookHolder = GameObject.Find("Hook Holder");
+
     }
 
-    void Update()
+    public override void Init()
     {
+        base.Init();
+        //
+        hook = RickController.Grapplinghook;
+        hookHolder = RickController.GrappleHolder;
+
+        activationMode = ActivationMode.Lingering;
+        activatedDuration = 10.0f;
+
+    }
+
+    public override void Run()
+    {
+        base.Run();
+        //
+            Debug.Log("TESTING BRUH");
+
+            Debug.Log(hook);
+            Debug.Log(hookHolder);
+
+    }
+    public override void LateRun()
+    {
+        base.LateRun();
+        //
+
+    }
+    public override void RunWhileActive()
+    {
+        base.RunWhileActive();
+        //
         // firing hook
+        Debug.Log("Fucking ability working bruh");
         if (Input.GetMouseButtonDown(2) && fired == false)
             fired = true;
 
@@ -46,7 +76,7 @@ public class GrapplingHook : MonoBehaviour {
             rope.SetPosition(1, hook.transform.position);
         }
 
-        if (fired == true  && hooked == false)
+        if (fired == true && hooked == false)
         {
             // moved hook towards aimed point
             hook.transform.Translate(Vector3.forward * Time.deltaTime * hookTravelSpeed);
@@ -79,15 +109,51 @@ public class GrapplingHook : MonoBehaviour {
 
                 StartCoroutine("Climb");
             }
-             
-
-        } else {
-
+        }
+        else
+        {
             hook.transform.parent = hookHolder.transform;
 
-           //enable gravity when not hooked to anything
-           this.GetComponent<Rigidbody>().useGravity = true;
+            //enable gravity when not hooked to anything
+            this.GetComponent<Rigidbody>().useGravity = true;
         }
+    }
+
+    public override void RunWhileInactive()
+    {
+        base.RunWhileInactive();
+        //
+
+    }
+    public override void OnKill()
+    {
+        base.OnKill();
+        //
+
+    }
+    public override void OnFiveKills()
+    {
+        base.OnFiveKills();
+        //
+
+    }
+    public override void OnTriggered()
+    {
+        base.OnTriggered();
+        //
+
+    }
+    public override void OnActivate()
+    {
+        base.OnActivate();
+        //
+
+    }
+    public override void OnDeactivate()
+    {
+        base.OnDeactivate();
+        //
+
     }
 
     IEnumerator Climb()
@@ -96,7 +162,7 @@ public class GrapplingHook : MonoBehaviour {
         ReturnHook();
     }
 
-    void ReturnHook()
+    private void ReturnHook()
     {
         //resets the hooks pos/rot to the hook holder
         hook.transform.rotation = hookHolder.transform.rotation;
@@ -109,7 +175,7 @@ public class GrapplingHook : MonoBehaviour {
         rope.SetVertexCount(0);
     }
 
-    void CheckIfGrounded()
+    private void CheckIfGrounded()
     {
         RaycastHit hit;
         float distance = 1f;

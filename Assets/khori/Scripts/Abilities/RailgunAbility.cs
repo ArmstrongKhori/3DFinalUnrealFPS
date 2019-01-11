@@ -28,6 +28,8 @@ public class RailgunAbility : Ability {
         base.Run();
         //
 
+        Debug.Log("TESTING RAILGUN");
+
     }
     public override void LateRun()
     {

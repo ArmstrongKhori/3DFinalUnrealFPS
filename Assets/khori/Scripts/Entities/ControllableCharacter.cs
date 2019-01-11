@@ -130,10 +130,6 @@ public class ControllableCharacter : Character {
 
         if (input.fire2 && !input.lastFire2)
         {
-            healthStatus.AlterHealth(-10);
-            OnTakeDamage(-10);
-
-
             // Helper.ClearMessages();
             //
             // pch.CmdCreateBulletTrail(transform.position, transform.position + LookVector * 100, 1.0f, Color.blue);
@@ -153,7 +149,7 @@ public class ControllableCharacter : Character {
         {
             ability.Run();
             if (ability.IsActivated) { ability.RunWhileActive(); }
-            else { ability.RunWhileActive(); }
+            else { ability.RunWhileInactive(); }
             ability.LateRun();
             //
             ability.Interact(input);
@@ -181,7 +177,10 @@ public class ControllableCharacter : Character {
 
         // ??? <-- Debugging code.
         weapon = new Weapon(new Rifle(), this); // Pistol
+
+        ability = new RailgunAbility(this);
     }
+
     public override void Respawn()
     {
         base.Respawn();
