@@ -130,6 +130,7 @@ public class ControllableCharacter : Character {
 
         if (input.fire2 && !input.lastFire2)
         {
+
             // Helper.ClearMessages();
             //
             // pch.CmdCreateBulletTrail(transform.position, transform.position + LookVector * 100, 1.0f, Color.blue);
@@ -178,7 +179,7 @@ public class ControllableCharacter : Character {
         // ??? <-- Debugging code.
         weapon = new Weapon(new Rifle(), this); // Pistol
 
-        ability = new RailgunAbility(this);
+        ability = new WaveDashAbility(this);
     }
 
     public override void Respawn()

@@ -59,6 +59,13 @@ public class FPSController2 : NetworkBehaviour
     public GameObject GrappleHolder;
 
 
+    public int HPress;
+    public int VPress;
+
+    public bool NoJump = false;
+
+    private TrailRenderer trail;
+
     // Use this for initialization
     void Start()
     {
@@ -69,9 +76,14 @@ public class FPSController2 : NetworkBehaviour
         //
         CharAnim = character.stateManager;
 
+
         Grapplinghook = GameObject.Find("Hook");
         GrappleHolder = GameObject.Find("Hook Holder");
 
+
+        trail = GetComponent<TrailRenderer>();
+
+        trail.enabled = false;
 
         WeaponPickup = new List<bool>();
 
@@ -79,8 +91,6 @@ public class FPSController2 : NetworkBehaviour
         {
             WeaponPickup.Add(false);
         }
-
-
 
         gunHolder = GameManager.Instance().gunHolder;
 
@@ -93,7 +103,7 @@ public class FPSController2 : NetworkBehaviour
         
         if (Input.GetKey(KeyCode.W))
         {
-            
+            VPress = 1;
 
             if (Input.GetKey(KeyCode.LeftShift))
             {
@@ -110,14 +120,14 @@ public class FPSController2 : NetworkBehaviour
     {
         if (Input.GetKey(KeyCode.S))
         {
-
+            VPress = -1;
             rb.velocity += transform.TransformDirection(new Vector3(0, 0, BackwardSpeed));
         }
     }
 
     private void Jump()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && !NoJump)
         {
             // Invoke("JumpAction", 0.2f);
             JumpAction();
@@ -142,11 +152,13 @@ public class FPSController2 : NetworkBehaviour
     {
         if (Input.GetKey(KeyCode.D))
         {
+            HPress = 1;
             rb.velocity += transform.TransformDirection(new Vector3(StrafeSpeed, 0, 0));
         }
 
         if (Input.GetKey(KeyCode.A))
         {
+            HPress = -1;
            rb.velocity += transform.TransformDirection(new Vector3(-StrafeSpeed, 0, 0));
         }
     }
@@ -184,6 +196,8 @@ public class FPSController2 : NetworkBehaviour
     private void Idle()
     {
         CharAnim.Idle();
+        HPress = 0;
+        VPress = 0;
     }
 
     void AimWeapon()
@@ -279,6 +293,18 @@ public class FPSController2 : NetworkBehaviour
         }
     }
 
+    public void ActivateTrail()
+    {
+            trail.enabled = true;
+    }
+
+    public void DeactivateTrail()
+    {
+        trail.enabled = false;
+
+        trail.Clear();
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -291,6 +317,7 @@ public class FPSController2 : NetworkBehaviour
         MoveForward();
         MoveBackward();
         Strafe();
+
         // =====================================================================================
         // ??? <-- Beware of the "Half-Life" bug!
         // One can move faster than normal by walking and strafing simultaneously. You need to multiply movement speed by "0.7" when both are being done at the same time to prevent this.
