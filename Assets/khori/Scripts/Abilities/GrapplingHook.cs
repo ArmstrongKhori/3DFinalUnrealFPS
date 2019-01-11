@@ -8,23 +8,22 @@ public class GrapplingHook : Ability {
     public GameObject hookHolder;
 
     //speed of hook when fired
-    public float hookTravelSpeed;
+    public float hookTravelSpeed = 15.0f;
 
     //player speed when hooked to object
-    public float playerTravelSpeed;
+    public float playerTravelSpeed = 12.0f;
 
     public static bool fired;
-    public bool hooked;
-
-    public GameObject hookedObj;
 
     //max distance hook can travel
-    public float maxDistance;
+    public float maxDistance = 15.0f;
 
     //dynamic float that will be detected before maxDistance is reached
     private float currentDistance;
 
     private bool grounded;
+
+    private HookDetector HookCheck;
 
     public GrapplingHook(ControllableCharacter cc) : base(cc)
     {
@@ -35,8 +34,10 @@ public class GrapplingHook : Ability {
     {
         base.Init();
         //
-        hook = RickController.Grapplinghook;
-        hookHolder = RickController.GrappleHolder;
+        hook = GameObject.Find("Camera/Hook Holder/Hook");
+        hookHolder = GameObject.Find("Camera/Hook Holder");
+
+        HookCheck = hook.GetComponent<HookDetector>();
 
         activationMode = ActivationMode.Lingering;
         activatedDuration = 10.0f;
@@ -47,11 +48,6 @@ public class GrapplingHook : Ability {
     {
         base.Run();
         //
-            Debug.Log("TESTING BRUH");
-
-            Debug.Log(hook);
-            Debug.Log(hookHolder);
-
     }
     public override void LateRun()
     {
@@ -61,28 +57,29 @@ public class GrapplingHook : Ability {
     }
     public override void RunWhileActive()
     {
+        
         base.RunWhileActive();
         //
         // firing hook
-        Debug.Log("Fucking ability working bruh");
+        Debug.Log(hookHolder);
         if (Input.GetMouseButtonDown(2) && fired == false)
             fired = true;
 
         if (fired)
         {
             LineRenderer rope = hook.GetComponent<LineRenderer>();
-            rope.SetVertexCount(2);
+            rope.positionCount = 2;
             rope.SetPosition(0, hookHolder.transform.position);
             rope.SetPosition(1, hook.transform.position);
         }
 
-        if (fired == true && hooked == false)
+        if (fired == true && HookCheck.hooked == false)
         {
             // moved hook towards aimed point
             hook.transform.Translate(Vector3.forward * Time.deltaTime * hookTravelSpeed);
 
             //calculate the distance between the hook and player so hook doesnt travel to far
-            currentDistance = Vector3.Distance(transform.position, hook.transform.position);
+            currentDistance = Vector3.Distance(owner.transform.position, hook.transform.position);
 
             //return hook
             if (currentDistance >= maxDistance)
@@ -90,24 +87,26 @@ public class GrapplingHook : Ability {
         }
 
         //start moving player to hooked location
-        if (hooked == true && fired == true)
+        if (HookCheck.hooked == true && fired == true)
         {
-            hook.transform.parent = hookedObj.transform;
-            transform.position = Vector3.MoveTowards(transform.position, hook.transform.position, Time.deltaTime * playerTravelSpeed);
-            float distanceToHook = Vector3.Distance(transform.position, hook.transform.position);
+            RickController.NoJump = true;
+            hook.transform.parent = HookCheck.HookedObject.transform;
+            owner.transform.position = Vector3.MoveTowards(owner.transform.position, hook.transform.position, Time.deltaTime * playerTravelSpeed);
+            float distanceToHook = Vector3.Distance(owner.transform.position, hook.transform.position);
 
             //disable player rigidbody
-            this.GetComponent<Rigidbody>().useGravity = false;
+            owner.GetComponent<Rigidbody>().useGravity = false;
 
             if (distanceToHook < 1.5)
             {
+                ReturnHook();
                 if (grounded == false)
                 {
-                    this.transform.Translate(Vector3.forward * Time.deltaTime * 10f);
-                    this.transform.Translate(Vector3.up * Time.deltaTime * 15f);
+                    owner.transform.Translate(Vector3.forward * Time.deltaTime * 10f);
+                    owner.transform.Translate(Vector3.up * Time.deltaTime * 15f);
                 }
 
-                StartCoroutine("Climb");
+                //StartCoroutine("Climb");
             }
         }
         else
@@ -115,7 +114,7 @@ public class GrapplingHook : Ability {
             hook.transform.parent = hookHolder.transform;
 
             //enable gravity when not hooked to anything
-            this.GetComponent<Rigidbody>().useGravity = true;
+            owner.GetComponent<Rigidbody>().useGravity = true;
         }
     }
 
@@ -153,7 +152,7 @@ public class GrapplingHook : Ability {
     {
         base.OnDeactivate();
         //
-
+        RickController.NoJump = false;
     }
 
     IEnumerator Climb()
@@ -168,20 +167,21 @@ public class GrapplingHook : Ability {
         hook.transform.rotation = hookHolder.transform.rotation;
         hook.transform.position = hookHolder.transform.position;
         fired = false;
-        hooked = false;
+        HookCheck.hooked = false;
 
         //disable line renderer for rope
         LineRenderer rope = hook.GetComponent<LineRenderer>();
-        rope.SetVertexCount(0);
+        rope.positionCount = 0;
     }
 
+    
     private void CheckIfGrounded()
     {
         RaycastHit hit;
         float distance = 1f;
         Vector3 dir = new Vector3(0, -1);
 
-        if (Physics.Raycast(transform.position, dir, out hit, distance))
+        if (Physics.Raycast(owner.transform.position, dir, out hit, distance))
         {
             grounded = true;
         } else {

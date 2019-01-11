@@ -55,10 +55,6 @@ public class FPSController2 : NetworkBehaviour
     public float Speed;
     private int CurrWayPoint;
 
-    public GameObject Grapplinghook;
-    public GameObject GrappleHolder;
-
-
     public int HPress;
     public int VPress;
 
@@ -75,11 +71,6 @@ public class FPSController2 : NetworkBehaviour
         character = GetComponent<Character>();
         //
         CharAnim = character.stateManager;
-
-
-        Grapplinghook = GameObject.Find("Hook");
-        GrappleHolder = GameObject.Find("Hook Holder");
-
 
         trail = GetComponent<TrailRenderer>();
 

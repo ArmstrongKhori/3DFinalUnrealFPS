@@ -280,7 +280,7 @@ public class Ability {
 
 /* *** ABILITIES
  * Directional Wave-Dash ~ Temporarily enable an additional jump that can go in any desired direction.
- * Grappling Hook ~ Your next shot will pull you to the target and temporarily bind you there. You are invisible during this.
+ * Grappling Hook ~ Your next shot will pull you to the target and temporarily bind you there.
  * Team/Self Heal ~ Reverses all damage received (such that damage becomes healing). Affects you and nearby teammates.
  * X-Railgun ~ Gain a single powerful shot that has perfect accuracy, pierces walls, and allows you to see through walls.
  * Damage Reflector ~ Returns 200% of any damage received to the attacker.
