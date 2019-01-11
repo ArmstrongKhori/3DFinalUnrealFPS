@@ -40,6 +40,10 @@ public class GameManager : SystemObj {
         GetComponent<ClientManager>().NMScript = go.GetComponent<NetworkManager>();
         go.GetComponent<NetworkManager>().onlineScene = "LevelLobby";
         //
+        go = new GameObject("SpawnPointManager");
+        go.transform.parent = transform;
+        go.AddComponent<SpawnPointManager>();
+        //
         //
         /*
         foreach (SystemObj a in FindObjectsOfType<SystemObj>())
@@ -49,6 +53,18 @@ public class GameManager : SystemObj {
             a.Initialize();
         }
         */
+        // *** Automatically gives all things considered as "Ground" the "SolidSurface" component.
+        GameObject level = GameObject.Find("Level");
+        if (level != null)
+        {
+            foreach (Transform thing in level.GetComponentsInChildren<Transform>())
+            {
+                if (thing.CompareTag("Ground")) // ??? <-- This is hard-coded... That's gross.
+                {
+                    thing.gameObject.AddComponent<SolidSurface>();
+                }
+            }
+        }
     }
 
     internal Canvas screenCanvas;

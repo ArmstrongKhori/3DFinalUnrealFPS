@@ -20,7 +20,7 @@ public class PlayerCommandHolder : NetworkBehaviour {
         {
             if (c.isClient)
             {
-                c.pch.RpcNetwork_Interact(verb, from, to, data);
+                c.PCH.RpcNetwork_Interact(verb, from, to, data);
             }
         }
     }
@@ -76,4 +76,72 @@ public class PlayerCommandHolder : NetworkBehaviour {
         comp.RpcOnServerSpawned();
     }
 
+
+
+
+
+    [Command]
+    public void CmdLogKilled(NetworkInstanceId target)
+    {
+        Helper.GetNetworkPlayer(target).deaths += 1;
+    }
+    [Command]
+    public void CmdLogKilling(NetworkInstanceId instigator)
+    {
+        ControllableCharacter cc = Helper.GetNetworkPlayer(instigator);
+        cc.kills += 1;
+        cc.ability.RegisterKill();
+        //
+        CmdCheckGameConditions();
+    }
+
+
+
+    [Command]
+    public void CmdCheckGameConditions()
+    {
+        BattleManager bm = BattleManager.Instance();
+
+        if (bm.gameConditions.matchInitiated && !bm.gameConditions.matchConcluded)
+        {
+            if (bm.gameConditions.gameMode == GameConditions.GameModes.FreeForAll)
+            {
+                foreach (ControllableCharacter cc in FindObjectsOfType<ControllableCharacter>())
+                {
+                    if (cc.kills >= bm.gameConditions.pointThreshold)
+                    {
+                        CmdConcludeMatch(cc.name + " has reached the kill threshold!");
+                    }
+                }
+            }
+        }
+    }
+
+
+    [Command]
+    public void CmdConcludeMatch(string messageReason)
+    {
+        RpcConcludeMatch(messageReason);
+    }
+
+    [ClientRpc]
+    public void RpcConcludeMatch(string message)
+    {
+        BattleManager.Instance().gameConditions.Match_End();
+        //
+        GameManager.Instance().DisplayMessage(message);
+    }
+
+
+    [Command]
+    public void CmdRespawnMe(NetworkInstanceId id)
+    {
+        RpcRespawnMe(id);
+    }
+    [ClientRpc]
+    public void RpcRespawnMe(NetworkInstanceId id)
+    {
+        ControllableCharacter cc = Helper.GetNetworkPlayer(id);
+        cc._Respawn();
+    }
 }

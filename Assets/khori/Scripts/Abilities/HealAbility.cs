@@ -18,6 +18,7 @@ public class HealAbility : Ability
     public override void Init()
     {
         base.Init();
+
         activationMode = ActivationMode.Lingering;      
     }
 
@@ -25,12 +26,14 @@ public class HealAbility : Ability
     {
         base.Run();
         //
+
         if (Input.GetKey(KeyCode.Q))
         {
             RegisterKill();
         }
 
         Debug.Log("TESTING RAILGUN");
+
 
     }
     public override void LateRun()
@@ -68,7 +71,6 @@ public class HealAbility : Ability
         base.OnTriggered();
 
         //
-
     }
     public override void OnActivate()
     {
@@ -82,7 +84,7 @@ public class HealAbility : Ability
     {
         base.OnDeactivate();
         //
-
+      
     }
 
 

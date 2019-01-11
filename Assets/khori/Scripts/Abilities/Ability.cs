@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 
-
-public class Ability { 
+public class Ability {
 
 
 
@@ -80,18 +79,32 @@ public class Ability {
 
     public void Interact(BaseInputter input)
     {
-        if (IsActivated && activeTimer > 0)
+
+        if (isActivated)
+
         {
-            activeTimer -= Time.deltaTime;
-            //
-            if (activeTimer <= 0)
+            if (activeTimer > 0)
             {
-                Deactivate();
+                activeTimer -= Time.deltaTime;
+                //
+                if (activeTimer <= 0)
+                {
+                    Deactivate();
+                }
+            }
+
+            if (activationMode == ActivationMode.HoldAndRelease)
+            {
+                if (!input.fire2)
+                {
+                    Deactivate();
+                }
             }
         }
 
 
 
+        
         if (input.fire2 && !input.lastFire2)
         {
             Trigger();
@@ -101,22 +114,32 @@ public class Ability {
 
     public void Trigger()
     {
-        usedCount += 1;
-        //
-        switch (activationMode)
+        if (IsReady)
         {
-            case ActivationMode.None:
-                break;
-            case ActivationMode.SinglePress:
-                OnTriggered();
-                break;
-            case ActivationMode.Lingering:
-                Activate();
-                break;
+            usedCount += 1;
+            //
+            switch (activationMode)
+            {
+                case ActivationMode.None:
+                    break;
+                case ActivationMode.SinglePress:
+                    OnTriggered();
+                    break;
+                case ActivationMode.Lingering:
+                    Activate();
+                    break;
+                case ActivationMode.HoldAndRelease:
+                    Activate();
+                    break;
+            }
+            //
+            //
+            isReady = false;
         }
-        //
-        //
-        isReady = false;
+        else
+        {
+            // ??? <-- ("Not ready" sound)
+        }
     }
 
     public void Activate()
@@ -176,6 +199,10 @@ public class Ability {
         /// Does something for a period of time, then goes back to being inactive.
         /// </summary>
         Lingering,
+        /// <summary>
+        /// Activates when pressed, then deactivates when released.
+        /// </summary>
+        HoldAndRelease,
     }
     public ActivationMode activationMode;
 

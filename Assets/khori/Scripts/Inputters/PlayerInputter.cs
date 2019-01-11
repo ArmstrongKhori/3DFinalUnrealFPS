@@ -17,5 +17,9 @@ public class PlayerInputter : BaseInputter {
         jump = Input.GetButton("Jump");
         fire1 = Input.GetButton("Fire1");
         fire2 = Input.GetButton("Fire2");
+        debug1 = Input.GetKey(KeyCode.V);
+        debug2 = Input.GetKey(KeyCode.B);
+        debug3 = Input.GetKey(KeyCode.N);
+        debug4 = Input.GetKey(KeyCode.M);
     }
 }

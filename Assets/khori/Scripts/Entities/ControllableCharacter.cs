@@ -8,6 +8,10 @@ using UnityEngine.Networking;
 /// Its primary difference is that it can receive and respond to inputs.
 /// </summary>
 public class ControllableCharacter : Character {
+    [SyncVar]
+    public int kills;
+    [SyncVar]
+    public int deaths;
 
     public BaseInputter input;
     public Weapon weapon;
@@ -23,7 +27,8 @@ public class ControllableCharacter : Character {
     /// <summary>
     /// Contains all the network functionality that players use.
     /// </summary>
-    internal PlayerCommandHolder pch;
+    private PlayerCommandHolder pch;
+    internal override PlayerCommandHolder PCH { get { return pch; } }
 
 
     /// <summary>
@@ -59,6 +64,17 @@ public class ControllableCharacter : Character {
                 GUI.color = new Color(screenFlashColor.r, screenFlashColor.g, screenFlashColor.b, 0.3f * Mathf.Sin(Mathf.PI * jist));
                 GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), Graphics.Instance().screenTex);
             }
+
+
+            int xx = Screen.width - 200;
+            int yy = Screen.height - 16;
+            GUI.color = Color.red;
+            GUI.Label(new Rect(xx, yy, 200, 200), "Total Kills: " + kills); yy -= 16;
+            GUI.Label(new Rect(xx, yy, 200, 200), "Total Deaths: " + deaths); yy -= 16;
+
+            GUI.Label(new Rect(xx, yy, 200, 200), "Ammunition: " + weapon.currentAmmo + "/" + weapon.data.maximumAmmo); yy -= 16;
+
+            GUI.Label(new Rect(xx, yy, 200, 200), "Ability charge: " + ability.killScore + "/" + ability.requiredKills + " (" + (ability.killScore / ability.requiredKills * 100) + "%)"); yy -= 16;
         }
     }
 
@@ -80,6 +96,7 @@ public class ControllableCharacter : Character {
         //
 
 
+        BattleManager.Instance().RegisterPlayer(this);
 
     }
 
@@ -129,7 +146,7 @@ public class ControllableCharacter : Character {
 
 
 
-        if (input.fire2 && !input.lastFire2)
+        if (input.debug1 && !input.lastDebug1)
         {
 
             // Helper.ClearMessages();
@@ -181,16 +198,12 @@ public class ControllableCharacter : Character {
         ability = new HealAbility(this);
         weapon = new Weapon(new Rifle(), this); // Pistol
 
-        ability = new GrapplingHook(this);
-
-        ability = new DamageReflectorAbility(this);
-
-
+        ability = new RailgunAbility(this);
     }
+    internal override void _Respawn()
 
-    public override void Respawn()
     {
-        base.Respawn();
+        base._Respawn();
     }
 
 
@@ -203,6 +216,9 @@ public class ControllableCharacter : Character {
         lifeTimer = 0.0f;
 
         SetThirdPerson(true);
+
+
+        pch.CmdLogKilled(NetworkID);
     }
 
 

@@ -102,7 +102,7 @@ public class Prop : Actor {
                     sd.character = c;
                     sd.originPoint = transform.position;
                     sd.pointOfImpact = collision.ClosestPoint(transform.position); // contacts[0].point
-                                                                                   //
+
                     Strike(sd);
                 }
             }
@@ -121,7 +121,7 @@ public class Prop : Actor {
                     sd.surface = ss;
                     sd.originPoint = transform.position;
                     sd.pointOfImpact = collision.ClosestPoint(transform.position); // collision.contacts[0].point;
-                                                                                    //
+
                     Strike(sd);
                 }
             }

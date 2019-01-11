@@ -24,12 +24,31 @@ public static class Helper {
 
         return null;
     }
+    public static ControllableCharacter GetNetworkPlayer(NetworkInstanceId id)
+    {
+        foreach (ControllableCharacter a in GameObject.FindObjectsOfType<ControllableCharacter>())
+        {
+            if (a.netId == id) { return a; }
+        }
+
+        return null;
+    }
 
     public static ControllableCharacter GetLocalPlayer()
     {
         foreach (ControllableCharacter cc in GameObject.FindObjectsOfType<ControllableCharacter>())
         {
             if (cc.isLocalPlayer) { return cc; }
+        }
+
+        return null;
+    }
+
+    public static ControllableCharacter GetHostPlayer()
+    {
+        foreach (ControllableCharacter cc in GameObject.FindObjectsOfType<ControllableCharacter>())
+        {
+            if (cc.isServer) { return cc; }
         }
 
         return null;

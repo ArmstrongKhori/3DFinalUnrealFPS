@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PistolShot : RCProp {
+public class RailgunShot : RCProp
+{
 
     public override void OnSpawned(Vector3 lookVector)
     {
         base.OnSpawned(lookVector);
         //
         heading = lookVector; // Helper.GetNetworkActor(Owner).LookVector
+        //
+        power = 200;
+        piercesWalls = true;
     }
 
 

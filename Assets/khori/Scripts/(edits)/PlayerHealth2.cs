@@ -12,7 +12,7 @@ public class PlayerHealth2 : NetworkBehaviour
     public Image deadScreen;
 
     private float currentHealth;
-    private bool isDead;
+    public bool isDead;
 
 
     // Use this for initialization

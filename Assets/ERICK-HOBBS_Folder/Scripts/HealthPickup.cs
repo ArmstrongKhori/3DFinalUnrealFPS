@@ -2,18 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthPickup : MonoBehaviour {
+public class HealthPickup : Interactable {
 
-    public int healAmount = 10;
+    public int healAmount = 100;
 
     void OnTriggerEnter(Collider other)
     {
-        PlayerHealth player = other.GetComponent<PlayerHealth>();
+        if (!isOn) { return; }
+
+
+        PlayerHealth2 player = other.GetComponent<PlayerHealth2>();
 
         if(player != null)
         {
             player.AlterHealth(healAmount);
-            gameObject.SetActive(false);
+
+            TurnOff();
         }
     }
 }
