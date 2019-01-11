@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 
-public class Ability {
+
+public class Ability { 
+
 
 
     /// <summary>
@@ -78,7 +80,7 @@ public class Ability {
 
     public void Interact(BaseInputter input)
     {
-        if (activeTimer > 0)
+        if (IsActivated && activeTimer > 0)
         {
             activeTimer -= Time.deltaTime;
             //
@@ -127,6 +129,7 @@ public class Ability {
 
     public void Deactivate()
     {
+
         isActivated = false;
         //
         OnDeactivate();

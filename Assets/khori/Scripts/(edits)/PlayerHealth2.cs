@@ -36,7 +36,7 @@ public class PlayerHealth2 : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            currentHealthText.text = currentHealth.ToString();
+            currentHealthText.text = currentHealth.ToString("f00");
             // deadScreen.gameObject.SetActive(isDead);
         }
         else

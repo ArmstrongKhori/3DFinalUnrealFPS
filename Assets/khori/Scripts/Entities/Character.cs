@@ -68,16 +68,13 @@ public class Character : Actor
         //
         stateManager = modelHolder.GetComponent<CharacterStateManager>();
 
-
         healthStatus = GetComponent<PlayerHealth2>();
         healthStatus.currentHealthText = GameObject.Find("(erick)").transform.Find("Canvas").Find("CurrentHealthText").GetComponent<UnityEngine.UI.Text>();
         healthStatus.deadScreen = GameObject.Find("(erick)").transform.Find("Canvas").Find("deadScreen").GetComponent<UnityEngine.UI.Image>();
 
-
-
-
-
         name = "PlayerNo_" + FindObjectsOfType<Character>().Length;
+
+
     }
     public override void Start()
     {
@@ -88,7 +85,8 @@ public class Character : Actor
         {
             GameManager.Instance().DisplayMessage("You are " + name);
         }
-
+        ///MIKE
+      //  GameObject.Find("Networker").GetComponent<Networker>().SpawnedPlayer = this.gameObject;
 
         InitializeMe();
     }

@@ -8,6 +8,8 @@ public class Networker : SystemObj {
 
     internal NetworkManager networkManager;
     internal NetworkManagerHUD networkHUD;
+    //MIKE
+    public GameObject SpawnedPlayer;
 
     private Scene scene;
 
@@ -20,7 +22,7 @@ public class Networker : SystemObj {
         scene = SceneManager.GetActiveScene();
         networkManager.offlineScene = scene.name;
         networkManager.onlineScene = scene.name;
-        networkManager.playerPrefab = (GameObject)Resources.Load("Spawnables/player", typeof(GameObject));
+        SpawnedPlayer = networkManager.playerPrefab = (GameObject)Resources.Load("Spawnables/player", typeof(GameObject));
         //
         foreach (GameObject obj in GameManager.Instance().networkSpawnablePrefabs)
         {
@@ -32,7 +34,6 @@ public class Networker : SystemObj {
 
         networkHUD = gameObject.AddComponent<NetworkManagerHUD>();
     }
-
 
     #region Singleton Stuff
     private static Networker _instance;

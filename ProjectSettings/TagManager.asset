@@ -5,8 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
-  - Hook
-  - Hookable
+
+  - RedTeamSpawnPoint
+  - BlueTeamSpawnPoint
+  - ReadyButton
+  - StartButton
+
   layers:
   - Default
   - TransparentFX

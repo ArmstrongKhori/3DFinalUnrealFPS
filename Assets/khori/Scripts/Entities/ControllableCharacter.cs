@@ -67,11 +67,8 @@ public class ControllableCharacter : Character {
         base.Awake();
         //
         input = new PlayerInputter();
-
-        
         controller = GetComponent<FPSController2>();
         if (controller == null) { controller = gameObject.AddComponent<FPSController2>(); }
-
 
         pch = GetComponent<PlayerCommandHolder>();
     }
@@ -177,6 +174,7 @@ public class ControllableCharacter : Character {
 
 
         // ??? <-- Debugging code.
+        ability = new HealAbility(this);
         weapon = new Weapon(new Rifle(), this); // Pistol
 
         ability = new GrapplingHook(this);
