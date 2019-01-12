@@ -76,7 +76,6 @@ public class HealAbility : Ability
     {
         base.OnActivate();
         ErickStatus.AlterHealth(50);
-        ErickStatus.AlterHealth(-50);
         //
 
     }

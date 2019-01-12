@@ -16,6 +16,7 @@ public class PlayerCam : Cam {
     {
         base.Record();
         //
+        Debug.Log("Camera: " + c.name);
         if (c != null)
         {
             Camera.transform.position = transform.position;

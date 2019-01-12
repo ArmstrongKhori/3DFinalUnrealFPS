@@ -81,6 +81,34 @@ public class PlayerCommandHolder : NetworkBehaviour {
 
 
     [Command]
+    public void CmdPlayerConnection(NetworkInstanceId id, bool areEntering)
+    {
+
+        Debug.Log("2. Tell server that I'm connecting.");
+        ClientManager.Instance().PlayerConnected(id, areEntering);
+    }
+    [Command]
+    public void CmdReadyStatus(NetworkInstanceId id, bool areTheyReady)
+    {
+        ClientManager.Instance().PlayerReadied(id, areTheyReady);
+    }
+    [Command]
+    public void CmdDoStartMatch()
+    {
+
+    }
+    [ClientRpc]
+    public void RpcLobbyShowButtons(bool isAdmin)
+    {
+        Debug.Log("5. Remotely tell THAT player to do this!");
+        ClientManager.Instance().ShowButtons(isAdmin);
+    }
+
+
+
+
+
+    [Command]
     public void CmdLogKilled(NetworkInstanceId target)
     {
         Helper.GetNetworkPlayer(target).deaths += 1;

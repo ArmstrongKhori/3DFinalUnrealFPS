@@ -36,4 +36,11 @@ public class Cam : MonoBehaviour {
         if (currentCam != null) { currentCam.gameObject.SetActive(true); }
     }
 
+
+
+    private void OnLevelWasLoaded(int level)
+    {
+        SetActiveCamera(FindObjectOfType<Cam>());
+    }
+
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
-public class Networker : SystemObj {
+public class Networker : MonoBehaviour {
 
     internal NetworkManager networkManager;
     internal NetworkManagerHUD networkHUD;
@@ -14,10 +14,8 @@ public class Networker : SystemObj {
     private Scene scene;
 
 
-    internal override void Initialize()
+    internal void Initialize()
     {
-        base.Initialize();
-        //
         networkManager = gameObject.AddComponent<NetworkManager>();
         scene = SceneManager.GetActiveScene();
         networkManager.offlineScene = scene.name;
@@ -34,6 +32,7 @@ public class Networker : SystemObj {
 
         networkHUD = gameObject.AddComponent<NetworkManagerHUD>();
     }
+
 
     #region Singleton Stuff
     private static Networker _instance;

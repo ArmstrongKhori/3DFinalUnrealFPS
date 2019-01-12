@@ -101,6 +101,19 @@ public class ControllableCharacter : Character {
     }
 
 
+    private void OnLevelWasLoaded(int level)
+    {
+        if (isLocalPlayer) { SetThirdPerson(false); }
+
+        modelHolder.SetActive(true);
+
+
+
+        transform.position = GameObject.Find("(networkEntryPoint)").transform.position;
+        // transform.position = SpawnPointManager.Instance().BlueTeamSpawnPointList[0].transform.position;
+    }
+
+
     public void SetThirdPerson(bool state)
     {
         if (!isLocalPlayer) { return; }
@@ -148,11 +161,8 @@ public class ControllableCharacter : Character {
 
         if (input.debug1 && !input.lastDebug1)
         {
-
-            // Helper.ClearMessages();
-            //
-            // pch.CmdCreateBulletTrail(transform.position, transform.position + LookVector * 100, 1.0f, Color.blue);
-            // pch.CmdSpawn("Bullet", NetworkID, LookVector);
+            healthStatus.AlterHealth(-10);
+            OnTakeDamage(-10);
         }
 
 
@@ -195,10 +205,8 @@ public class ControllableCharacter : Character {
 
 
         // ??? <-- Debugging code.
-        ability = new HealAbility(this);
-        weapon = new Weapon(new Rifle(), this); // Pistol
-
         ability = new RailgunAbility(this);
+        weapon = new Weapon(new Rifle(), this); // Pistol
     }
     internal override void _Respawn()
 
@@ -264,4 +272,17 @@ public class ControllableCharacter : Character {
 
 
 
+
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+        //
+    }
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+        //
+        // Debug.Log("1. Connected to server.");
+        // PCH.CmdPlayerConnection(NetworkID, true);
+    }
 }

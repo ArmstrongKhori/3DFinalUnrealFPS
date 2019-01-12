@@ -35,14 +35,19 @@ public class GameManager : SystemObj {
         go.transform.parent = transform;
         go.AddComponent<Networker>();
 
-        //MIKE
-        //assigning the networknmg for the Client ManagerScript
-        GetComponent<ClientManager>().NMScript = go.GetComponent<NetworkManager>();
-        go.GetComponent<NetworkManager>().onlineScene = "LevelLobby";
+        go = new GameObject("Networker");
+        go.transform.parent = transform;
+        go.AddComponent<Networker>();
         //
         go = new GameObject("SpawnPointManager");
         go.transform.parent = transform;
         go.AddComponent<SpawnPointManager>();
+
+        go = new GameObject("ClientManager");
+        go.transform.parent = transform;
+        ClientManager cm = go.AddComponent<ClientManager>();
+        cm.NMScript = Networker.Instance().GetComponent<NetworkManager>();
+        // cm.NMScript.onlineScene = "LevelLobby";
         //
         //
         /*
@@ -73,6 +78,13 @@ public class GameManager : SystemObj {
     {
         base.Initialize();
         //
+        LinkReferences();
+    }
+
+
+
+    public void LinkReferences()
+    {
         GameObject go;
         go = new GameObject("__ScreenCanvas");
         screenCanvas = go.AddComponent<Canvas>();
@@ -98,7 +110,25 @@ public class GameManager : SystemObj {
 
 
         gunHolder = Camera.main.transform.Find("GunHolder").gameObject;
+
+
+
+
+        SpawnPointManager spm = SpawnPointManager.Instance();
+        if (spm != null) { spm.LinkReferences(); }
+
+
+        foreach (FPSController2 fps in FindObjectsOfType<FPSController2>())
+        {
+            fps.LinkReferences();
+        }
     }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        LinkReferences();
+    }
+
 
 
     public void DisplayMessage(string message)

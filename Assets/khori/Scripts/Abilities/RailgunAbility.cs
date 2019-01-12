@@ -2,28 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaveDashAbility : Ability
-{
+public class RailgunAbility : Ability {
 
-    public WaveDashAbility(ControllableCharacter cc) : base(cc)
+
+    /// <summary>
+    /// Constructor.
+    /// PLEASE call the "base()" part or else you'll break everything!
+    /// </summary>
+    /// <param name="cc"></param>
+    public RailgunAbility(ControllableCharacter cc) : base(cc)
     {
 
     }
+
+
 
     public override void Init()
     {
         base.Init();
         //
-        activationMode = ActivationMode.Lingering;
-        activatedDuration = 1.5f;
+        activationMode = ActivationMode.HoldAndRelease;
+        activatedDuration = 10.0f; // *** You can hold it for 10 seconds.
     }
-
     public override void Run()
     {
         base.Run();
         //
     }
-
     public override void LateRun()
     {
         base.LateRun();
@@ -34,11 +39,7 @@ public class WaveDashAbility : Ability
     {
         base.RunWhileActive();
         //
-        if (KhoriController.input.jump && !KhoriController.input.lastJump)
-        {
-            owner.transform.Translate(new Vector3(RickController.HPress * 5, 0, RickController.VPress * 5));
-        }
-        RickController.ActivateTrail();
+
     }
     public override void RunWhileInactive()
     {
@@ -62,23 +63,19 @@ public class WaveDashAbility : Ability
     {
         base.OnTriggered();
         //
-        Debug.Log("HERE WE USE THIS ABILITY!!!");
-
     }
-
     public override void OnActivate()
     {
         base.OnActivate();
         //
 
-        RickController.NoJump = true;
     }
     public override void OnDeactivate()
     {
         base.OnDeactivate();
         //
-        RickController.NoJump = false;
-
-        RickController.DeactivateTrail();
+        BattleManager.Instance().Spawn("RailgunShot", owner, owner.LookVector);
     }
+
+
 }

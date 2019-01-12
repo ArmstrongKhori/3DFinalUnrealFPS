@@ -114,7 +114,7 @@ public class Ability {
 
     public void Trigger()
     {
-        if (IsReady)
+        if (IsReady || true)
         {
             usedCount += 1;
             //

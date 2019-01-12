@@ -39,8 +39,10 @@ public class CharacterStateManager : NetworkBehaviour
     private void Awake()
     {
         InitializeMe();
-        
+    }
 
+    private void Start()
+    {
         laserRifle = GameManager.Instance().gunHolder.transform.Find("LaserRifle").gameObject;
         sniperRifle = GameManager.Instance().gunHolder.transform.Find("SniperRifle").gameObject;
         granadeLauncher = GameManager.Instance().gunHolder.transform.Find("GranadeLauncher").gameObject;
@@ -541,7 +543,7 @@ public class CharacterStateManager : NetworkBehaviour
     public void InstDamageReflectorIndicator()
     {
 
-        damageReflectorIndicator = Instantiate(damageReflectorIndicator_prefab);
+        damageReflectorIndicator = Instantiate(damageReflectorIndicator_prefab, transform);
         damageReflectorIndicator.name = "Shield";
 
         TurnIndicatorOFF();

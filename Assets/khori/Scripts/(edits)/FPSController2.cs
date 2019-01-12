@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class FPSController2 : NetworkBehaviour
 {
@@ -83,11 +84,19 @@ public class FPSController2 : NetworkBehaviour
             WeaponPickup.Add(false);
         }
 
-        gunHolder = GameManager.Instance().gunHolder;
 
+
+        LinkReferences();
+    }
+
+    public void LinkReferences()
+    {
         WayPointPOS[0] = Camera.main.transform.Find("WayPoints").Find("Point0");
         WayPointPOS[1] = Camera.main.transform.Find("WayPoints").Find("Point1");
+
+        gunHolder = GameManager.Instance().gunHolder;
     }
+
 
     private void MoveForward()
     {
@@ -201,7 +210,6 @@ public class FPSController2 : NetworkBehaviour
         }
         else
         {
-
             CurrWayPoint = 0;
             gunHolder.transform.position = Vector3.MoveTowards(gunHolder.transform.position, WayPointPOS[CurrWayPoint].position, Speed);
             gunHolder.transform.rotation = WayPointPOS[CurrWayPoint].rotation;

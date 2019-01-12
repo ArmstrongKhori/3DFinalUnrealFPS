@@ -37,10 +37,6 @@ public class BattleManager : SystemObj {
 
 
         testObj = (GameObject)Resources.Load("Spawnables/testpref", typeof(GameObject));
-
-
-
-        gameConditions.Match_Begin();
     }
 
 

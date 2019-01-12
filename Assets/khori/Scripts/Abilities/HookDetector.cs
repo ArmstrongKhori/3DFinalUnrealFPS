@@ -14,7 +14,7 @@ public class HookDetector : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Hookable")
+        if (other.tag == "Ground") // Hookable
         {
             Debug.Log("Hit Hookable Object");
             hooked = true;

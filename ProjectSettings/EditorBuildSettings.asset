@@ -5,7 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-    
+  - enabled: 0
+    path: Assets/CharacterAnimsRickAndrey/LevelLobby.unity
+    guid: 750c5f59a1e56494e942a989d8b3817b
   - enabled: 1
     path: Assets/MIKE/Scenes/Complex.unity
     guid: f9169b26960e5c745b3e66f57959bb46
